@@ -1,135 +1,399 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Charity-Fund · Hope together</title>
-  <!-- Font Awesome (free icons) -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
-  <!-- External CSS -->
-  <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Charity-Fund · Making Hope Possible</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <!-- Navigation -->
-  <nav class="navbar">
-    <div class="container nav-flex">
-      <div class="logo">
-        <i class="fas fa-hand-holding-heart"></i> Charity-Fund
-      </div>
-      <div class="nav-links">
-        <a href="#">Home</a>
-        <a href="#missions">Our work</a>
-        <a href="#donate" class="btn-donate-nav">
-          <i class="fas fa-heart"></i> Donate
-        </a>
-      </div>
-    </div>
-  </nav>
+    <!-- Theme Toggle -->
+    <button id="themeToggle" class="theme-toggle">
+        <i class="fas fa-moon"></i>
+    </button>
 
-  <!-- Hero -->
-  <section class="hero">
-    <div class="container hero-grid">
-      <div class="hero-text">
-        <h1>Give <span>hope</span> <br />change lives</h1>
-        <p>Every contribution builds a future. Join Charity-Fund to empower communities worldwide.</p>
-        <a href="#donate" class="btn-primary">
-          <i class="fas fa-arrow-right" style="margin-right: 10px;"></i> Donate now
-        </a>
-        <div class="hero-stats">
-          <div><h3>12k+</h3><p>children helped</p></div>
-          <div><h3>84</h3><p>active projects</p></div>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container nav-flex">
+            <div class="logo">
+                <i class="fas fa-hands-helping"></i> Charity-Fund
+            </div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#donate">Donate</a></li>
+                <li><a href="#testimonials">Testimonials</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="#donate" class="btn-donate-nav">Donate Now</a></li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
         </div>
-      </div>
-      <div class="hero-image">
-        <i class="fas fa-hand-holding-heart"></i>
-        <p><i class="fas fa-globe-americas" style="margin-right: 8px;"></i> 100% transparency</p>
-      </div>
-    </div>
-  </section>
+    </nav>
 
-  <!-- Missions -->
-  <section class="missions" id="missions">
-    <div class="container">
-      <div class="section-title">
-        <h2>Our focus areas</h2>
-        <p>We build sustainable impact through education, health, and emergency relief.</p>
-      </div>
-      <div class="card-grid">
-        <div class="mission-card">
-          <i class="fas fa-graduation-cap"></i>
-          <h3>Education</h3>
-          <p>Schools & learning resources for underserved children.</p>
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-overlay"></div>
+        <div class="container hero-content">
+            <div class="hero-text animate-fade-up">
+                <span class="badge">🌟 Changing Lives Since 2015</span>
+                <h1>Give <span class="highlight">Hope</span>,<br />Transform <span class="highlight">Futures</span></h1>
+                <p>Every donation creates a ripple effect of change. Join thousands of supporters making a difference in communities worldwide.</p>
+                <div class="hero-buttons">
+                    <a href="#donate" class="btn-primary">
+                        <i class="fas fa-heart"></i> Donate Now
+                    </a>
+                    <a href="#projects" class="btn-secondary">
+                        <i class="fas fa-play-circle"></i> Learn More
+                    </a>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <h3 class="counter" data-target="15000">0</h3>
+                        <p>Children Educated</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3 class="counter" data-target="500">0</h3>
+                        <p>Clean Water Projects</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3 class="counter" data-target="25000">0</h3>
+                        <p>Lives Impacted</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3 class="counter" data-target="98">0<small>%</small></h3>
+                        <p>Funds to Programs</p>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="mission-card">
-          <i class="fas fa-heartbeat"></i>
-          <h3>Health</h3>
-          <p>Medical camps, clean water, and nutrition programs.</p>
-        </div>
-        <div class="mission-card">
-          <i class="fas fa-hand-holding-water"></i>
-          <h3>Relief</h3>
-          <p>Emergency aid for communities in crisis.</p>
-        </div>
-        <div class="mission-card">
-          <i class="fas fa-seedling"></i>
-          <h3>Livelihood</h3>
-          <p>Empowering families with sustainable income.</p>
-        </div>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Donate interactive (JavaScript) -->
-  <section class="donate-section" id="donate">
-    <div class="container donate-flex">
-      <div class="donate-info">
-        <h2>Make a <span style="color: #2d7d46;">donation</span></h2>
-        <p>Your generosity fuels every project. Choose an amount or enter your own.</p>
-        <p style="font-size: 1rem; opacity: 0.7; margin-top: 12px;">
-          <i class="fas fa-lock" style="margin-right: 6px;"></i> secure · tax-deductible
-        </p>
-      </div>
-      <div class="donate-box">
-        <h3>🌱 Donate</h3>
-        <p class="sub">Select or enter an amount</p>
-        <div class="amount-options" id="amountOptions">
-          <button class="amount-btn" data-amount="10">$10</button>
-          <button class="amount-btn active" data-amount="25">$25</button>
-          <button class="amount-btn" data-amount="50">$50</button>
-          <button class="amount-btn" data-amount="100">$100</button>
-        </div>
-        <div class="custom-donate">
-          <input type="number" id="customAmount" placeholder="Custom amount (USD)" min="1" step="1" />
-          <button id="donateNowBtn">
-            <i class="fas fa-heart" style="margin-right: 8px;"></i> Donate
-          </button>
-        </div>
-        <div id="donateMessage" class="donate-message">
-          <i class="fas fa-check-circle" style="margin-right: 8px;"></i>
-          Thank you! Your donation of <span id="donationDisplay">$25</span> makes a real difference.
-        </div>
-        <p style="font-size: 0.85rem; color: #6a7f92; margin-top: 16px;">
-          <i class="fas fa-credit-card"></i> secure payment (demo)
-        </p>
-      </div>
-    </div>
-  </section>
+    <!-- Projects Section -->
+    <section class="projects" id="projects">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Our Projects</span>
+                <h2>Real Impact, Real Stories</h2>
+                <p>Discover how your donations are changing lives around the world</p>
+            </div>
+            <div class="project-grid">
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='250'%3E%3Crect width='400' height='250' fill='%232d7d46'/%3E%3Ctext x='120' y='130' fill='white' font-size='24' font-family='Arial'%3E📚 Education%3C/text%3E%3C/svg%3E" alt="Education Project">
+                        <div class="project-progress">
+                            <div class="progress-bar" style="width: 85%"></div>
+                            <span>85% funded</span>
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <h3>Building Schools in Rural Areas</h3>
+                        <p>Providing access to quality education for 500+ children in remote communities.</p>
+                        <div class="project-meta">
+                            <span><i class="fas fa-calendar"></i> 2024-2025</span>
+                            <span><i class="fas fa-users"></i> 534 beneficiaries</span>
+                        </div>
+                        <a href="#donate" class="btn-donate-small">Donate Now →</a>
+                    </div>
+                </div>
 
-  <!-- Footer -->
-  <footer>
-    <div class="container">
-      <div class="social">
-        <a href="#"><i class="fab fa-twitter"></i></a>
-        <a href="#"><i class="fab fa-instagram"></i></a>
-        <a href="#"><i class="fab fa-facebook-f"></i></a>
-        <a href="#"><i class="fab fa-youtube"></i></a>
-      </div>
-      <p>© 2026 Charity-Fund · 123 Hope Street, NY</p>
-      <p style="opacity: 0.6; font-size: 0.9rem;">Built with ❤️ for a better world</p>
-    </div>
-  </footer>
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='250'%3E%3Crect width='400' height='250' fill='%232d7d46'/%3E%3Ctext x='90' y='130' fill='white' font-size='24' font-family='Arial'%3E💧 Clean Water%3C/text%3E%3C/svg%3E" alt="Water Project">
+                        <div class="project-progress">
+                            <div class="progress-bar" style="width: 92%"></div>
+                            <span>92% funded</span>
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <h3>Clean Water Initiative</h3>
+                        <p>Installing sustainable water systems in 50 villages across drought-affected regions.</p>
+                        <div class="project-meta">
+                            <span><i class="fas fa-calendar"></i> 2024-2026</span>
+                            <span><i class="fas fa-users"></i> 2,100 beneficiaries</span>
+                        </div>
+                        <a href="#donate" class="btn-donate-small">Donate Now →</a>
+                    </div>
+                </div>
 
-  <!-- External JavaScript -->
-  <script src="script.js"></script>
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='250'%3E%3Crect width='400' height='250' fill='%232d7d46'/%3E%3Ctext x='90' y='130' fill='white' font-size='24' font-family='Arial'%3E⚕️ Healthcare%3C/text%3E%3C/svg%3E" alt="Healthcare Project">
+                        <div class="project-progress">
+                            <div class="progress-bar" style="width: 78%"></div>
+                            <span>78% funded</span>
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <h3>Mobile Health Clinics</h3>
+                        <p>Bringing essential healthcare services to underserved communities with mobile medical units.</p>
+                        <div class="project-meta">
+                            <span><i class="fas fa-calendar"></i> 2024-2025</span>
+                            <span><i class="fas fa-users"></i> 1,500 beneficiaries</span>
+                        </div>
+                        <a href="#donate" class="btn-donate-small">Donate Now →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Donate Section with Advanced Features -->
+    <section class="donate-section" id="donate">
+        <div class="container">
+            <div class="donate-wrapper">
+                <div class="donate-info animate-fade-up">
+                    <span class="section-tag" style="color: #2d7d46; background: rgba(45,125,70,0.1);">💝 Make a Difference</span>
+                    <h2>Your Donation <br/>Changes Everything</h2>
+                    <p>Every contribution, no matter how small, helps us reach more communities in need.</p>
+                    
+                    <div class="impact-stats">
+                        <div class="impact-item">
+                            <i class="fas fa-hand-holding-heart"></i>
+                            <div>
+                                <h4>$25</h4>
+                                <p>Provides a child with school supplies</p>
+                            </div>
+                        </div>
+                        <div class="impact-item">
+                            <i class="fas fa-water"></i>
+                            <div>
+                                <h4>$50</h4>
+                                <p>Provides clean water for 1 family</p>
+                            </div>
+                        </div>
+                        <div class="impact-item">
+                            <i class="fas fa-heartbeat"></i>
+                            <div>
+                                <h4>$100</h4>
+                                <p>Medical checkup for 10 children</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="donate-box animate-fade-up">
+                    <div class="donation-header">
+                        <h3><i class="fas fa-heart" style="color: #2d7d46;"></i> Make a Donation</h3>
+                        <p>Select an amount or enter a custom donation</p>
+                    </div>
+
+                    <div class="currency-selector">
+                        <button class="currency-btn active" data-currency="USD">$ USD</button>
+                        <button class="currency-btn" data-currency="EUR">€ EUR</button>
+                        <button class="currency-btn" data-currency="GBP">£ GBP</button>
+                    </div>
+
+                    <div class="amount-grid">
+                        <button class="amount-btn active" data-amount="10">$10</button>
+                        <button class="amount-btn" data-amount="25">$25</button>
+                        <button class="amount-btn" data-amount="50">$50</button>
+                        <button class="amount-btn" data-amount="100">$100</button>
+                        <button class="amount-btn" data-amount="250">$250</button>
+                        <button class="amount-btn" data-amount="500">$500</button>
+                    </div>
+
+                    <div class="custom-donate">
+                        <input type="number" id="customAmount" placeholder="Or enter custom amount" min="1" />
+                        <select id="donationFrequency">
+                            <option value="one-time">One-time</option>
+                            <option value="monthly">Monthly</option>
+                            <option value="yearly">Yearly</option>
+                        </select>
+                    </div>
+
+                    <div class="donation-total">
+                        <span>Total Donation:</span>
+                        <strong id="totalDisplay">$25.00</strong>
+                    </div>
+
+                    <button id="donateNowBtn" class="btn-primary btn-full">
+                        <i class="fas fa-heart"></i> Donate Now
+                    </button>
+
+                    <div id="donateMessage" class="donate-message">
+                        <i class="fas fa-check-circle"></i>
+                        <p>Thank you! Your donation of <span id="donationDisplay">$25.00</span> is making a real difference.</p>
+                        <small>💚 100% of your donation goes to our programs</small>
+                    </div>
+
+                    <div class="donation-goal">
+                        <div class="goal-label">
+                            <span>Monthly Goal</span>
+                            <span>$12,500 / $15,000</span>
+                        </div>
+                        <div class="goal-progress">
+                            <div class="goal-fill" style="width: 83%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials" id="testimonials">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Testimonials</span>
+                <h2>What Our Supporters Say</h2>
+                <p>Real stories from people who've made a difference</p>
+            </div>
+            <div class="testimonial-slider" id="testimonialSlider">
+                <div class="testimonial-track" id="testimonialTrack">
+                    <div class="testimonial-card">
+                        <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
+                        <p>"Charity-Fund changed my perspective on giving. Seeing where my donation goes and the real impact it makes is incredibly rewarding."</p>
+                        <div class="testimonial-author">
+                            <div class="avatar">JD</div>
+                            <div>
+                                <h4>John Doe</h4>
+                                <span>Donor since 2023</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="testimonial-card">
+                        <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
+                        <p>"The transparency and efficiency of this organization is amazing. I know my monthly donation is actually reaching those who need it most."</p>
+                        <div class="testimonial-author">
+                            <div class="avatar">SM</div>
+                            <div>
+                                <h4>Sarah Mitchell</h4>
+                                <span>Monthly Donor</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="testimonial-card">
+                        <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
+                        <p>"Being able to see the progress of projects through updates and photos makes me feel truly connected to the cause. Highly recommend!"</p>
+                        <div class="testimonial-author">
+                            <div class="avatar">RK</div>
+                            <div>
+                                <h4>Robert Kim</h4>
+                                <span>Corporate Partner</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="slider-controls">
+                <button class="slider-btn" id="prevSlide"><i class="fas fa-chevron-left"></i></button>
+                <div class="slider-dots" id="sliderDots">
+                    <span class="dot active"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                </div>
+                <button class="slider-btn" id="nextSlide"><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter">
+        <div class="container">
+            <div class="newsletter-wrapper">
+                <div class="newsletter-content">
+                    <h2>Stay Updated</h2>
+                    <p>Subscribe to our newsletter and be part of the change</p>
+                    <form id="newsletterForm" class="newsletter-form">
+                        <input type="email" id="newsletterEmail" placeholder="Enter your email" required />
+                        <button type="submit">
+                            <i class="fas fa-paper-plane"></i> Subscribe
+                        </button>
+                    </form>
+                    <div id="newsletterMessage" class="newsletter-message"></div>
+                    <div class="newsletter-stats">
+                        <span><i class="fas fa-users"></i> 12,500+ subscribers</span>
+                        <span><i class="fas fa-check-circle"></i> 100% spam-free</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="contact-wrapper">
+                <div class="contact-info">
+                    <span class="section-tag">Get in Touch</span>
+                    <h2>We'd Love to Hear From You</h2>
+                    <p>Have questions about our programs or want to partner with us? Reach out!</p>
+                    <div class="contact-details">
+                        <div><i class="fas fa-map-marker-alt"></i> 123 Charity Street, New York, NY 10001</div>
+                        <div><i class="fas fa-phone"></i> +1 (555) 123-4567</div>
+                        <div><i class="fas fa-envelope"></i> info@charity-fund.org</div>
+                    </div>
+                </div>
+                <form id="contactForm" class="contact-form">
+                    <input type="text" placeholder="Your Name" required />
+                    <input type="email" placeholder="Your Email" required />
+                    <input type="text" placeholder="Subject" />
+                    <textarea placeholder="Your Message" rows="4" required></textarea>
+                    <button type="submit" class="btn-primary">
+                        <i class="fas fa-paper-plane"></i> Send Message
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h3><i class="fas fa-hands-helping"></i> Charity-Fund</h3>
+                    <p>Making hope possible through community action and global support.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#projects">Projects</a></li>
+                        <li><a href="#donate">Donate</a></li>
+                        <li><a href="#testimonials">Testimonials</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Volunteer</a></li>
+                        <li><a href="#">Careers</a></li>
+                    </ul>
+                </div>
+                <div class="footer-newsletter">
+                    <h4>Newsletter</h4>
+                    <p>Subscribe for updates and stories</p>
+                    <form>
+                        <input type="email" placeholder="Enter email" />
+                        <button type="submit"><i class="fas fa-arrow-right"></i></button>
+                    </form>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2026 Charity-Fund. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
 </body>
 </html>
