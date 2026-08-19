@@ -49,6 +49,12 @@
             align-items: center;
             gap: 14px;
             color: var(--text-dark);
+            padding: 12px 16px;
+            border-radius: var(--radius);
+            transition: var(--transition);
+        }
+        .contact-details div:hover {
+            background: var(--light-gray);
         }
         .contact-details i {
             color: var(--primary);
@@ -77,6 +83,51 @@
         }
         .contact-form button {
             padding: 14px;
+        }
+        .support-box {
+            margin-top: 30px;
+            background: var(--primary-light);
+            padding: 24px;
+            border-radius: var(--radius);
+            border: 2px solid var(--primary);
+        }
+        .support-box h4 {
+            color: var(--text-dark);
+            margin-bottom: 12px;
+            font-size: 1.2rem;
+        }
+        .support-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 8px 0;
+            color: var(--text-dark);
+        }
+        .support-item .brand-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.8rem;
+            color: white;
+        }
+        .support-item .brand-icon.airtel {
+            background: #cc0000;
+        }
+        .support-item .brand-icon.tnm {
+            background: #004d99;
+        }
+        .support-item .number {
+            font-weight: 700;
+            font-family: 'Courier New', monospace;
+            font-size: 1.1rem;
+        }
+        .support-item .label {
+            color: var(--text-light);
+            font-size: 0.85rem;
         }
         @media (max-width: 768px) {
             .contact-wrapper {
@@ -123,17 +174,29 @@
                     <p>Have questions about our programs in Malawi or want to partner with us? Reach out!</p>
                     <div class="contact-details">
                         <div><i class="fas fa-map-marker-alt"></i> 123 Kamuzu Road, Lilongwe, Malawi</div>
-                        <div><i class="fas fa-phone"></i> +265 997 008 860 (AIRTEL)</div>
-                        <div><i class="fas fa-phone"></i> +265 881 395 378 (TNM)</div>
                         <div><i class="fas fa-envelope"></i> info@charity-fund.mw</div>
                         <div><i class="fas fa-clock"></i> Mon-Fri: 8:00 AM - 5:00 PM</div>
                     </div>
 
-                    <div style="margin-top: 30px; background: var(--primary-light); padding: 20px; border-radius: var(--radius);">
-                        <h4 style="color: var(--text-dark); margin-bottom: 10px;">📱 Mobile Money Support</h4>
-                        <p style="color: var(--text-light);">
-                            <strong>AIRTEL Money:</strong> +265 997 008 860<br />
-                            <strong>TNM Mpamba:</strong> +265 881 395 378
+                    <div class="support-box">
+                        <h4>📱 Mobile Money Support</h4>
+                        <div class="support-item">
+                            <div class="brand-icon airtel">A</div>
+                            <div>
+                                <div class="number">+265 997 008 860</div>
+                                <div class="label">AIRTEL Money</div>
+                            </div>
+                        </div>
+                        <div class="support-item">
+                            <div class="brand-icon tnm">T</div>
+                            <div>
+                                <div class="number">+265 881 395 378</div>
+                                <div class="label">TNM Mpamba</div>
+                            </div>
+                        </div>
+                        <p style="margin-top: 12px; font-size: 0.9rem; color: var(--text-light);">
+                            <i class="fas fa-check-circle" style="color: var(--primary);"></i> 
+                            Available 24/7 for donations
                         </p>
                     </div>
                 </div>

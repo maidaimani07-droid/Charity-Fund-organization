@@ -27,6 +27,30 @@
             padding: 60px 0;
             background: var(--light-gray);
         }
+        .project-image {
+            position: relative;
+            overflow: hidden;
+            height: 280px;
+        }
+        .project-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+        .project-card:hover .project-image img {
+            transform: scale(1.05);
+        }
+        .project-image .image-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 60%;
+            background: linear-gradient(transparent, rgba(0,0,0,0.7));
+            pointer-events: none;
+        }
     </style>
 </head>
 <body>
@@ -62,16 +86,17 @@
     <section class="projects-page">
         <div class="container">
             <div class="project-grid">
+                <!-- Education Project - School Building -->
                 <div class="project-card">
                     <div class="project-image">
-                        <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=600&h=350&fit=crop" alt="Education" />
+                        <img src="https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=600&h=350&fit=crop" alt="Building Schools in Malawi" />
                         <div class="project-progress">
                             <div class="progress-bar" style="width: 85%"></div>
                             <span>85% funded</span>
                         </div>
                     </div>
                     <div class="project-info">
-                        <h3>Building Schools in Rural Malawi</h3>
+                        <h3>🏫 Building Schools in Rural Malawi</h3>
                         <p>Providing access to quality education for 500+ children in remote communities across Malawi.</p>
                         <div class="project-meta">
                             <span><i class="fas fa-calendar"></i> 2024-2025</span>
@@ -82,16 +107,17 @@
                     </div>
                 </div>
 
+                <!-- Clean Water Project -->
                 <div class="project-card">
                     <div class="project-image">
-                        <img src="https://images.unsplash.com/photo-1548839140-29a749e1cf4d?w=600&h=350&fit=crop" alt="Clean Water" />
+                        <img src="https://images.unsplash.com/photo-1548839140-29a749e1cf4d?w=600&h=350&fit=crop" alt="Clean Water Malawi" />
                         <div class="project-progress">
                             <div class="progress-bar" style="width: 92%"></div>
                             <span>92% funded</span>
                         </div>
                     </div>
                     <div class="project-info">
-                        <h3>Clean Water for Malawi Villages</h3>
+                        <h3>💧 Clean Water for Malawi Villages</h3>
                         <p>Installing sustainable water systems in 50 villages across Malawi's drought-affected regions.</p>
                         <div class="project-meta">
                             <span><i class="fas fa-calendar"></i> 2024-2026</span>
@@ -102,16 +128,17 @@
                     </div>
                 </div>
 
+                <!-- Healthcare Project - Mobile Ambulance -->
                 <div class="project-card">
                     <div class="project-image">
-                        <img src="https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?w=600&h=350&fit=crop" alt="Healthcare" />
+                        <img src="https://images.unsplash.com/photo-1631815588090-d4bfec5b1ccb?w=600&h=350&fit=crop" alt="Mobile Health Clinics Malawi" />
                         <div class="project-progress">
                             <div class="progress-bar" style="width: 78%"></div>
                             <span>78% funded</span>
                         </div>
                     </div>
                     <div class="project-info">
-                        <h3>Mobile Health Clinics in Malawi</h3>
+                        <h3>🚑 Mobile Health Clinics in Malawi</h3>
                         <p>Bringing essential healthcare services to underserved communities with mobile medical units.</p>
                         <div class="project-meta">
                             <span><i class="fas fa-calendar"></i> 2024-2025</span>
@@ -122,17 +149,18 @@
                     </div>
                 </div>
 
+                <!-- Agriculture Project - Maize/Food Security -->
                 <div class="project-card">
                     <div class="project-image">
-                        <img src="https://images.unsplash.com/photo-1532938911079-1b06ac7ceec7?w=600&h=350&fit=crop" alt="Agriculture" />
+                        <img src="https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?w=600&h=350&fit=crop" alt="Agricultural Empowerment Malawi" />
                         <div class="project-progress">
                             <div class="progress-bar" style="width: 65%"></div>
                             <span>65% funded</span>
                         </div>
                     </div>
                     <div class="project-info">
-                        <h3>Agricultural Empowerment</h3>
-                        <p>Supporting small-scale farmers with training, seeds, and tools for sustainable farming.</p>
+                        <h3>🌽 Agricultural Empowerment</h3>
+                        <p>Supporting small-scale farmers with training, seeds, and tools for sustainable farming and food security.</p>
                         <div class="project-meta">
                             <span><i class="fas fa-calendar"></i> 2024-2025</span>
                             <span><i class="fas fa-users"></i> 800 beneficiaries</span>
@@ -142,17 +170,18 @@
                     </div>
                 </div>
 
+                <!-- Girls Education -->
                 <div class="project-card">
                     <div class="project-image">
-                        <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=600&h=350&fit=crop" alt="Girls Education" />
+                        <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=600&h=350&fit=crop" alt="Girls Education Malawi" />
                         <div class="project-progress">
                             <div class="progress-bar" style="width: 70%"></div>
                             <span>70% funded</span>
                         </div>
                     </div>
                     <div class="project-info">
-                        <h3>Girls Education Initiative</h3>
-                        <p>Empowering girls through scholarships, mentorship, and educational resources.</p>
+                        <h3>👩‍🎓 Girls Education Initiative</h3>
+                        <p>Empowering girls through scholarships, mentorship, and educational resources across Malawi.</p>
                         <div class="project-meta">
                             <span><i class="fas fa-calendar"></i> 2024-2026</span>
                             <span><i class="fas fa-users"></i> 300 beneficiaries</span>
@@ -162,17 +191,18 @@
                     </div>
                 </div>
 
+                <!-- Emergency Relief - Food Distribution -->
                 <div class="project-card">
                     <div class="project-image">
-                        <img src="https://images.unsplash.com/photo-1548839140-29a749e1cf4d?w=600&h=350&fit=crop" alt="Emergency Relief" />
+                        <img src="https://images.unsplash.com/photo-1593113598332-cd288d649433?w=600&h=350&fit=crop" alt="Emergency Relief Malawi" />
                         <div class="project-progress">
                             <div class="progress-bar" style="width: 55%"></div>
                             <span>55% funded</span>
                         </div>
                     </div>
                     <div class="project-info">
-                        <h3>Emergency Relief & Disaster Response</h3>
-                        <p>Providing immediate aid and supplies during natural disasters and emergencies in Malawi.</p>
+                        <h3>📦 Emergency Relief & Disaster Response</h3>
+                        <p>Providing immediate food aid, maize, and supplies during natural disasters and emergencies in Malawi.</p>
                         <div class="project-meta">
                             <span><i class="fas fa-calendar"></i> 2024-2025</span>
                             <span><i class="fas fa-users"></i> 2,500+ beneficiaries</span>

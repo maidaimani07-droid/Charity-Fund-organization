@@ -25,52 +25,172 @@
         }
         .payment-methods {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 30px;
             margin: 40px 0;
         }
         .payment-card {
             background: var(--white);
-            padding: 30px;
+            padding: 35px 30px;
             border-radius: var(--radius);
             box-shadow: var(--shadow);
             text-align: center;
             border: 2px solid var(--medium-gray);
             transition: var(--transition);
+            position: relative;
+            overflow: hidden;
         }
         .payment-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-8px);
             box-shadow: var(--shadow-hover);
-            border-color: var(--primary);
         }
-        .payment-card img {
+        .payment-card .brand-banner {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+        }
+        .payment-card.airtel .brand-banner {
+            background: linear-gradient(90deg, #ff0000, #cc0000, #ff0000);
+        }
+        .payment-card.tnm .brand-banner {
+            background: linear-gradient(90deg, #004d99, #0066cc, #004d99);
+        }
+        .payment-card.bank .brand-banner {
+            background: linear-gradient(90deg, #2d7d46, #4ade80, #2d7d46);
+        }
+        .payment-card .logo-container {
+            width: 120px;
+            height: 120px;
+            margin: 20px auto 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: #f8f9fa;
+            padding: 15px;
+            border: 3px solid var(--medium-gray);
+            transition: var(--transition);
+        }
+        .payment-card.airtel .logo-container {
+            background: #fff5f5;
+            border-color: #ff0000;
+        }
+        .payment-card.tnm .logo-container {
+            background: #f0f7ff;
+            border-color: #004d99;
+        }
+        .payment-card.bank .logo-container {
+            background: #e8f5e9;
+            border-color: #2d7d46;
+        }
+        .payment-card .logo-container img {
             width: 80px;
             height: 80px;
             object-fit: contain;
-            margin-bottom: 15px;
         }
         .payment-card h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
             color: var(--text-dark);
             margin-bottom: 5px;
         }
         .payment-card .number {
-            font-size: 1.3rem;
+            font-size: 1.4rem;
             font-weight: 700;
             color: var(--primary);
             margin: 10px 0;
+            letter-spacing: 1px;
+            font-family: 'Courier New', monospace;
+            background: var(--light-gray);
+            padding: 8px 16px;
+            border-radius: 8px;
+            display: inline-block;
+        }
+        .payment-card .number i {
+            margin-right: 8px;
+            font-size: 1.1rem;
+        }
+        .payment-card.airtel .number {
+            color: #cc0000;
+            background: #fff0f0;
+        }
+        .payment-card.tnm .number {
+            color: #004d99;
+            background: #e8f0ff;
         }
         .payment-card p {
             color: var(--text-light);
             font-size: 0.95rem;
+            margin: 10px 0;
         }
         .payment-card .badge {
             display: inline-block;
-            background: var(--primary-light);
-            color: var(--primary);
-            padding: 4px 12px;
+            padding: 4px 16px;
             border-radius: 50px;
             font-size: 0.8rem;
             font-weight: 600;
+            margin-top: 8px;
+        }
+        .payment-card.airtel .badge {
+            background: #ff000015;
+            color: #cc0000;
+            border: 1px solid #ff000030;
+        }
+        .payment-card.tnm .badge {
+            background: #004d9915;
+            color: #004d99;
+            border: 1px solid #004d9930;
+        }
+        .payment-card.bank .badge {
+            background: #2d7d4615;
+            color: #2d7d46;
+            border: 1px solid #2d7d4630;
+        }
+        .payment-card .icon-large {
+            font-size: 3.5rem;
+            margin-bottom: 10px;
+        }
+        .payment-card.airtel .icon-large {
+            color: #cc0000;
+        }
+        .payment-card.tnm .icon-large {
+            color: #004d99;
+        }
+        .payment-card.bank .icon-large {
+            color: #2d7d46;
+        }
+        .payment-card .copy-btn {
+            background: transparent;
+            border: 1px solid var(--medium-gray);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            cursor: pointer;
+            transition: var(--transition);
+            color: var(--text-light);
+            margin-left: 8px;
+        }
+        .payment-card .copy-btn:hover {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+        .payment-card .copy-btn.copied {
+            background: #4ade80;
+            color: white;
+            border-color: #4ade80;
+        }
+        @media (max-width: 768px) {
+            .payment-card .logo-container {
+                width: 90px;
+                height: 90px;
+            }
+            .payment-card .logo-container img {
+                width: 60px;
+                height: 60px;
+            }
         }
     </style>
 </head>
@@ -185,6 +305,7 @@
                 </div>
             </div>
 
+            <!-- Professional Payment Methods -->
             <div style="margin-top: 60px;">
                 <div class="section-header">
                     <span class="section-tag">📱 Payment Methods</span>
@@ -193,28 +314,48 @@
                 </div>
 
                 <div class="payment-methods">
-                    <div class="payment-card">
-                        <img src="https://img.icons8.com/color/96/airtel.png" alt="AIRTEL Money" />
+                    <!-- AIRTEL Money -->
+                    <div class="payment-card airtel">
+                        <div class="brand-banner"></div>
+                        <div class="logo-container">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Airtel_Logo.svg/2560px-Airtel_Logo.svg.png" alt="AIRTEL Money" />
+                        </div>
                         <h3>AIRTEL Money</h3>
-                        <div class="number">+265 997 008 860</div>
+                        <div class="number">
+                            <i class="fas fa-phone"></i> +265 997 008 860
+                            <button class="copy-btn" onclick="copyNumber('+265997008860')">Copy</button>
+                        </div>
                         <p>Send your donation via AIRTEL Money</p>
-                        <span class="badge">Available 24/7</span>
+                        <span class="badge"><i class="fas fa-check-circle"></i> Available 24/7</span>
                     </div>
 
-                    <div class="payment-card">
-                        <img src="https://img.icons8.com/color/96/tnm.png" alt="TNM Mpamba" />
+                    <!-- TNM Mpamba -->
+                    <div class="payment-card tnm">
+                        <div class="brand-banner"></div>
+                        <div class="logo-container">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b4/TNM_logo.svg/2560px-TNM_logo.svg.png" alt="TNM Mpamba" />
+                        </div>
                         <h3>TNM Mpamba</h3>
-                        <div class="number">+265 881 395 378</div>
+                        <div class="number">
+                            <i class="fas fa-phone"></i> +265 881 395 378
+                            <button class="copy-btn" onclick="copyNumber('+265881395378')">Copy</button>
+                        </div>
                         <p>Send your donation via TNM Mpamba</p>
-                        <span class="badge">Available 24/7</span>
+                        <span class="badge"><i class="fas fa-check-circle"></i> Available 24/7</span>
                     </div>
 
-                    <div class="payment-card">
-                        <img src="https://img.icons8.com/color/96/bank.png" alt="Bank Transfer" />
+                    <!-- Bank Transfer -->
+                    <div class="payment-card bank">
+                        <div class="brand-banner"></div>
+                        <div class="logo-container">
+                            <i class="fas fa-university icon-large"></i>
+                        </div>
                         <h3>Bank Transfer</h3>
-                        <div class="number">NBS Bank</div>
+                        <div class="number">
+                            <i class="fas fa-building"></i> NBS Bank
+                        </div>
                         <p>Account: 1234567890</p>
-                        <span class="badge">Charity-Fund Malawi</span>
+                        <span class="badge"><i class="fas fa-check-circle"></i> Charity-Fund Malawi</span>
                     </div>
                 </div>
 
@@ -276,6 +417,31 @@
         </div>
     </footer>
 
+    <script>
+    // Copy number function
+    function copyNumber(number) {
+        // Remove any non-digit characters for clean copy
+        const cleanNumber = number.replace(/[^0-9+]/g, '');
+        navigator.clipboard.writeText(cleanNumber).then(() => {
+            const btn = event.target;
+            btn.textContent = 'Copied!';
+            btn.classList.add('copied');
+            setTimeout(() => {
+                btn.textContent = 'Copy';
+                btn.classList.remove('copied');
+            }, 2000);
+        }).catch(() => {
+            // Fallback
+            const input = document.createElement('input');
+            input.value = number;
+            document.body.appendChild(input);
+            input.select();
+            document.execCommand('copy');
+            document.body.removeChild(input);
+            alert('Number copied: ' + number);
+        });
+    }
+    </script>
     <script src="script.js"></script>
 </body>
 </html>
