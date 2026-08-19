@@ -76,14 +76,12 @@
     let selectedCurrency = 'USD';
     let donationFrequency = 'one-time';
 
-    // Currency symbols
     const currencySymbols = {
         USD: '$',
         EUR: '€',
         GBP: '£'
     };
 
-    // Update amount buttons
     amountBtns.forEach(btn => {
         btn.addEventListener('click', function() {
             const amount = parseInt(this.getAttribute('data-amount'));
@@ -98,7 +96,6 @@
         });
     });
 
-    // Custom input
     customInput.addEventListener('input', function() {
         const val = parseFloat(this.value);
         if (!isNaN(val) && val > 0) {
@@ -109,14 +106,12 @@
         }
     });
 
-    // Currency selector
     currencyBtns.forEach(btn => {
         btn.addEventListener('click', function() {
             selectedCurrency = this.getAttribute('data-currency');
             currencyBtns.forEach(b => b.classList.remove('active'));
             this.classList.add('active');
             updateTotal();
-            // Update currency symbols on amount buttons
             const symbol = currencySymbols[selectedCurrency];
             amountBtns.forEach(b => {
                 const amount = b.getAttribute('data-amount');
@@ -125,13 +120,11 @@
         });
     });
 
-    // Frequency selector
     frequencySelect.addEventListener('change', function() {
         donationFrequency = this.value;
         updateTotal();
     });
 
-    // Update total display
     function updateTotal() {
         let amount = selectedAmount;
         if (donationFrequency === 'monthly') {
@@ -143,11 +136,9 @@
         }
     }
 
-    // Donate button
     donateBtn.addEventListener('click', function() {
         let amount = selectedAmount;
 
-        // Check custom input
         const customVal = parseFloat(customInput.value);
         if (!isNaN(customVal) && customVal > 0) {
             amount = customVal;
@@ -168,7 +159,6 @@
         donationDisplay.textContent = `${symbol}${amount.toFixed(2)}${frequencyText}`;
         donateMessage.classList.add('show');
 
-        // Update goal progress (simulate)
         const goalFill = document.querySelector('.goal-fill');
         const currentWidth = parseFloat(goalFill.style.width);
         const newWidth = Math.min(currentWidth + 5, 100);
@@ -176,13 +166,11 @@
         document.querySelector('.goal-label span:last-child').textContent = 
             `$${(12500 + (newWidth - 83) * 83.33).toFixed(0)} / $15,000`;
 
-        // Reset after 5 seconds
         setTimeout(() => {
             donateMessage.classList.remove('show');
         }, 5000);
     });
 
-    // Enter key on custom input
     customInput.addEventListener('keypress', function(e) {
         if (e.key === 'Enter') {
             e.preventDefault();
@@ -217,7 +205,6 @@
         goToSlide(currentSlide - 1);
     }
 
-    // Auto-slide
     function startAutoSlide() {
         stopAutoSlide();
         autoSlideInterval = setInterval(nextSlide, 5000);
@@ -229,7 +216,6 @@
         }
     }
 
-    // Event listeners
     prevBtn.addEventListener('click', () => {
         prevSlide();
         startAutoSlide();
@@ -247,12 +233,10 @@
         });
     });
 
-    // Pause on hover
     const slider = document.querySelector('.testimonial-slider');
     slider.addEventListener('mouseenter', stopAutoSlide);
     slider.addEventListener('mouseleave', startAutoSlide);
 
-    // Start auto-slide
     startAutoSlide();
 
     // ===== NEWSLETTER SUBSCRIPTION =====
@@ -274,7 +258,6 @@
         newsletterMessage.style.color = '#4ade80';
         newsletterEmail.value = '';
 
-        // Reset after 4 seconds
         setTimeout(() => {
             newsletterMessage.textContent = '';
         }, 4000);
@@ -321,13 +304,12 @@
                     behavior: 'smooth',
                     block: 'start'
                 });
-                // Close mobile menu
                 navLinks.classList.remove('active');
             }
         });
     });
 
-    // ===== PARALLAX EFFECT ON SCROLL =====
+    // ===== PARALLAX EFFECT =====
     window.addEventListener('scroll', function() {
         const scrolled = window.pageYOffset;
         const hero = document.querySelector('.hero');

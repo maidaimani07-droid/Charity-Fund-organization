@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Charity-Fund · Making Hope Possible</title>
+    <!-- Font Awesome only for minimal icons (social media, etc.) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <link rel="stylesheet" href="style.css" />
 </head>
@@ -17,7 +18,8 @@
     <nav class="navbar">
         <div class="container nav-flex">
             <div class="logo">
-                <i class="fas fa-hands-helping"></i> Charity-Fund
+                <img src="https://img.icons8.com/fluency/48/charity.png" alt="Charity-Fund Logo" style="width: 40px; vertical-align: middle; margin-right: 10px;" />
+                Charity-Fund
             </div>
             <ul class="nav-links">
                 <li><a href="#home">Home</a></li>
@@ -45,10 +47,10 @@
                 <p>Every donation creates a ripple effect of change. Join thousands of supporters making a difference in communities worldwide.</p>
                 <div class="hero-buttons">
                     <a href="#donate" class="btn-primary">
-                        <i class="fas fa-heart"></i> Donate Now
+                        Donate Now
                     </a>
                     <a href="#projects" class="btn-secondary">
-                        <i class="fas fa-play-circle"></i> Learn More
+                        Learn More
                     </a>
                 </div>
                 <div class="hero-stats">
@@ -84,7 +86,7 @@
             <div class="project-grid">
                 <div class="project-card">
                     <div class="project-image">
-                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='250'%3E%3Crect width='400' height='250' fill='%232d7d46'/%3E%3Ctext x='120' y='130' fill='white' font-size='24' font-family='Arial'%3E📚 Education%3C/text%3E%3C/svg%3E" alt="Education Project">
+                        <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=600&h=350&fit=crop" alt="Education Project" />
                         <div class="project-progress">
                             <div class="progress-bar" style="width: 85%"></div>
                             <span>85% funded</span>
@@ -103,7 +105,7 @@
 
                 <div class="project-card">
                     <div class="project-image">
-                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='250'%3E%3Crect width='400' height='250' fill='%232d7d46'/%3E%3Ctext x='90' y='130' fill='white' font-size='24' font-family='Arial'%3E💧 Clean Water%3C/text%3E%3C/svg%3E" alt="Water Project">
+                        <img src="https://images.unsplash.com/photo-1548839140-29a749e1cf4d?w=600&h=350&fit=crop" alt="Clean Water Project" />
                         <div class="project-progress">
                             <div class="progress-bar" style="width: 92%"></div>
                             <span>92% funded</span>
@@ -122,7 +124,7 @@
 
                 <div class="project-card">
                     <div class="project-image">
-                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='250'%3E%3Crect width='400' height='250' fill='%232d7d46'/%3E%3Ctext x='90' y='130' fill='white' font-size='24' font-family='Arial'%3E⚕️ Healthcare%3C/text%3E%3C/svg%3E" alt="Healthcare Project">
+                        <img src="https://images.unsplash.com/photo-1532938911079-1b06ac7ceec7?w=600&h=350&fit=crop" alt="Healthcare Project" />
                         <div class="project-progress">
                             <div class="progress-bar" style="width: 78%"></div>
                             <span>78% funded</span>
@@ -142,7 +144,7 @@
         </div>
     </section>
 
-    <!-- Donate Section with Advanced Features -->
+    <!-- Donate Section -->
     <section class="donate-section" id="donate">
         <div class="container">
             <div class="donate-wrapper">
@@ -153,21 +155,21 @@
                     
                     <div class="impact-stats">
                         <div class="impact-item">
-                            <i class="fas fa-hand-holding-heart"></i>
+                            <img src="https://img.icons8.com/fluency/48/school.png" alt="Education" style="width: 40px;" />
                             <div>
                                 <h4>$25</h4>
                                 <p>Provides a child with school supplies</p>
                             </div>
                         </div>
                         <div class="impact-item">
-                            <i class="fas fa-water"></i>
+                            <img src="https://img.icons8.com/fluency/48/water.png" alt="Water" style="width: 40px;" />
                             <div>
                                 <h4>$50</h4>
                                 <p>Provides clean water for 1 family</p>
                             </div>
                         </div>
                         <div class="impact-item">
-                            <i class="fas fa-heartbeat"></i>
+                            <img src="https://img.icons8.com/fluency/48/medical-doctor.png" alt="Health" style="width: 40px;" />
                             <div>
                                 <h4>$100</h4>
                                 <p>Medical checkup for 10 children</p>
@@ -178,7 +180,7 @@
 
                 <div class="donate-box animate-fade-up">
                     <div class="donation-header">
-                        <h3><i class="fas fa-heart" style="color: #2d7d46;"></i> Make a Donation</h3>
+                        <h3>❤️ Make a Donation</h3>
                         <p>Select an amount or enter a custom donation</p>
                     </div>
 
@@ -212,12 +214,11 @@
                     </div>
 
                     <button id="donateNowBtn" class="btn-primary btn-full">
-                        <i class="fas fa-heart"></i> Donate Now
+                        Donate Now
                     </button>
 
                     <div id="donateMessage" class="donate-message">
-                        <i class="fas fa-check-circle"></i>
-                        <p>Thank you! Your donation of <span id="donationDisplay">$25.00</span> is making a real difference.</p>
+                        <p>✅ Thank you! Your donation of <span id="donationDisplay">$25.00</span> is making a real difference.</p>
                         <small>💚 100% of your donation goes to our programs</small>
                     </div>
 
@@ -246,10 +247,10 @@
             <div class="testimonial-slider" id="testimonialSlider">
                 <div class="testimonial-track" id="testimonialTrack">
                     <div class="testimonial-card">
-                        <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
+                        <div class="quote-icon">"</div>
                         <p>"Charity-Fund changed my perspective on giving. Seeing where my donation goes and the real impact it makes is incredibly rewarding."</p>
                         <div class="testimonial-author">
-                            <div class="avatar">JD</div>
+                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face" alt="John Doe" style="width: 60px; height: 60px; border-radius: 50%; object-fit: cover;" />
                             <div>
                                 <h4>John Doe</h4>
                                 <span>Donor since 2023</span>
@@ -258,10 +259,10 @@
                     </div>
 
                     <div class="testimonial-card">
-                        <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
+                        <div class="quote-icon">"</div>
                         <p>"The transparency and efficiency of this organization is amazing. I know my monthly donation is actually reaching those who need it most."</p>
                         <div class="testimonial-author">
-                            <div class="avatar">SM</div>
+                            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop&crop=face" alt="Sarah Mitchell" style="width: 60px; height: 60px; border-radius: 50%; object-fit: cover;" />
                             <div>
                                 <h4>Sarah Mitchell</h4>
                                 <span>Monthly Donor</span>
@@ -270,10 +271,10 @@
                     </div>
 
                     <div class="testimonial-card">
-                        <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
+                        <div class="quote-icon">"</div>
                         <p>"Being able to see the progress of projects through updates and photos makes me feel truly connected to the cause. Highly recommend!"</p>
                         <div class="testimonial-author">
-                            <div class="avatar">RK</div>
+                            <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop&crop=face" alt="Robert Kim" style="width: 60px; height: 60px; border-radius: 50%; object-fit: cover;" />
                             <div>
                                 <h4>Robert Kim</h4>
                                 <span>Corporate Partner</span>
@@ -303,9 +304,7 @@
                     <p>Subscribe to our newsletter and be part of the change</p>
                     <form id="newsletterForm" class="newsletter-form">
                         <input type="email" id="newsletterEmail" placeholder="Enter your email" required />
-                        <button type="submit">
-                            <i class="fas fa-paper-plane"></i> Subscribe
-                        </button>
+                        <button type="submit">Subscribe</button>
                     </form>
                     <div id="newsletterMessage" class="newsletter-message"></div>
                     <div class="newsletter-stats">
@@ -336,9 +335,7 @@
                     <input type="email" placeholder="Your Email" required />
                     <input type="text" placeholder="Subject" />
                     <textarea placeholder="Your Message" rows="4" required></textarea>
-                    <button type="submit" class="btn-primary">
-                        <i class="fas fa-paper-plane"></i> Send Message
-                    </button>
+                    <button type="submit" class="btn-primary">Send Message</button>
                 </form>
             </div>
         </div>
@@ -349,7 +346,7 @@
         <div class="container">
             <div class="footer-grid">
                 <div class="footer-brand">
-                    <h3><i class="fas fa-hands-helping"></i> Charity-Fund</h3>
+                    <h3>❤️ Charity-Fund</h3>
                     <p>Making hope possible through community action and global support.</p>
                     <div class="social-links">
                         <a href="#"><i class="fab fa-twitter"></i></a>
