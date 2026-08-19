@@ -3,55 +3,45 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Charity-Fund · Making Hope Possible</title>
-    <!-- Font Awesome only for minimal icons (social media, etc.) -->
+    <title>Charity-Fund Malawi · Home</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-    <!-- Theme Toggle -->
     <button id="themeToggle" class="theme-toggle">
         <i class="fas fa-moon"></i>
     </button>
 
-    <!-- Navigation -->
     <nav class="navbar">
         <div class="container nav-flex">
             <div class="logo">
-                <img src="https://img.icons8.com/fluency/48/charity.png" alt="Charity-Fund Logo" style="width: 40px; vertical-align: middle; margin-right: 10px;" />
-                Charity-Fund
+                <img src="https://img.icons8.com/fluency/48/africa.png" alt="Logo" style="width: 40px; vertical-align: middle; margin-right: 10px;" />
+                Charity-Fund <span style="font-size: 0.8rem; color: #2d7d46;">Malawi</span>
             </div>
             <ul class="nav-links">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#donate">Donate</a></li>
-                <li><a href="#testimonials">Testimonials</a></li>
-                <li><a href="#contact">Contact</a></li>
-                <li><a href="#donate" class="btn-donate-nav">Donate Now</a></li>
+                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="projects.html">Projects</a></li>
+                <li><a href="donate.html">Donate</a></li>
+                <li><a href="testimonials.html">Testimonials</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="donate.html" class="btn-donate-nav">Donate Now</a></li>
             </ul>
             <div class="hamburger" id="hamburger">
-                <span></span>
-                <span></span>
-                <span></span>
+                <span></span><span></span><span></span>
             </div>
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section class="hero" id="home">
+    <section class="hero">
         <div class="hero-overlay"></div>
         <div class="container hero-content">
             <div class="hero-text animate-fade-up">
-                <span class="badge">🌟 Changing Lives Since 2015</span>
+                <span class="badge">🇲🇼 Empowering Malawi Since 2015</span>
                 <h1>Give <span class="highlight">Hope</span>,<br />Transform <span class="highlight">Futures</span></h1>
-                <p>Every donation creates a ripple effect of change. Join thousands of supporters making a difference in communities worldwide.</p>
+                <p>Every donation creates a ripple effect of change across Malawi. Join thousands of supporters making a difference in communities across Africa.</p>
                 <div class="hero-buttons">
-                    <a href="#donate" class="btn-primary">
-                        Donate Now
-                    </a>
-                    <a href="#projects" class="btn-secondary">
-                        Learn More
-                    </a>
+                    <a href="donate.html" class="btn-primary">Donate Now</a>
+                    <a href="projects.html" class="btn-secondary">Learn More</a>
                 </div>
                 <div class="hero-stats">
                     <div class="stat-item">
@@ -75,279 +65,69 @@
         </div>
     </section>
 
-    <!-- Projects Section -->
-    <section class="projects" id="projects">
+    <section class="projects">
         <div class="container">
             <div class="section-header">
-                <span class="section-tag">Our Projects</span>
-                <h2>Real Impact, Real Stories</h2>
-                <p>Discover how your donations are changing lives around the world</p>
+                <span class="section-tag">🇲🇼 Featured Projects</span>
+                <h2>Our Impact in Malawi</h2>
+                <p>Discover how your donations are changing lives across Malawi</p>
             </div>
             <div class="project-grid">
                 <div class="project-card">
                     <div class="project-image">
-                        <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=600&h=350&fit=crop" alt="Education Project" />
+                        <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=600&h=350&fit=crop" alt="Education" />
                         <div class="project-progress">
                             <div class="progress-bar" style="width: 85%"></div>
                             <span>85% funded</span>
                         </div>
                     </div>
                     <div class="project-info">
-                        <h3>Building Schools in Rural Areas</h3>
+                        <h3>Building Schools in Rural Malawi</h3>
                         <p>Providing access to quality education for 500+ children in remote communities.</p>
-                        <div class="project-meta">
-                            <span><i class="fas fa-calendar"></i> 2024-2025</span>
-                            <span><i class="fas fa-users"></i> 534 beneficiaries</span>
-                        </div>
-                        <a href="#donate" class="btn-donate-small">Donate Now →</a>
+                        <a href="projects.html" class="btn-donate-small">Learn More →</a>
                     </div>
                 </div>
-
                 <div class="project-card">
                     <div class="project-image">
-                        <img src="https://images.unsplash.com/photo-1548839140-29a749e1cf4d?w=600&h=350&fit=crop" alt="Clean Water Project" />
+                        <img src="https://images.unsplash.com/photo-1548839140-29a749e1cf4d?w=600&h=350&fit=crop" alt="Clean Water" />
                         <div class="project-progress">
                             <div class="progress-bar" style="width: 92%"></div>
                             <span>92% funded</span>
                         </div>
                     </div>
                     <div class="project-info">
-                        <h3>Clean Water Initiative</h3>
-                        <p>Installing sustainable water systems in 50 villages across drought-affected regions.</p>
-                        <div class="project-meta">
-                            <span><i class="fas fa-calendar"></i> 2024-2026</span>
-                            <span><i class="fas fa-users"></i> 2,100 beneficiaries</span>
-                        </div>
-                        <a href="#donate" class="btn-donate-small">Donate Now →</a>
+                        <h3>Clean Water for Malawi Villages</h3>
+                        <p>Installing sustainable water systems in 50 villages across Malawi.</p>
+                        <a href="projects.html" class="btn-donate-small">Learn More →</a>
                     </div>
                 </div>
-
                 <div class="project-card">
                     <div class="project-image">
-                        <img src="https://images.unsplash.com/photo-1532938911079-1b06ac7ceec7?w=600&h=350&fit=crop" alt="Healthcare Project" />
+                        <img src="https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?w=600&h=350&fit=crop" alt="Healthcare" />
                         <div class="project-progress">
                             <div class="progress-bar" style="width: 78%"></div>
                             <span>78% funded</span>
                         </div>
                     </div>
                     <div class="project-info">
-                        <h3>Mobile Health Clinics</h3>
-                        <p>Bringing essential healthcare services to underserved communities with mobile medical units.</p>
-                        <div class="project-meta">
-                            <span><i class="fas fa-calendar"></i> 2024-2025</span>
-                            <span><i class="fas fa-users"></i> 1,500 beneficiaries</span>
-                        </div>
-                        <a href="#donate" class="btn-donate-small">Donate Now →</a>
+                        <h3>Mobile Health Clinics in Malawi</h3>
+                        <p>Bringing essential healthcare to underserved communities.</p>
+                        <a href="projects.html" class="btn-donate-small">Learn More →</a>
                     </div>
                 </div>
+            </div>
+            <div style="text-align: center; margin-top: 40px;">
+                <a href="projects.html" class="btn-primary">View All Projects</a>
             </div>
         </div>
     </section>
 
-    <!-- Donate Section -->
-    <section class="donate-section" id="donate">
-        <div class="container">
-            <div class="donate-wrapper">
-                <div class="donate-info animate-fade-up">
-                    <span class="section-tag" style="color: #2d7d46; background: rgba(45,125,70,0.1);">💝 Make a Difference</span>
-                    <h2>Your Donation <br/>Changes Everything</h2>
-                    <p>Every contribution, no matter how small, helps us reach more communities in need.</p>
-                    
-                    <div class="impact-stats">
-                        <div class="impact-item">
-                            <img src="https://img.icons8.com/fluency/48/school.png" alt="Education" style="width: 40px;" />
-                            <div>
-                                <h4>$25</h4>
-                                <p>Provides a child with school supplies</p>
-                            </div>
-                        </div>
-                        <div class="impact-item">
-                            <img src="https://img.icons8.com/fluency/48/water.png" alt="Water" style="width: 40px;" />
-                            <div>
-                                <h4>$50</h4>
-                                <p>Provides clean water for 1 family</p>
-                            </div>
-                        </div>
-                        <div class="impact-item">
-                            <img src="https://img.icons8.com/fluency/48/medical-doctor.png" alt="Health" style="width: 40px;" />
-                            <div>
-                                <h4>$100</h4>
-                                <p>Medical checkup for 10 children</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="donate-box animate-fade-up">
-                    <div class="donation-header">
-                        <h3>❤️ Make a Donation</h3>
-                        <p>Select an amount or enter a custom donation</p>
-                    </div>
-
-                    <div class="currency-selector">
-                        <button class="currency-btn active" data-currency="USD">$ USD</button>
-                        <button class="currency-btn" data-currency="EUR">€ EUR</button>
-                        <button class="currency-btn" data-currency="GBP">£ GBP</button>
-                    </div>
-
-                    <div class="amount-grid">
-                        <button class="amount-btn active" data-amount="10">$10</button>
-                        <button class="amount-btn" data-amount="25">$25</button>
-                        <button class="amount-btn" data-amount="50">$50</button>
-                        <button class="amount-btn" data-amount="100">$100</button>
-                        <button class="amount-btn" data-amount="250">$250</button>
-                        <button class="amount-btn" data-amount="500">$500</button>
-                    </div>
-
-                    <div class="custom-donate">
-                        <input type="number" id="customAmount" placeholder="Or enter custom amount" min="1" />
-                        <select id="donationFrequency">
-                            <option value="one-time">One-time</option>
-                            <option value="monthly">Monthly</option>
-                            <option value="yearly">Yearly</option>
-                        </select>
-                    </div>
-
-                    <div class="donation-total">
-                        <span>Total Donation:</span>
-                        <strong id="totalDisplay">$25.00</strong>
-                    </div>
-
-                    <button id="donateNowBtn" class="btn-primary btn-full">
-                        Donate Now
-                    </button>
-
-                    <div id="donateMessage" class="donate-message">
-                        <p>✅ Thank you! Your donation of <span id="donationDisplay">$25.00</span> is making a real difference.</p>
-                        <small>💚 100% of your donation goes to our programs</small>
-                    </div>
-
-                    <div class="donation-goal">
-                        <div class="goal-label">
-                            <span>Monthly Goal</span>
-                            <span>$12,500 / $15,000</span>
-                        </div>
-                        <div class="goal-progress">
-                            <div class="goal-fill" style="width: 83%"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Testimonials Section -->
-    <section class="testimonials" id="testimonials">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-tag">Testimonials</span>
-                <h2>What Our Supporters Say</h2>
-                <p>Real stories from people who've made a difference</p>
-            </div>
-            <div class="testimonial-slider" id="testimonialSlider">
-                <div class="testimonial-track" id="testimonialTrack">
-                    <div class="testimonial-card">
-                        <div class="quote-icon">"</div>
-                        <p>"Charity-Fund changed my perspective on giving. Seeing where my donation goes and the real impact it makes is incredibly rewarding."</p>
-                        <div class="testimonial-author">
-                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face" alt="John Doe" style="width: 60px; height: 60px; border-radius: 50%; object-fit: cover;" />
-                            <div>
-                                <h4>John Doe</h4>
-                                <span>Donor since 2023</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="testimonial-card">
-                        <div class="quote-icon">"</div>
-                        <p>"The transparency and efficiency of this organization is amazing. I know my monthly donation is actually reaching those who need it most."</p>
-                        <div class="testimonial-author">
-                            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop&crop=face" alt="Sarah Mitchell" style="width: 60px; height: 60px; border-radius: 50%; object-fit: cover;" />
-                            <div>
-                                <h4>Sarah Mitchell</h4>
-                                <span>Monthly Donor</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="testimonial-card">
-                        <div class="quote-icon">"</div>
-                        <p>"Being able to see the progress of projects through updates and photos makes me feel truly connected to the cause. Highly recommend!"</p>
-                        <div class="testimonial-author">
-                            <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop&crop=face" alt="Robert Kim" style="width: 60px; height: 60px; border-radius: 50%; object-fit: cover;" />
-                            <div>
-                                <h4>Robert Kim</h4>
-                                <span>Corporate Partner</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="slider-controls">
-                <button class="slider-btn" id="prevSlide"><i class="fas fa-chevron-left"></i></button>
-                <div class="slider-dots" id="sliderDots">
-                    <span class="dot active"></span>
-                    <span class="dot"></span>
-                    <span class="dot"></span>
-                </div>
-                <button class="slider-btn" id="nextSlide"><i class="fas fa-chevron-right"></i></button>
-            </div>
-        </div>
-    </section>
-
-    <!-- Newsletter Section -->
-    <section class="newsletter">
-        <div class="container">
-            <div class="newsletter-wrapper">
-                <div class="newsletter-content">
-                    <h2>Stay Updated</h2>
-                    <p>Subscribe to our newsletter and be part of the change</p>
-                    <form id="newsletterForm" class="newsletter-form">
-                        <input type="email" id="newsletterEmail" placeholder="Enter your email" required />
-                        <button type="submit">Subscribe</button>
-                    </form>
-                    <div id="newsletterMessage" class="newsletter-message"></div>
-                    <div class="newsletter-stats">
-                        <span><i class="fas fa-users"></i> 12,500+ subscribers</span>
-                        <span><i class="fas fa-check-circle"></i> 100% spam-free</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section class="contact" id="contact">
-        <div class="container">
-            <div class="contact-wrapper">
-                <div class="contact-info">
-                    <span class="section-tag">Get in Touch</span>
-                    <h2>We'd Love to Hear From You</h2>
-                    <p>Have questions about our programs or want to partner with us? Reach out!</p>
-                    <div class="contact-details">
-                        <div><i class="fas fa-map-marker-alt"></i> 123 Charity Street, New York, NY 10001</div>
-                        <div><i class="fas fa-phone"></i> +1 (555) 123-4567</div>
-                        <div><i class="fas fa-envelope"></i> info@charity-fund.org</div>
-                    </div>
-                </div>
-                <form id="contactForm" class="contact-form">
-                    <input type="text" placeholder="Your Name" required />
-                    <input type="email" placeholder="Your Email" required />
-                    <input type="text" placeholder="Subject" />
-                    <textarea placeholder="Your Message" rows="4" required></textarea>
-                    <button type="submit" class="btn-primary">Send Message</button>
-                </form>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
     <footer>
         <div class="container">
             <div class="footer-grid">
                 <div class="footer-brand">
-                    <h3>❤️ Charity-Fund</h3>
-                    <p>Making hope possible through community action and global support.</p>
+                    <h3>🇲🇼 Charity-Fund Malawi</h3>
+                    <p>Making hope possible through community action and global support across Malawi and Africa.</p>
                     <div class="social-links">
                         <a href="#"><i class="fab fa-twitter"></i></a>
                         <a href="#"><i class="fab fa-instagram"></i></a>
@@ -359,11 +139,11 @@
                 <div class="footer-links">
                     <h4>Quick Links</h4>
                     <ul>
-                        <li><a href="#home">Home</a></li>
-                        <li><a href="#projects">Projects</a></li>
-                        <li><a href="#donate">Donate</a></li>
-                        <li><a href="#testimonials">Testimonials</a></li>
-                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="projects.html">Projects</a></li>
+                        <li><a href="donate.html">Donate</a></li>
+                        <li><a href="testimonials.html">Testimonials</a></li>
+                        <li><a href="contact.html">Contact</a></li>
                     </ul>
                 </div>
                 <div class="footer-links">
@@ -373,12 +153,11 @@
                         <li><a href="#">Privacy Policy</a></li>
                         <li><a href="#">Terms of Service</a></li>
                         <li><a href="#">Volunteer</a></li>
-                        <li><a href="#">Careers</a></li>
                     </ul>
                 </div>
                 <div class="footer-newsletter">
                     <h4>Newsletter</h4>
-                    <p>Subscribe for updates and stories</p>
+                    <p>Subscribe for updates from Malawi</p>
                     <form>
                         <input type="email" placeholder="Enter email" />
                         <button type="submit"><i class="fas fa-arrow-right"></i></button>
@@ -386,7 +165,7 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>© 2026 Charity-Fund. All rights reserved.</p>
+                <p>© 2026 Charity-Fund Malawi. All rights reserved.</p>
             </div>
         </div>
     </footer>

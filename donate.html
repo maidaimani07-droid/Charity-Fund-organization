@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Charity-Fund Malawi · Donate</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <link rel="stylesheet" href="style.css" />
+    <style>
+        .page-header {
+            background: linear-gradient(135deg, var(--secondary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+        }
+        .page-header h1 {
+            font-size: 3rem;
+            font-weight: 700;
+        }
+        .page-header p {
+            opacity: 0.85;
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 10px auto;
+        }
+        .payment-methods {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+        .payment-card {
+            background: var(--white);
+            padding: 30px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            text-align: center;
+            border: 2px solid var(--medium-gray);
+            transition: var(--transition);
+        }
+        .payment-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+            border-color: var(--primary);
+        }
+        .payment-card img {
+            width: 80px;
+            height: 80px;
+            object-fit: contain;
+            margin-bottom: 15px;
+        }
+        .payment-card h3 {
+            color: var(--text-dark);
+            margin-bottom: 5px;
+        }
+        .payment-card .number {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin: 10px 0;
+        }
+        .payment-card p {
+            color: var(--text-light);
+            font-size: 0.95rem;
+        }
+        .payment-card .badge {
+            display: inline-block;
+            background: var(--primary-light);
+            color: var(--primary);
+            padding: 4px 12px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <button id="themeToggle" class="theme-toggle"><i class="fas fa-moon"></i></button>
+
+    <nav class="navbar">
+        <div class="container nav-flex">
+            <div class="logo">
+                <img src="https://img.icons8.com/fluency/48/africa.png" alt="Logo" style="width: 40px; vertical-align: middle; margin-right: 10px;" />
+                Charity-Fund <span style="font-size: 0.8rem; color: #2d7d46;">Malawi</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="projects.html">Projects</a></li>
+                <li><a href="donate.html" class="active">Donate</a></li>
+                <li><a href="testimonials.html">Testimonials</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="donate.html" class="btn-donate-nav">Donate Now</a></li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+    </nav>
+
+    <section class="page-header">
+        <div class="container">
+            <h1>💝 Make a Donation</h1>
+            <p>Your contribution changes lives across Malawi</p>
+        </div>
+    </section>
+
+    <section class="donate-section" style="padding: 60px 0;">
+        <div class="container">
+            <div class="donate-wrapper">
+                <div class="donate-info animate-fade-up">
+                    <span class="section-tag" style="color: #2d7d46; background: rgba(45,125,70,0.1);">💝 Make a Difference in Malawi</span>
+                    <h2>Your Donation <br/>Changes Everything</h2>
+                    <p>Every contribution, no matter how small, helps us reach more communities in need across Malawi.</p>
+                    
+                    <div class="impact-stats">
+                        <div class="impact-item">
+                            <img src="https://img.icons8.com/fluency/48/school.png" alt="Education" style="width: 40px;" />
+                            <div>
+                                <h4>MWK 5,000</h4>
+                                <p>Provides a child with school supplies</p>
+                            </div>
+                        </div>
+                        <div class="impact-item">
+                            <img src="https://img.icons8.com/fluency/48/water.png" alt="Water" style="width: 40px;" />
+                            <div>
+                                <h4>MWK 10,000</h4>
+                                <p>Provides clean water for 1 family</p>
+                            </div>
+                        </div>
+                        <div class="impact-item">
+                            <img src="https://img.icons8.com/fluency/48/medical-doctor.png" alt="Health" style="width: 40px;" />
+                            <div>
+                                <h4>MWK 20,000</h4>
+                                <p>Medical checkup for 10 children</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="donate-box animate-fade-up">
+                    <div class="donation-header">
+                        <h3>❤️ Make a Donation</h3>
+                        <p>Select an amount in Malawi Kwacha (MWK)</p>
+                    </div>
+
+                    <div class="amount-grid">
+                        <button class="amount-btn active" data-amount="1000">MWK 1,000</button>
+                        <button class="amount-btn" data-amount="2500">MWK 2,500</button>
+                        <button class="amount-btn" data-amount="5000">MWK 5,000</button>
+                        <button class="amount-btn" data-amount="10000">MWK 10,000</button>
+                        <button class="amount-btn" data-amount="25000">MWK 25,000</button>
+                        <button class="amount-btn" data-amount="50000">MWK 50,000</button>
+                    </div>
+
+                    <div class="custom-donate">
+                        <input type="number" id="customAmount" placeholder="Or enter custom amount (MWK)" min="100" />
+                        <select id="donationFrequency">
+                            <option value="one-time">One-time</option>
+                            <option value="monthly">Monthly</option>
+                            <option value="yearly">Yearly</option>
+                        </select>
+                    </div>
+
+                    <div class="donation-total">
+                        <span>Total Donation:</span>
+                        <strong id="totalDisplay">MWK 1,000</strong>
+                    </div>
+
+                    <button id="donateNowBtn" class="btn-primary btn-full">Donate Now</button>
+
+                    <div id="donateMessage" class="donate-message">
+                        <p>✅ Thank you! Your donation of <span id="donationDisplay">MWK 1,000</span> is making a real difference in Malawi.</p>
+                        <small>💚 100% of your donation goes to our programs</small>
+                    </div>
+
+                    <div class="donation-goal">
+                        <div class="goal-label">
+                            <span>Monthly Goal</span>
+                            <span>MWK 2,500,000 / MWK 3,000,000</span>
+                        </div>
+                        <div class="goal-progress">
+                            <div class="goal-fill" style="width: 83%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div style="margin-top: 60px;">
+                <div class="section-header">
+                    <span class="section-tag">📱 Payment Methods</span>
+                    <h2>Donate via Mobile Money</h2>
+                    <p>Send your donation directly using these mobile money options</p>
+                </div>
+
+                <div class="payment-methods">
+                    <div class="payment-card">
+                        <img src="https://img.icons8.com/color/96/airtel.png" alt="AIRTEL Money" />
+                        <h3>AIRTEL Money</h3>
+                        <div class="number">+265 997 008 860</div>
+                        <p>Send your donation via AIRTEL Money</p>
+                        <span class="badge">Available 24/7</span>
+                    </div>
+
+                    <div class="payment-card">
+                        <img src="https://img.icons8.com/color/96/tnm.png" alt="TNM Mpamba" />
+                        <h3>TNM Mpamba</h3>
+                        <div class="number">+265 881 395 378</div>
+                        <p>Send your donation via TNM Mpamba</p>
+                        <span class="badge">Available 24/7</span>
+                    </div>
+
+                    <div class="payment-card">
+                        <img src="https://img.icons8.com/color/96/bank.png" alt="Bank Transfer" />
+                        <h3>Bank Transfer</h3>
+                        <div class="number">NBS Bank</div>
+                        <p>Account: 1234567890</p>
+                        <span class="badge">Charity-Fund Malawi</span>
+                    </div>
+                </div>
+
+                <div style="text-align: center; background: var(--primary-light); padding: 20px; border-radius: var(--radius); margin-top: 30px;">
+                    <p style="color: var(--text-dark); font-size: 1.1rem;">
+                        <i class="fas fa-shield-alt" style="color: var(--primary); margin-right: 10px;"></i>
+                        All donations are secure and 100% transparent. You'll receive a confirmation message.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h3>🇲🇼 Charity-Fund Malawi</h3>
+                    <p>Making hope possible through community action and global support across Malawi and Africa.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="projects.html">Projects</a></li>
+                        <li><a href="donate.html">Donate</a></li>
+                        <li><a href="testimonials.html">Testimonials</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Volunteer</a></li>
+                    </ul>
+                </div>
+                <div class="footer-newsletter">
+                    <h4>Newsletter</h4>
+                    <p>Subscribe for updates from Malawi</p>
+                    <form>
+                        <input type="email" placeholder="Enter email" />
+                        <button type="submit"><i class="fas fa-arrow-right"></i></button>
+                    </form>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2026 Charity-Fund Malawi. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

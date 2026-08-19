@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Charity-Fund Malawi · Projects</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <link rel="stylesheet" href="style.css" />
+    <style>
+        .page-header {
+            background: linear-gradient(135deg, var(--secondary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+        }
+        .page-header h1 {
+            font-size: 3rem;
+            font-weight: 700;
+        }
+        .page-header p {
+            opacity: 0.85;
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 10px auto;
+        }
+        .projects-page {
+            padding: 60px 0;
+            background: var(--light-gray);
+        }
+    </style>
+</head>
+<body>
+    <button id="themeToggle" class="theme-toggle"><i class="fas fa-moon"></i></button>
+
+    <nav class="navbar">
+        <div class="container nav-flex">
+            <div class="logo">
+                <img src="https://img.icons8.com/fluency/48/africa.png" alt="Logo" style="width: 40px; vertical-align: middle; margin-right: 10px;" />
+                Charity-Fund <span style="font-size: 0.8rem; color: #2d7d46;">Malawi</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="projects.html" class="active">Projects</a></li>
+                <li><a href="donate.html">Donate</a></li>
+                <li><a href="testimonials.html">Testimonials</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="donate.html" class="btn-donate-nav">Donate Now</a></li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+    </nav>
+
+    <section class="page-header">
+        <div class="container">
+            <h1>🇲🇼 Our Projects in Malawi</h1>
+            <p>Real impact, real stories - see how your donations are transforming communities</p>
+        </div>
+    </section>
+
+    <section class="projects-page">
+        <div class="container">
+            <div class="project-grid">
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=600&h=350&fit=crop" alt="Education" />
+                        <div class="project-progress">
+                            <div class="progress-bar" style="width: 85%"></div>
+                            <span>85% funded</span>
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <h3>Building Schools in Rural Malawi</h3>
+                        <p>Providing access to quality education for 500+ children in remote communities across Malawi.</p>
+                        <div class="project-meta">
+                            <span><i class="fas fa-calendar"></i> 2024-2025</span>
+                            <span><i class="fas fa-users"></i> 534 beneficiaries</span>
+                            <span><i class="fas fa-map-marker-alt"></i> Lilongwe, Malawi</span>
+                        </div>
+                        <a href="donate.html" class="btn-donate-small">Support This Project →</a>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1548839140-29a749e1cf4d?w=600&h=350&fit=crop" alt="Clean Water" />
+                        <div class="project-progress">
+                            <div class="progress-bar" style="width: 92%"></div>
+                            <span>92% funded</span>
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <h3>Clean Water for Malawi Villages</h3>
+                        <p>Installing sustainable water systems in 50 villages across Malawi's drought-affected regions.</p>
+                        <div class="project-meta">
+                            <span><i class="fas fa-calendar"></i> 2024-2026</span>
+                            <span><i class="fas fa-users"></i> 2,100 beneficiaries</span>
+                            <span><i class="fas fa-map-marker-alt"></i> Blantyre, Malawi</span>
+                        </div>
+                        <a href="donate.html" class="btn-donate-small">Support This Project →</a>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?w=600&h=350&fit=crop" alt="Healthcare" />
+                        <div class="project-progress">
+                            <div class="progress-bar" style="width: 78%"></div>
+                            <span>78% funded</span>
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <h3>Mobile Health Clinics in Malawi</h3>
+                        <p>Bringing essential healthcare services to underserved communities with mobile medical units.</p>
+                        <div class="project-meta">
+                            <span><i class="fas fa-calendar"></i> 2024-2025</span>
+                            <span><i class="fas fa-users"></i> 1,500 beneficiaries</span>
+                            <span><i class="fas fa-map-marker-alt"></i> Mzuzu, Malawi</span>
+                        </div>
+                        <a href="donate.html" class="btn-donate-small">Support This Project →</a>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1532938911079-1b06ac7ceec7?w=600&h=350&fit=crop" alt="Agriculture" />
+                        <div class="project-progress">
+                            <div class="progress-bar" style="width: 65%"></div>
+                            <span>65% funded</span>
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <h3>Agricultural Empowerment</h3>
+                        <p>Supporting small-scale farmers with training, seeds, and tools for sustainable farming.</p>
+                        <div class="project-meta">
+                            <span><i class="fas fa-calendar"></i> 2024-2025</span>
+                            <span><i class="fas fa-users"></i> 800 beneficiaries</span>
+                            <span><i class="fas fa-map-marker-alt"></i> Kasungu, Malawi</span>
+                        </div>
+                        <a href="donate.html" class="btn-donate-small">Support This Project →</a>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=600&h=350&fit=crop" alt="Girls Education" />
+                        <div class="project-progress">
+                            <div class="progress-bar" style="width: 70%"></div>
+                            <span>70% funded</span>
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <h3>Girls Education Initiative</h3>
+                        <p>Empowering girls through scholarships, mentorship, and educational resources.</p>
+                        <div class="project-meta">
+                            <span><i class="fas fa-calendar"></i> 2024-2026</span>
+                            <span><i class="fas fa-users"></i> 300 beneficiaries</span>
+                            <span><i class="fas fa-map-marker-alt"></i> Zomba, Malawi</span>
+                        </div>
+                        <a href="donate.html" class="btn-donate-small">Support This Project →</a>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1548839140-29a749e1cf4d?w=600&h=350&fit=crop" alt="Emergency Relief" />
+                        <div class="project-progress">
+                            <div class="progress-bar" style="width: 55%"></div>
+                            <span>55% funded</span>
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <h3>Emergency Relief & Disaster Response</h3>
+                        <p>Providing immediate aid and supplies during natural disasters and emergencies in Malawi.</p>
+                        <div class="project-meta">
+                            <span><i class="fas fa-calendar"></i> 2024-2025</span>
+                            <span><i class="fas fa-users"></i> 2,500+ beneficiaries</span>
+                            <span><i class="fas fa-map-marker-alt"></i> Malawi Wide</span>
+                        </div>
+                        <a href="donate.html" class="btn-donate-small">Support This Project →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h3>🇲🇼 Charity-Fund Malawi</h3>
+                    <p>Making hope possible through community action and global support across Malawi and Africa.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="projects.html">Projects</a></li>
+                        <li><a href="donate.html">Donate</a></li>
+                        <li><a href="testimonials.html">Testimonials</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Volunteer</a></li>
+                    </ul>
+                </div>
+                <div class="footer-newsletter">
+                    <h4>Newsletter</h4>
+                    <p>Subscribe for updates from Malawi</p>
+                    <form>
+                        <input type="email" placeholder="Enter email" />
+                        <button type="submit"><i class="fas fa-arrow-right"></i></button>
+                    </form>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2026 Charity-Fund Malawi. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

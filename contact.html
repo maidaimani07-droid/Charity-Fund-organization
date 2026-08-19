@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Charity-Fund Malawi · Contact</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <link rel="stylesheet" href="style.css" />
+    <style>
+        .page-header {
+            background: linear-gradient(135deg, var(--secondary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+        }
+        .page-header h1 {
+            font-size: 3rem;
+            font-weight: 700;
+        }
+        .page-header p {
+            opacity: 0.85;
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 10px auto;
+        }
+        .contact-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            padding: 60px 0;
+        }
+        .contact-info h2 {
+            font-size: 2.5rem;
+            color: var(--text-dark);
+            margin-bottom: 16px;
+        }
+        .contact-info p {
+            color: var(--text-light);
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+        }
+        .contact-details {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        .contact-details div {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            color: var(--text-dark);
+        }
+        .contact-details i {
+            color: var(--primary);
+            font-size: 1.2rem;
+            width: 30px;
+        }
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        .contact-form input,
+        .contact-form textarea {
+            padding: 14px 18px;
+            border: 2px solid var(--medium-gray);
+            border-radius: 12px;
+            font-size: 1rem;
+            background: var(--white);
+            color: var(--text-dark);
+            transition: var(--transition);
+        }
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            border-color: var(--primary);
+            outline: none;
+        }
+        .contact-form button {
+            padding: 14px;
+        }
+        @media (max-width: 768px) {
+            .contact-wrapper {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button id="themeToggle" class="theme-toggle"><i class="fas fa-moon"></i></button>
+
+    <nav class="navbar">
+        <div class="container nav-flex">
+            <div class="logo">
+                <img src="https://img.icons8.com/fluency/48/africa.png" alt="Logo" style="width: 40px; vertical-align: middle; margin-right: 10px;" />
+                Charity-Fund <span style="font-size: 0.8rem; color: #2d7d46;">Malawi</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="projects.html">Projects</a></li>
+                <li><a href="donate.html">Donate</a></li>
+                <li><a href="testimonials.html">Testimonials</a></li>
+                <li><a href="contact.html" class="active">Contact</a></li>
+                <li><a href="donate.html" class="btn-donate-nav">Donate Now</a></li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+    </nav>
+
+    <section class="page-header">
+        <div class="container">
+            <h1>📞 Get in Touch</h1>
+            <p>We'd love to hear from you. Reach out to us anytime.</p>
+        </div>
+    </section>
+
+    <section class="contact" style="padding: 0;">
+        <div class="container">
+            <div class="contact-wrapper">
+                <div class="contact-info">
+                    <h2>Contact Information</h2>
+                    <p>Have questions about our programs in Malawi or want to partner with us? Reach out!</p>
+                    <div class="contact-details">
+                        <div><i class="fas fa-map-marker-alt"></i> 123 Kamuzu Road, Lilongwe, Malawi</div>
+                        <div><i class="fas fa-phone"></i> +265 997 008 860 (AIRTEL)</div>
+                        <div><i class="fas fa-phone"></i> +265 881 395 378 (TNM)</div>
+                        <div><i class="fas fa-envelope"></i> info@charity-fund.mw</div>
+                        <div><i class="fas fa-clock"></i> Mon-Fri: 8:00 AM - 5:00 PM</div>
+                    </div>
+
+                    <div style="margin-top: 30px; background: var(--primary-light); padding: 20px; border-radius: var(--radius);">
+                        <h4 style="color: var(--text-dark); margin-bottom: 10px;">📱 Mobile Money Support</h4>
+                        <p style="color: var(--text-light);">
+                            <strong>AIRTEL Money:</strong> +265 997 008 860<br />
+                            <strong>TNM Mpamba:</strong> +265 881 395 378
+                        </p>
+                    </div>
+                </div>
+
+                <form id="contactForm" class="contact-form">
+                    <input type="text" placeholder="Your Name" required />
+                    <input type="email" placeholder="Your Email" required />
+                    <input type="text" placeholder="Subject" />
+                    <textarea placeholder="Your Message" rows="4" required></textarea>
+                    <button type="submit" class="btn-primary">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h3>🇲🇼 Charity-Fund Malawi</h3>
+                    <p>Making hope possible through community action and global support across Malawi and Africa.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="projects.html">Projects</a></li>
+                        <li><a href="donate.html">Donate</a></li>
+                        <li><a href="testimonials.html">Testimonials</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Volunteer</a></li>
+                    </ul>
+                </div>
+                <div class="footer-newsletter">
+                    <h4>Newsletter</h4>
+                    <p>Subscribe for updates from Malawi</p>
+                    <form>
+                        <input type="email" placeholder="Enter email" />
+                        <button type="submit"><i class="fas fa-arrow-right"></i></button>
+                    </form>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2026 Charity-Fund Malawi. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

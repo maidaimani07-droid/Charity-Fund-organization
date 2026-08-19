@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Charity-Fund Malawi · Testimonials</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <link rel="stylesheet" href="style.css" />
+    <style>
+        .page-header {
+            background: linear-gradient(135deg, var(--secondary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+        }
+        .page-header h1 {
+            font-size: 3rem;
+            font-weight: 700;
+        }
+        .page-header p {
+            opacity: 0.85;
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 10px auto;
+        }
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            padding: 60px 0;
+            background: var(--light-gray);
+        }
+        .testimonial-item {
+            background: var(--white);
+            padding: 30px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            text-align: center;
+        }
+        .testimonial-item .quote {
+            font-size: 1.1rem;
+            font-style: italic;
+            color: var(--text-dark);
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+        .testimonial-item .author {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+        .testimonial-item .author img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        .testimonial-item .author h4 {
+            color: var(--text-dark);
+            font-size: 1.1rem;
+        }
+        .testimonial-item .author span {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+        .testimonial-item .rating {
+            color: #f5c542;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+    </style>
+</head>
+<body>
+    <button id="themeToggle" class="theme-toggle"><i class="fas fa-moon"></i></button>
+
+    <nav class="navbar">
+        <div class="container nav-flex">
+            <div class="logo">
+                <img src="https://img.icons8.com/fluency/48/africa.png" alt="Logo" style="width: 40px; vertical-align: middle; margin-right: 10px;" />
+                Charity-Fund <span style="font-size: 0.8rem; color: #2d7d46;">Malawi</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="projects.html">Projects</a></li>
+                <li><a href="donate.html">Donate</a></li>
+                <li><a href="testimonials.html" class="active">Testimonials</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="donate.html" class="btn-donate-nav">Donate Now</a></li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+    </nav>
+
+    <section class="page-header">
+        <div class="container">
+            <h1>📣 What Our Supporters Say</h1>
+            <p>Real stories from people making a difference in Malawi</p>
+        </div>
+    </section>
+
+    <section class="testimonials-grid">
+        <div class="container">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px;">
+                <div class="testimonial-item">
+                    <div class="rating">⭐⭐⭐⭐⭐</div>
+                    <div class="quote">"Charity-Fund Malawi changed my perspective on giving. Seeing where my donation goes and the real impact it makes in Malawian communities is incredibly rewarding."</div>
+                    <div class="author">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face" alt="John Banda" />
+                        <div>
+                            <h4>John Banda</h4>
+                            <span>Donor from Lilongwe</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-item">
+                    <div class="rating">⭐⭐⭐⭐⭐</div>
+                    <div class="quote">"The transparency and efficiency of this organization is amazing. I know my monthly donation is actually reaching those who need it most in Malawi's rural areas."</div>
+                    <div class="author">
+                        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop&crop=face" alt="Sarah Phiri" />
+                        <div>
+                            <h4>Sarah Phiri</h4>
+                            <span>Monthly Donor from Blantyre</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-item">
+                    <div class="rating">⭐⭐⭐⭐⭐</div>
+                    <div class="quote">"Being able to see the progress of projects through updates and photos from Malawi makes me feel truly connected to the cause. Highly recommend!"</div>
+                    <div class="author">
+                        <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop&crop=face" alt="Robert Mwale" />
+                        <div>
+                            <h4>Robert Mwale</h4>
+                            <span>Corporate Partner in Mzuzu</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-item">
+                    <div class="rating">⭐⭐⭐⭐⭐</div>
+                    <div class="quote">"I've been supporting Charity-Fund for 3 years now. The impact in my community is visible. More children are in school and families have clean water."</div>
+                    <div class="author">
+                        <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&crop=face" alt="Grace Mwale" />
+                        <div>
+                            <h4>Grace Mwale</h4>
+                            <span>Community Leader in Dowa</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-item">
+                    <div class="rating">⭐⭐⭐⭐⭐</div>
+                    <div class="quote">"The mobile health clinics have saved lives in our village. My children now get regular checkups. Thank you Charity-Fund Malawi!"</div>
+                    <div class="author">
+                        <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face" alt="David Kamanga" />
+                        <div>
+                            <h4>David Kamanga</h4>
+                            <span>Beneficiary from Salima</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-item">
+                    <div class="rating">⭐⭐⭐⭐⭐</div>
+                    <div class="quote">"As a corporate partner, we've seen the impact of our donations. The team is professional and truly committed to empowering Malawian communities."</div>
+                    <div class="author">
+                        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=100&h=100&fit=crop&crop=face" alt="Margaret Chikwanda" />
+                        <div>
+                            <h4>Margaret Chikwanda</h4>
+                            <span>Corporate Partner</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h3>🇲🇼 Charity-Fund Malawi</h3>
+                    <p>Making hope possible through community action and global support across Malawi and Africa.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="projects.html">Projects</a></li>
+                        <li><a href="donate.html">Donate</a></li>
+                        <li><a href="testimonials.html">Testimonials</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Volunteer</a></li>
+                    </ul>
+                </div>
+                <div class="footer-newsletter">
+                    <h4>Newsletter</h4>
+                    <p>Subscribe for updates from Malawi</p>
+                    <form>
+                        <input type="email" placeholder="Enter email" />
+                        <button type="submit"><i class="fas fa-arrow-right"></i></button>
+                    </form>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2026 Charity-Fund Malawi. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
