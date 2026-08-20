@@ -129,7 +129,64 @@
             color: var(--text-light);
             font-size: 0.85rem;
         }
+        .whatsapp-btn {
+            display: inline-block;
+            background: #25D366;
+            color: white;
+            padding: 10px 24px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 12px;
+            transition: var(--transition);
+        }
+        .whatsapp-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+            color: white;
+        }
+        .whatsapp-btn i {
+            margin-right: 8px;
+        }
+
+        /* ===== WHATSAPP FLOATING BUTTON ===== */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 100px;
+            right: 30px;
+            z-index: 999;
+            background: #25D366;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+            text-decoration: none;
+            transition: var(--transition);
+            animation: pulse 2s infinite;
+        }
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 30px rgba(37, 211, 102, 0.6);
+            color: white;
+        }
+        @keyframes pulse {
+            0% { box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4); }
+            50% { box-shadow: 0 4px 30px rgba(37, 211, 102, 0.7); }
+            100% { box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4); }
+        }
         @media (max-width: 768px) {
+            .whatsapp-float {
+                width: 50px;
+                height: 50px;
+                font-size: 1.6rem;
+                bottom: 80px;
+                right: 15px;
+            }
             .contact-wrapper {
                 grid-template-columns: 1fr;
             }
@@ -137,6 +194,12 @@
     </style>
 </head>
 <body>
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/265997008860?text=Hello%20Charity-Fund%20Malawi%2C%20I%20would%20like%20to%20get%20in%20touch%20with%20your%20team." 
+       class="whatsapp-float" target="_blank" title="Chat with us on WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
     <button id="themeToggle" class="theme-toggle"><i class="fas fa-moon"></i></button>
 
     <nav class="navbar">
@@ -198,6 +261,10 @@
                             <i class="fas fa-check-circle" style="color: var(--primary);"></i> 
                             Available 24/7 for donations
                         </p>
+                        <a href="https://wa.me/265997008860?text=Hello%20Charity-Fund%20Malawi%2C%20I%20need%20assistance%20with%20my%20donation." 
+                           target="_blank" class="whatsapp-btn">
+                            <i class="fab fa-whatsapp"></i> Chat with CEO on WhatsApp
+                        </a>
                     </div>
                 </div>
 

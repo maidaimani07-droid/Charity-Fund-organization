@@ -42,18 +42,55 @@
         .project-card:hover .project-image img {
             transform: scale(1.05);
         }
-        .project-image .image-overlay {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 60%;
-            background: linear-gradient(transparent, rgba(0,0,0,0.7));
-            pointer-events: none;
+
+        /* ===== WHATSAPP FLOATING BUTTON ===== */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 100px;
+            right: 30px;
+            z-index: 999;
+            background: #25D366;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+            text-decoration: none;
+            transition: var(--transition);
+            animation: pulse 2s infinite;
+        }
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 30px rgba(37, 211, 102, 0.6);
+            color: white;
+        }
+        @keyframes pulse {
+            0% { box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4); }
+            50% { box-shadow: 0 4px 30px rgba(37, 211, 102, 0.7); }
+            100% { box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4); }
+        }
+        @media (max-width: 768px) {
+            .whatsapp-float {
+                width: 50px;
+                height: 50px;
+                font-size: 1.6rem;
+                bottom: 80px;
+                right: 15px;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/265997008860?text=Hello%20Charity-Fund%20Malawi%2C%20I%20would%20like%20to%20know%20more%20about%20your%20projects%20in%20Malawi." 
+       class="whatsapp-float" target="_blank" title="Chat with us on WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
     <button id="themeToggle" class="theme-toggle"><i class="fas fa-moon"></i></button>
 
     <nav class="navbar">
@@ -86,7 +123,6 @@
     <section class="projects-page">
         <div class="container">
             <div class="project-grid">
-                <!-- Education Project - School Building -->
                 <div class="project-card">
                     <div class="project-image">
                         <img src="https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=600&h=350&fit=crop" alt="Building Schools in Malawi" />
@@ -107,7 +143,6 @@
                     </div>
                 </div>
 
-                <!-- Clean Water Project -->
                 <div class="project-card">
                     <div class="project-image">
                         <img src="https://images.unsplash.com/photo-1548839140-29a749e1cf4d?w=600&h=350&fit=crop" alt="Clean Water Malawi" />
@@ -128,7 +163,6 @@
                     </div>
                 </div>
 
-                <!-- Healthcare Project - Mobile Ambulance -->
                 <div class="project-card">
                     <div class="project-image">
                         <img src="https://images.unsplash.com/photo-1631815588090-d4bfec5b1ccb?w=600&h=350&fit=crop" alt="Mobile Health Clinics Malawi" />
@@ -149,7 +183,6 @@
                     </div>
                 </div>
 
-                <!-- Agriculture Project - Maize/Food Security -->
                 <div class="project-card">
                     <div class="project-image">
                         <img src="https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?w=600&h=350&fit=crop" alt="Agricultural Empowerment Malawi" />
@@ -170,7 +203,6 @@
                     </div>
                 </div>
 
-                <!-- Girls Education -->
                 <div class="project-card">
                     <div class="project-image">
                         <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=600&h=350&fit=crop" alt="Girls Education Malawi" />
@@ -191,7 +223,6 @@
                     </div>
                 </div>
 
-                <!-- Emergency Relief - Food Distribution -->
                 <div class="project-card">
                     <div class="project-image">
                         <img src="https://images.unsplash.com/photo-1593113598332-cd288d649433?w=600&h=350&fit=crop" alt="Emergency Relief Malawi" />
