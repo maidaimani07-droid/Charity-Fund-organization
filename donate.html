@@ -51,7 +51,6 @@
             right: 0;
             height: 6px;
         }
-        /* AIRTEL - Keep Red */
         .payment-card.airtel .brand-banner {
             background: linear-gradient(90deg, #ff0000, #cc0000, #ff0000);
         }
@@ -71,8 +70,6 @@
         .payment-card.airtel .icon-large {
             color: #cc0000;
         }
-
-        /* TNM - Green Theme */
         .payment-card.tnm .brand-banner {
             background: linear-gradient(90deg, #1a7a3a, #2d9b4e, #1a7a3a);
         }
@@ -92,8 +89,6 @@
         .payment-card.tnm .icon-large {
             color: #1a7a3a;
         }
-
-        /* Bank - Green Theme */
         .payment-card.bank .brand-banner {
             background: linear-gradient(90deg, #1a7a3a, #2d9b4e, #1a7a3a);
         }
@@ -113,7 +108,6 @@
         .payment-card.bank .icon-large {
             color: #1a7a3a;
         }
-
         .payment-card .logo-container {
             width: 120px;
             height: 120px;
@@ -219,15 +213,12 @@
         .payment-card .call-btn i {
             margin-right: 8px;
         }
-        /* AIRTEL keeps red call button */
         .payment-card.airtel .call-btn {
             background: #cc0000;
         }
         .payment-card.airtel .call-btn:hover {
             box-shadow: 0 4px 15px rgba(204, 0, 0, 0.4);
         }
-
-        /* ===== PAYMENT MODAL ===== */
         .payment-modal {
             display: none;
             position: fixed;
@@ -246,14 +237,8 @@
             display: flex;
         }
         @keyframes modalFadeIn {
-            from {
-                opacity: 0;
-                transform: scale(0.95);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
         }
         .payment-modal-content {
             background: var(--white);
@@ -385,8 +370,6 @@
         .modal-cancel-btn:hover {
             background: var(--medium-gray);
         }
-
-        /* ===== WHATSAPP FLOATING BUTTON ===== */
         .whatsapp-float {
             position: fixed;
             bottom: 100px;
@@ -416,7 +399,6 @@
             50% { box-shadow: 0 4px 30px rgba(37, 211, 102, 0.7); }
             100% { box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4); }
         }
-
         .whatsapp-modal-btn {
             display: inline-block;
             background: #25D366;
@@ -437,8 +419,6 @@
         .whatsapp-modal-btn i {
             margin-right: 8px;
         }
-
-        /* ===== REDIRECTING OVERLAY ===== */
         .redirecting-overlay {
             display: none;
             position: fixed;
@@ -525,7 +505,6 @@
         .redirecting-content .btn-cancel-redirect:hover {
             color: var(--text-dark);
         }
-
         @media (max-width: 768px) {
             .payment-modal-content {
                 padding: 25px 20px;
@@ -548,7 +527,6 @@
     </style>
 </head>
 <body>
-    <!-- WhatsApp Floating Button -->
     <a href="https://wa.me/265997008860?text=Hello%20Charity-Fund%20Malawi%2C%20I%20need%20assistance%20with%20my%20donation." 
        class="whatsapp-float" target="_blank" title="Chat with us on WhatsApp">
         <i class="fab fa-whatsapp"></i>
@@ -666,7 +644,6 @@
                 </div>
             </div>
 
-            <!-- Payment Methods -->
             <div style="margin-top: 60px;">
                 <div class="section-header">
                     <span class="section-tag">📱 Payment Methods</span>
@@ -675,7 +652,6 @@
                 </div>
 
                 <div class="payment-methods">
-                    <!-- AIRTEL Money - KEEP RED -->
                     <div class="payment-card airtel">
                         <div class="brand-banner"></div>
                         <div class="logo-container">
@@ -693,7 +669,6 @@
                         <span class="badge"><i class="fas fa-check-circle"></i> Available 24/7</span>
                     </div>
 
-                    <!-- TNM Mpamba - GREEN THEME -->
                     <div class="payment-card tnm">
                         <div class="brand-banner"></div>
                         <div class="logo-container">
@@ -711,7 +686,6 @@
                         <span class="badge"><i class="fas fa-check-circle"></i> Available 24/7</span>
                     </div>
 
-                    <!-- FIRST CAPITAL BANK - GREEN THEME -->
                     <div class="payment-card bank">
                         <div class="brand-banner"></div>
                         <div class="logo-container">
@@ -731,7 +705,6 @@
                     </div>
                 </div>
 
-                <!-- Support & WhatsApp Section -->
                 <div style="text-align: center; background: var(--primary-light); padding: 24px; border-radius: var(--radius); margin-top: 30px;">
                     <p style="color: var(--text-dark); font-size: 1.1rem;">
                         <i class="fas fa-shield-alt" style="color: var(--primary); margin-right: 10px;"></i>
@@ -753,7 +726,6 @@
         </div>
     </section>
 
-    <!-- ===== PAYMENT METHOD MODAL ===== -->
     <div class="payment-modal" id="paymentModal">
         <div class="payment-modal-content">
             <div class="modal-header">
@@ -795,7 +767,6 @@
                 </button>
             </div>
 
-            <!-- WhatsApp Help in Modal -->
             <div style="margin: 16px 0; padding: 12px; background: #e8f5e9; border-radius: 12px;">
                 <p style="font-size: 0.9rem; color: var(--text-dark);">
                     <i class="fab fa-whatsapp" style="color: #25D366; font-size: 1.2rem; margin-right: 8px;"></i>
@@ -813,7 +784,6 @@
         </div>
     </div>
 
-    <!-- ===== REDIRECTING OVERLAY ===== -->
     <div class="redirecting-overlay" id="redirectingOverlay">
         <div class="redirecting-content">
             <div class="spinner"></div>
@@ -890,7 +860,6 @@
     </footer>
 
     <script>
-    // Copy number function
     function copyNumber(number) {
         const cleanNumber = number.replace(/[^0-9+]/g, '');
         navigator.clipboard.writeText(cleanNumber).then(() => {
@@ -912,9 +881,8 @@
         });
     }
 
-    // Copy Bank Details
     function copyBankDetails() {
-        const details = `FIRST CAPITAL BANK\nAccount Name: IMANI LIWEWE MAIDA\nAccount Number: 0029503035324`;
+        const details = 'FIRST CAPITAL BANK\nAccount Name: IMANI LIWEWE MAIDA\nAccount Number: 0029503035324';
         navigator.clipboard.writeText(details).then(() => {
             const btn = event.target;
             btn.textContent = 'Copied!';
@@ -934,7 +902,6 @@
         });
     }
 
-    // ===== MODAL FUNCTIONS =====
     let currentDonationAmount = 2500;
     let selectedPaymentMethod = '';
     let redirectTimer = null;
@@ -958,7 +925,6 @@
         window.location.href = 'tel:' + number.replace(/[^0-9+]/g, '');
     }
 
-    // ===== REDIRECTING OVERLAY FUNCTIONS =====
     function showRedirecting(methodName, methodDetails, redirectUrl) {
         const overlay = document.getElementById('redirectingOverlay');
         document.getElementById('redirectMethodName').textContent = methodName;
@@ -966,7 +932,6 @@
         overlay.classList.add('active');
         document.body.style.overflow = 'hidden';
 
-        // Auto-redirect after 3 seconds
         redirectTimer = setTimeout(() => {
             if (redirectUrl) {
                 window.open(redirectUrl, '_blank');
@@ -976,7 +941,6 @@
             document.body.style.overflow = '';
         }, 3000);
 
-        // Manual continue button
         document.getElementById('redirectContinueBtn').onclick = function() {
             clearTimeout(redirectTimer);
             if (redirectUrl) {
@@ -992,11 +956,9 @@
         clearTimeout(redirectTimer);
         document.getElementById('redirectingOverlay').classList.remove('active');
         document.body.style.overflow = '';
-        // Reopen modal
         openModal(currentDonationAmount);
     }
 
-    // ===== COMPLETE DONATION =====
     function completeDonation(methodName) {
         const amount = currentDonationAmount;
         const donateMessage = document.getElementById('donateMessage');
@@ -1023,7 +985,6 @@
         
         donateMessage.classList.add('show');
 
-        // Update goal progress
         const goalFill = document.querySelector('.goal-fill');
         if (goalFill) {
             const currentWidth = parseFloat(goalFill.style.width);
@@ -1034,7 +995,7 @@
             const goalLabel = document.querySelector('.goal-label span:last-child');
             if (goalLabel) {
                 const formatMWK = (num) => 'MWK ' + Number(Math.round(num)).toLocaleString();
-                goalLabel.textContent = `${formatMWK(currentAmount)} / ${formatMWK(3000000)}`;
+                goalLabel.textContent = formatMWK(currentAmount) + ' / ' + formatMWK(3000000);
             }
         }
 
@@ -1047,47 +1008,35 @@
         }, 15000);
     }
 
-    // ===== SELECT PAYMENT =====
     function selectPayment(method) {
         const methods = {
             airtel: {
                 name: 'AIRTEL Money',
                 number: '+265 997 008 860',
                 dial: '+265997008860',
-                icon: '📱',
                 redirectUrl: 'tel:+265997008860'
             },
             tnm: {
                 name: 'TNM Mpamba',
                 number: '+265 881 395 378',
                 dial: '+265881395378',
-                icon: '📱',
                 redirectUrl: 'tel:+265881395378'
             },
             bank: {
                 name: 'FIRST CAPITAL BANK',
                 number: '0029503035324',
-                icon: '🏦',
                 details: 'Account Name: IMANI LIWEWE MAIDA',
-                redirectUrl: null // No redirect for bank, show details
+                redirectUrl: null
             }
         };
 
         const selected = methods[method];
         selectedPaymentMethod = method;
-
-        // Close modal
         closeModal();
 
-        // Show redirecting overlay
         if (method === 'airtel' || method === 'tnm') {
-            showRedirecting(
-                selected.name,
-                selected.number,
-                selected.redirectUrl
-            );
+            showRedirecting(selected.name, selected.number, selected.redirectUrl);
         } else {
-            // Bank - show details in redirect overlay without auto-redirect
             const overlay = document.getElementById('redirectingOverlay');
             document.getElementById('redirectMethodName').textContent = selected.name;
             document.getElementById('redirectMethodDetails').innerHTML = `
@@ -1100,7 +1049,6 @@
             document.getElementById('redirectContinueBtn').onclick = function() {
                 overlay.classList.remove('active');
                 document.body.style.overflow = '';
-                // Show bank details in message
                 const amount = currentDonationAmount;
                 const donateMessage = document.getElementById('donateMessage');
                 const donationDisplay = document.getElementById('donationDisplay');
@@ -1141,7 +1089,7 @@
                     const goalLabel = document.querySelector('.goal-label span:last-child');
                     if (goalLabel) {
                         const formatMWK = (num) => 'MWK ' + Number(Math.round(num)).toLocaleString();
-                        goalLabel.textContent = `${formatMWK(currentAmount)} / ${formatMWK(3000000)}`;
+                        goalLabel.textContent = formatMWK(currentAmount) + ' / ' + formatMWK(3000000);
                     }
                 }
 
@@ -1154,7 +1102,6 @@
                 }, 15000);
             };
 
-            // Cancel button for bank
             document.querySelector('.btn-cancel-redirect').onclick = function() {
                 overlay.classList.remove('active');
                 document.body.style.overflow = '';
@@ -1175,19 +1122,18 @@
         }
     });
 
-    // ===== DONATION FUNCTIONALITY =====
     (function() {
         const amountBtns = document.querySelectorAll('.amount-btn');
         const customInput = document.getElementById('customAmount');
         const donateBtn = document.getElementById('donateNowBtn');
         const totalDisplay = document.getElementById('totalDisplay');
+        const frequencySelect = document.getElementById('donationFrequency');
 
         let selectedAmount = 2500;
         let donationFrequency = 'one-time';
-        const currencySymbol = 'MWK';
 
         function formatMWK(amount) {
-            return `${currencySymbol} ${Number(amount).toLocaleString()}`;
+            return 'MWK ' + Number(amount).toLocaleString();
         }
 
         amountBtns.forEach(btn => {
@@ -1214,7 +1160,6 @@
             });
         }
 
-        const frequencySelect = document.getElementById('donationFrequency');
         if (frequencySelect) {
             frequencySelect.addEventListener('change', function() {
                 donationFrequency = this.value;
@@ -1225,9 +1170,9 @@
         function updateTotal() {
             let amount = selectedAmount;
             if (donationFrequency === 'monthly') {
-                totalDisplay.textContent = `${formatMWK(amount * 12)} / year`;
+                totalDisplay.textContent = formatMWK(amount * 12) + ' / year';
             } else if (donationFrequency === 'yearly') {
-                totalDisplay.textContent = `${formatMWK(amount * 2)} / 2 years`;
+                totalDisplay.textContent = formatMWK(amount * 2) + ' / 2 years';
             } else {
                 totalDisplay.textContent = formatMWK(amount);
             }
