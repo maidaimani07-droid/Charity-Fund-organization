@@ -7,6 +7,40 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <link rel="stylesheet" href="style.css" />
     <style>
+        /* ===== GREEN HEART ===== */
+        .fa-heart {
+            color: #1a7a3a !important;
+        }
+        .donation-header h3 .fa-heart {
+            color: #1a7a3a !important;
+        }
+        .btn-primary .fa-heart {
+            color: #ffffff !important;
+        }
+        .donate-message .fa-heart {
+            color: #1a7a3a !important;
+        }
+        .payment-card .fa-heart {
+            color: #1a7a3a !important;
+        }
+        .section-tag .fa-heart {
+            color: #1a7a3a !important;
+        }
+        .modal-header .fa-heart {
+            color: #1a7a3a !important;
+        }
+        /* Green love emoji */
+        .donation-header h3,
+        .donate-box .donation-header h3 {
+            color: var(--text-dark);
+        }
+        .donation-header h3 .green-heart {
+            color: #1a7a3a !important;
+        }
+        .green-heart {
+            color: #1a7a3a !important;
+        }
+
         .page-header {
             background: linear-gradient(135deg, var(--secondary) 0%, var(--primary-dark) 100%);
             color: white;
@@ -505,23 +539,6 @@
         .redirecting-content .btn-cancel-redirect:hover {
             color: var(--text-dark);
         }
-        
-        /* ===== GREEN HEART ICON ===== */
-        .fa-heart,
-        .donation-header .fa-heart,
-        .modal-header .fa-heart {
-            color: #1a7a3a !important;
-        }
-        .btn-primary .fa-heart {
-            color: white !important;
-        }
-        .donate-box .donation-header h3 .fa-heart {
-            color: #1a7a3a !important;
-        }
-        .payment-card .badge .fa-heart {
-            color: #1a7a3a !important;
-        }
-        
         @media (max-width: 768px) {
             .payment-modal-content {
                 padding: 25px 20px;
@@ -613,7 +630,7 @@
 
                 <div class="donate-box animate-fade-up">
                     <div class="donation-header">
-                        <h3>❤️ Make a Donation</h3>
+                        <h3><span class="green-heart">❤️</span> Make a Donation</h3>
                         <p>Select an amount in Malawi Kwacha (MWK)</p>
                     </div>
 
