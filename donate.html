@@ -58,7 +58,7 @@
             background: linear-gradient(90deg, #004d99, #0066cc, #004d99);
         }
         .payment-card.bank .brand-banner {
-            background: linear-gradient(90deg, #2d7d46, #4ade80, #2d7d46);
+            background: linear-gradient(90deg, #1a237e, #283593, #1a237e);
         }
         .payment-card .logo-container {
             width: 120px;
@@ -82,8 +82,8 @@
             border-color: #004d99;
         }
         .payment-card.bank .logo-container {
-            background: #e8f5e9;
-            border-color: #2d7d46;
+            background: #e8eaf6;
+            border-color: #1a237e;
         }
         .payment-card .logo-container img {
             width: 80px;
@@ -120,6 +120,10 @@
             color: #004d99;
             background: #e8f0ff;
         }
+        .payment-card.bank .number {
+            color: #1a237e;
+            background: #e8eaf6;
+        }
         .payment-card p {
             color: var(--text-light);
             font-size: 0.95rem;
@@ -144,9 +148,9 @@
             border: 1px solid #004d9930;
         }
         .payment-card.bank .badge {
-            background: #2d7d4615;
-            color: #2d7d46;
-            border: 1px solid #2d7d4630;
+            background: #1a237e15;
+            color: #1a237e;
+            border: 1px solid #1a237e30;
         }
         .payment-card .icon-large {
             font-size: 3.5rem;
@@ -159,7 +163,7 @@
             color: #004d99;
         }
         .payment-card.bank .icon-large {
-            color: #2d7d46;
+            color: #1a237e;
         }
         .payment-card .copy-btn {
             background: transparent;
@@ -181,6 +185,16 @@
             background: #4ade80;
             color: white;
             border-color: #4ade80;
+        }
+        .payment-card .bank-details {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            line-height: 1.8;
+            text-align: left;
+            padding: 10px 0;
+        }
+        .payment-card .bank-details strong {
+            color: var(--text-dark);
         }
 
         /* ===== PAYMENT MODAL ===== */
@@ -281,6 +295,7 @@
             font-weight: 700;
             font-size: 0.8rem;
             color: white;
+            flex-shrink: 0;
         }
         .modal-payment-options button .payment-icon.airtel-icon {
             background: #cc0000;
@@ -289,7 +304,7 @@
             background: #004d99;
         }
         .modal-payment-options button .payment-icon.bank-icon {
-            background: #2d7d46;
+            background: #1a237e;
         }
         .modal-payment-options button .payment-detail {
             flex: 1;
@@ -318,12 +333,12 @@
             background: #e0edff;
         }
         .modal-payment-options button.bank-option {
-            border-color: #2d7d4640;
-            background: #e8f5e9;
+            border-color: #1a237e40;
+            background: #e8eaf6;
         }
         .modal-payment-options button.bank-option:hover {
-            border-color: #2d7d46;
-            background: #d4edda;
+            border-color: #1a237e;
+            background: #c5cae9;
         }
         .modal-close-btn {
             background: transparent;
@@ -489,6 +504,7 @@
                 </div>
 
                 <div class="payment-methods">
+                    <!-- AIRTEL Money -->
                     <div class="payment-card airtel">
                         <div class="brand-banner"></div>
                         <div class="logo-container">
@@ -503,6 +519,7 @@
                         <span class="badge"><i class="fas fa-check-circle"></i> Available 24/7</span>
                     </div>
 
+                    <!-- TNM Mpamba -->
                     <div class="payment-card tnm">
                         <div class="brand-banner"></div>
                         <div class="logo-container">
@@ -517,17 +534,23 @@
                         <span class="badge"><i class="fas fa-check-circle"></i> Available 24/7</span>
                     </div>
 
+                    <!-- FIRST CAPITAL BANK -->
                     <div class="payment-card bank">
                         <div class="brand-banner"></div>
                         <div class="logo-container">
                             <i class="fas fa-university icon-large"></i>
                         </div>
-                        <h3>Bank Transfer</h3>
+                        <h3>FIRST CAPITAL BANK</h3>
                         <div class="number">
-                            <i class="fas fa-building"></i> NBS Bank
+                            <i class="fas fa-user"></i> IMANI LIWEWE MAIDA
                         </div>
-                        <p>Account: 1234567890</p>
-                        <span class="badge"><i class="fas fa-check-circle"></i> Charity-Fund Malawi</span>
+                        <div class="bank-details">
+                            <strong>Account Name:</strong> IMANI LIWEWE MAIDA<br />
+                            <strong>Account Number:</strong> 0029503035324<br />
+                            <strong>Bank:</strong> FIRST CAPITAL BANK
+                            <button class="copy-btn" onclick="copyBankDetails()" style="display: block; margin: 8px auto 0;">Copy Bank Details</button>
+                        </div>
+                        <span class="badge"><i class="fas fa-check-circle"></i> Direct Bank Transfer</span>
                     </div>
                 </div>
 
@@ -576,10 +599,10 @@
                 <button class="bank-option" onclick="selectPayment('bank')">
                     <span class="payment-icon bank-icon">🏦</span>
                     <span class="payment-detail">
-                        Bank Transfer
-                        <small>NBS Bank - Account: 1234567890</small>
+                        FIRST CAPITAL BANK
+                        <small>IMANI LIWEWE MAIDA · 0029503035324</small>
                     </span>
-                    <i class="fas fa-chevron-right" style="color: #2d7d46;"></i>
+                    <i class="fas fa-chevron-right" style="color: #1a237e;"></i>
                 </button>
             </div>
 
@@ -660,6 +683,28 @@
         });
     }
 
+    // Copy Bank Details
+    function copyBankDetails() {
+        const details = `FIRST CAPITAL BANK\nAccount Name: IMANI LIWEWE MAIDA\nAccount Number: 0029503035324`;
+        navigator.clipboard.writeText(details).then(() => {
+            const btn = event.target;
+            btn.textContent = 'Copied!';
+            btn.classList.add('copied');
+            setTimeout(() => {
+                btn.textContent = 'Copy Bank Details';
+                btn.classList.remove('copied');
+            }, 2000);
+        }).catch(() => {
+            const input = document.createElement('input');
+            input.value = details;
+            document.body.appendChild(input);
+            input.select();
+            document.execCommand('copy');
+            document.body.removeChild(input);
+            alert('Bank details copied!');
+        });
+    }
+
     // ===== MODAL FUNCTIONS =====
     let currentDonationAmount = 2500;
 
@@ -691,9 +736,10 @@
                 icon: '📱'
             },
             bank: {
-                name: 'Bank Transfer',
-                number: 'NBS Bank - 1234567890',
-                icon: '🏦'
+                name: 'FIRST CAPITAL BANK',
+                number: 'Account: 0029503035324',
+                icon: '🏦',
+                details: 'Account Name: IMANI LIWEWE MAIDA'
             }
         };
 
@@ -709,13 +755,27 @@
         
         donationDisplay.textContent = 'MWK ' + Number(amount).toLocaleString();
         
-        // Update message with payment method
+        let extraDetails = '';
+        if (method === 'bank') {
+            extraDetails = `
+                <br /><span style="font-size: 0.85rem; display: block; margin-top: 8px; background: #e8eaf6; padding: 10px; border-radius: 8px;">
+                    <strong>🏦 FIRST CAPITAL BANK</strong><br />
+                    Account Name: <strong>IMANI LIWEWE MAIDA</strong><br />
+                    Account Number: <strong>0029503035324</strong>
+                </span>
+            `;
+        }
+        
         const messageP = donateMessage.querySelector('p');
         messageP.innerHTML = `
             ✅ Thank you! Your donation of <strong>MWK ${Number(amount).toLocaleString()}</strong> is making a real difference in Malawi.<br />
             <span style="font-size: 0.9rem; display: block; margin-top: 8px;">
                 <i class="fas fa-check-circle" style="color: #2d7d46;"></i> 
-                Payment via <strong>${selected.name}</strong> (${selected.number}) initiated.
+                Payment via <strong>${selected.name}</strong> ${selected.number ? '(' + selected.number + ')' : ''} initiated.
+                ${selected.details ? '<br />' + selected.details : ''}
+            </span>
+            ${extraDetails}
+            <span style="font-size: 0.85rem; display: block; margin-top: 8px; color: var(--text-light);">
                 Please complete the transaction to finalize your donation.
             </span>
         `;
@@ -742,10 +802,10 @@
             donateMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }, 300);
 
-        // Auto-hide after 8 seconds
+        // Auto-hide after 10 seconds
         setTimeout(() => {
             donateMessage.classList.remove('show');
-        }, 8000);
+        }, 10000);
     }
 
     // Close modal on outside click
