@@ -36,6 +36,11 @@
             border-radius: var(--radius);
             box-shadow: var(--shadow);
             text-align: center;
+            transition: var(--transition);
+        }
+        .testimonial-item:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
         }
         .testimonial-item .quote {
             font-size: 1.1rem;
@@ -55,6 +60,7 @@
             height: 60px;
             border-radius: 50%;
             object-fit: cover;
+            border: 3px solid var(--primary);
         }
         .testimonial-item .author h4 {
             color: var(--text-dark);
@@ -68,6 +74,14 @@
             color: #f5c542;
             margin-bottom: 15px;
             font-size: 1.2rem;
+        }
+        .testimonial-item .quote-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            opacity: 0.3;
+            font-family: Georgia, serif;
+            line-height: 1;
+            margin-bottom: 5px;
         }
 
         /* ===== WHATSAPP FLOATING BUTTON ===== */
@@ -124,7 +138,7 @@
         <div class="container nav-flex">
             <div class="logo">
                 <img src="https://img.icons8.com/fluency/48/africa.png" alt="Logo" style="width: 40px; vertical-align: middle; margin-right: 10px;" />
-                Charity-Fund <span style="font-size: 0.8rem; color: #2d7d46;">Malawi</span>
+                Charity-Fund <span style="font-size: 0.8rem; color: #1a7a3a;">Malawi</span>
             </div>
             <ul class="nav-links">
                 <li><a href="index.html">Home</a></li>
@@ -150,11 +164,13 @@
     <section class="testimonials-grid">
         <div class="container">
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px;">
+                <!-- Testimonial 1 - John Banda -->
                 <div class="testimonial-item">
+                    <div class="quote-icon">"</div>
                     <div class="rating">⭐⭐⭐⭐⭐</div>
                     <div class="quote">"Charity-Fund Malawi changed my perspective on giving. Seeing where my donation goes and the real impact it makes in Malawian communities is incredibly rewarding."</div>
                     <div class="author">
-                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face" alt="John Banda" />
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face" alt="John Banda" />
                         <div>
                             <h4>John Banda</h4>
                             <span>Donor from Lilongwe</span>
@@ -162,11 +178,13 @@
                     </div>
                 </div>
 
+                <!-- Testimonial 2 - Sarah Phiri -->
                 <div class="testimonial-item">
+                    <div class="quote-icon">"</div>
                     <div class="rating">⭐⭐⭐⭐⭐</div>
                     <div class="quote">"The transparency and efficiency of this organization is amazing. I know my monthly donation is actually reaching those who need it most in Malawi's rural areas."</div>
                     <div class="author">
-                        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop&crop=face" alt="Sarah Phiri" />
+                        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&h=150&fit=crop&crop=face" alt="Sarah Phiri" />
                         <div>
                             <h4>Sarah Phiri</h4>
                             <span>Monthly Donor from Blantyre</span>
@@ -174,11 +192,13 @@
                     </div>
                 </div>
 
+                <!-- Testimonial 3 - Robert Mwale -->
                 <div class="testimonial-item">
+                    <div class="quote-icon">"</div>
                     <div class="rating">⭐⭐⭐⭐⭐</div>
                     <div class="quote">"Being able to see the progress of projects through updates and photos from Malawi makes me feel truly connected to the cause. Highly recommend!"</div>
                     <div class="author">
-                        <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop&crop=face" alt="Robert Mwale" />
+                        <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&h=150&fit=crop&crop=face" alt="Robert Mwale" />
                         <div>
                             <h4>Robert Mwale</h4>
                             <span>Corporate Partner in Mzuzu</span>
@@ -186,11 +206,13 @@
                     </div>
                 </div>
 
+                <!-- Testimonial 4 - Grace Mwale -->
                 <div class="testimonial-item">
+                    <div class="quote-icon">"</div>
                     <div class="rating">⭐⭐⭐⭐⭐</div>
                     <div class="quote">"I've been supporting Charity-Fund for 3 years now. The impact in my community is visible. More children are in school and families have clean water."</div>
                     <div class="author">
-                        <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&crop=face" alt="Grace Mwale" />
+                        <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face" alt="Grace Mwale" />
                         <div>
                             <h4>Grace Mwale</h4>
                             <span>Community Leader in Dowa</span>
@@ -198,11 +220,13 @@
                     </div>
                 </div>
 
+                <!-- Testimonial 5 - David Kamanga -->
                 <div class="testimonial-item">
+                    <div class="quote-icon">"</div>
                     <div class="rating">⭐⭐⭐⭐⭐</div>
                     <div class="quote">"The mobile health clinics have saved lives in our village. My children now get regular checkups. Thank you Charity-Fund Malawi!"</div>
                     <div class="author">
-                        <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face" alt="David Kamanga" />
+                        <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face" alt="David Kamanga" />
                         <div>
                             <h4>David Kamanga</h4>
                             <span>Beneficiary from Salima</span>
@@ -210,14 +234,58 @@
                     </div>
                 </div>
 
+                <!-- Testimonial 6 - Margaret Chikwanda -->
                 <div class="testimonial-item">
+                    <div class="quote-icon">"</div>
                     <div class="rating">⭐⭐⭐⭐⭐</div>
                     <div class="quote">"As a corporate partner, we've seen the impact of our donations. The team is professional and truly committed to empowering Malawian communities."</div>
                     <div class="author">
-                        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=100&h=100&fit=crop&crop=face" alt="Margaret Chikwanda" />
+                        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=150&h=150&fit=crop&crop=face" alt="Margaret Chikwanda" />
                         <div>
                             <h4>Margaret Chikwanda</h4>
                             <span>Corporate Partner</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 7 - Charles Mwansa -->
+                <div class="testimonial-item">
+                    <div class="quote-icon">"</div>
+                    <div class="rating">⭐⭐⭐⭐⭐</div>
+                    <div class="quote">"The work Charity-Fund does in Malawi is incredible. From education to healthcare, they are transforming lives. I'm proud to support them."</div>
+                    <div class="author">
+                        <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=150&h=150&fit=crop&crop=face" alt="Charles Mwansa" />
+                        <div>
+                            <h4>Charles Mwansa</h4>
+                            <span>Donor from Lusaka</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 8 - Esther Kamanga -->
+                <div class="testimonial-item">
+                    <div class="quote-icon">"</div>
+                    <div class="rating">⭐⭐⭐⭐⭐</div>
+                    <div class="quote">"My daughter received a scholarship through Charity-Fund. She's now in university studying to become a doctor. Thank you for believing in our children!"</div>
+                    <div class="author">
+                        <img src="https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=150&h=150&fit=crop&crop=face" alt="Esther Kamanga" />
+                        <div>
+                            <h4>Esther Kamanga</h4>
+                            <span>Parent from Zomba</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 9 - Peter Nkhoma -->
+                <div class="testimonial-item">
+                    <div class="quote-icon">"</div>
+                    <div class="rating">⭐⭐⭐⭐⭐</div>
+                    <div class="quote">"As a village headman, I've seen the clean water projects transform our community. No more walking miles for water. My people are healthy and happy."</div>
+                    <div class="author">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face" alt="Peter Nkhoma" />
+                        <div>
+                            <h4>Peter Nkhoma</h4>
+                            <span>Village Headman from Kasungu</span>
                         </div>
                     </div>
                 </div>

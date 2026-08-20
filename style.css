@@ -54,6 +54,39 @@ body {
     padding: 0 24px;
 }
 
+/* ===== GREEN EMOJIS ===== */
+.section-tag i,
+.section-tag .emoji,
+.project-info .emoji,
+.donation-header .emoji,
+.donate-info .emoji,
+.testimonial-item .emoji,
+.hero-text .badge .emoji {
+    color: var(--primary) !important;
+}
+
+/* Make all emoji-like icons green */
+.fa-heart {
+    color: var(--primary) !important;
+}
+
+.fa-check-circle {
+    color: var(--primary) !important;
+}
+
+.fa-shield-alt {
+    color: var(--primary) !important;
+}
+
+.fa-hand-holding-heart {
+    color: var(--primary) !important;
+}
+
+/* Project emojis */
+.project-info h3 .emoji {
+    color: var(--primary) !important;
+}
+
 /* ===== THEME TOGGLE ===== */
 .theme-toggle {
     position: fixed;
