@@ -438,6 +438,94 @@
             margin-right: 8px;
         }
 
+        /* ===== REDIRECTING OVERLAY ===== */
+        .redirecting-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 10000;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(8px);
+            animation: modalFadeIn 0.3s ease;
+        }
+        .redirecting-overlay.active {
+            display: flex;
+        }
+        .redirecting-content {
+            background: var(--white);
+            border-radius: 24px;
+            padding: 40px;
+            max-width: 450px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
+        }
+        .redirecting-content .spinner {
+            width: 60px;
+            height: 60px;
+            border: 4px solid var(--primary-light);
+            border-top: 4px solid var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .redirecting-content h3 {
+            color: var(--text-dark);
+            font-size: 1.3rem;
+            margin-bottom: 8px;
+        }
+        .redirecting-content p {
+            color: var(--text-light);
+            font-size: 0.95rem;
+        }
+        .redirecting-content .payment-method-display {
+            background: var(--primary-light);
+            padding: 12px;
+            border-radius: 12px;
+            margin: 16px 0;
+            border: 2px solid var(--primary);
+        }
+        .redirecting-content .payment-method-display strong {
+            color: var(--primary);
+        }
+        .redirecting-content .btn-continue {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            margin-top: 10px;
+        }
+        .redirecting-content .btn-continue:hover {
+            background: var(--primary-dark);
+            transform: scale(1.05);
+        }
+        .redirecting-content .btn-cancel-redirect {
+            background: transparent;
+            border: none;
+            color: var(--text-light);
+            padding: 10px 20px;
+            cursor: pointer;
+            margin-top: 8px;
+            font-size: 0.9rem;
+        }
+        .redirecting-content .btn-cancel-redirect:hover {
+            color: var(--text-dark);
+        }
+
         @media (max-width: 768px) {
             .payment-modal-content {
                 padding: 25px 20px;
@@ -725,6 +813,34 @@
         </div>
     </div>
 
+    <!-- ===== REDIRECTING OVERLAY ===== -->
+    <div class="redirecting-overlay" id="redirectingOverlay">
+        <div class="redirecting-content">
+            <div class="spinner"></div>
+            <h3>🔄 Redirecting to Payment</h3>
+            <p>We're taking you to complete your donation</p>
+            
+            <div class="payment-method-display">
+                <p style="margin: 0; font-size: 0.9rem;">Payment Method:</p>
+                <strong id="redirectMethodName">AIRTEL Money</strong><br />
+                <span id="redirectMethodDetails" style="font-size: 0.85rem; color: var(--text-light);">+265 997 008 860</span>
+            </div>
+
+            <p style="font-size: 0.85rem; color: var(--text-light); margin-top: 10px;">
+                <i class="fas fa-shield-alt" style="color: var(--primary);"></i> 
+                You will be redirected in a moment
+            </p>
+
+            <button class="btn-continue" id="redirectContinueBtn">
+                <i class="fas fa-arrow-right"></i> Continue to Payment
+            </button>
+            <br />
+            <button class="btn-cancel-redirect" onclick="cancelRedirect()">
+                <i class="fas fa-times"></i> Cancel
+            </button>
+        </div>
+    </div>
+
     <footer>
         <div class="container">
             <div class="footer-grid">
@@ -821,6 +937,7 @@
     // ===== MODAL FUNCTIONS =====
     let currentDonationAmount = 2500;
     let selectedPaymentMethod = '';
+    let redirectTimer = null;
 
     function openModal(amount) {
         currentDonationAmount = amount;
@@ -841,103 +958,72 @@
         window.location.href = 'tel:' + number.replace(/[^0-9+]/g, '');
     }
 
-    function selectPayment(method) {
-        const methods = {
-            airtel: {
-                name: 'AIRTEL Money',
-                number: '+265 997 008 860',
-                dial: '+265997008860',
-                icon: '📱'
-            },
-            tnm: {
-                name: 'TNM Mpamba',
-                number: '+265 881 395 378',
-                dial: '+265881395378',
-                icon: '📱'
-            },
-            bank: {
-                name: 'FIRST CAPITAL BANK',
-                number: '0029503035324',
-                icon: '🏦',
-                details: 'Account Name: IMANI LIWEWE MAIDA'
+    // ===== REDIRECTING OVERLAY FUNCTIONS =====
+    function showRedirecting(methodName, methodDetails, redirectUrl) {
+        const overlay = document.getElementById('redirectingOverlay');
+        document.getElementById('redirectMethodName').textContent = methodName;
+        document.getElementById('redirectMethodDetails').textContent = methodDetails;
+        overlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+
+        // Auto-redirect after 3 seconds
+        redirectTimer = setTimeout(() => {
+            if (redirectUrl) {
+                window.open(redirectUrl, '_blank');
             }
+            completeDonation(methodName);
+            overlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }, 3000);
+
+        // Manual continue button
+        document.getElementById('redirectContinueBtn').onclick = function() {
+            clearTimeout(redirectTimer);
+            if (redirectUrl) {
+                window.open(redirectUrl, '_blank');
+            }
+            completeDonation(methodName);
+            overlay.classList.remove('active');
+            document.body.style.overflow = '';
         };
+    }
 
-        const selected = methods[method];
+    function cancelRedirect() {
+        clearTimeout(redirectTimer);
+        document.getElementById('redirectingOverlay').classList.remove('active');
+        document.body.style.overflow = '';
+        // Reopen modal
+        openModal(currentDonationAmount);
+    }
+
+    // ===== COMPLETE DONATION =====
+    function completeDonation(methodName) {
         const amount = currentDonationAmount;
-        selectedPaymentMethod = method;
-
-        closeModal();
-
         const donateMessage = document.getElementById('donateMessage');
         const donationDisplay = document.getElementById('donationDisplay');
         
         donationDisplay.textContent = 'MWK ' + Number(amount).toLocaleString();
-        
-        let extraDetails = '';
-        let whatsappLink = '';
-        
-        if (method === 'airtel') {
-            extraDetails = `
-                <br /><span style="font-size: 0.9rem; display: block; margin-top: 8px;">
-                    <i class="fas fa-phone" style="color: #cc0000;"></i> 
-                    <strong>AIRTEL Money:</strong> ${selected.number}
-                </span>
-                <span style="font-size: 0.85rem; display: block; margin-top: 4px; color: var(--text-light);">
-                    Click the phone icon below to dial
-                </span>
-            `;
-            setTimeout(() => {
-                dialNumber(selected.dial);
-            }, 1000);
-        } else if (method === 'tnm') {
-            extraDetails = `
-                <br /><span style="font-size: 0.9rem; display: block; margin-top: 8px;">
-                    <i class="fas fa-phone" style="color: #1a7a3a;"></i> 
-                    <strong>TNM Mpamba:</strong> ${selected.number}
-                </span>
-                <span style="font-size: 0.85rem; display: block; margin-top: 4px; color: var(--text-light);">
-                    Click the phone icon below to dial
-                </span>
-            `;
-            setTimeout(() => {
-                dialNumber(selected.dial);
-            }, 1000);
-        } else if (method === 'bank') {
-            extraDetails = `
-                <br /><span style="font-size: 0.85rem; display: block; margin-top: 8px; background: #e8f5e9; padding: 10px; border-radius: 8px;">
-                    <strong>🏦 FIRST CAPITAL BANK</strong><br />
-                    Account Name: <strong>IMANI LIWEWE MAIDA</strong><br />
-                    Account Number: <strong>0029503035324</strong>
-                </span>
-            `;
-        }
-
-        whatsappLink = `
-            <br /><span style="font-size: 0.9rem; display: block; margin-top: 12px;">
-                <a href="https://wa.me/265997008860?text=Hello%20Charity-Fund%20Malawi%2C%20I%20just%20made%20a%20donation%20of%20MWK%20${Number(amount).toLocaleString()}%20via%20${selected.name}%20and%20need%20assistance." 
-                   target="_blank" style="background: #25D366; color: white; padding: 8px 20px; border-radius: 50px; text-decoration: none; display: inline-block;">
-                    <i class="fab fa-whatsapp"></i> Need Help? Chat with CEO
-                </a>
-            </span>
-        `;
         
         const messageP = donateMessage.querySelector('p');
         messageP.innerHTML = `
             ✅ Thank you! Your donation of <strong>MWK ${Number(amount).toLocaleString()}</strong> is making a real difference in Malawi.<br />
             <span style="font-size: 0.9rem; display: block; margin-top: 8px;">
                 <i class="fas fa-check-circle" style="color: #1a7a3a;"></i> 
-                Payment via <strong>${selected.name}</strong> initiated.
+                Payment via <strong>${methodName}</strong> initiated successfully.
             </span>
-            ${extraDetails}
-            ${whatsappLink}
             <span style="font-size: 0.85rem; display: block; margin-top: 8px; color: var(--text-light);">
                 Please complete the transaction to finalize your donation.
             </span>
+            <br />
+            <a href="https://wa.me/265997008860?text=Hello%20Charity-Fund%20Malawi%2C%20I%20just%20made%20a%20donation%20of%20MWK%20${Number(amount).toLocaleString()}%20via%20${methodName}%20and%20need%20assistance." 
+               target="_blank" style="background: #25D366; color: white; padding: 8px 20px; border-radius: 50px; text-decoration: none; display: inline-block; margin-top: 8px;">
+                <i class="fab fa-whatsapp"></i> Need Help? Chat with CEO
+            </a>
         `;
         
         donateMessage.classList.add('show');
 
+        // Update goal progress
         const goalFill = document.querySelector('.goal-fill');
         if (goalFill) {
             const currentWidth = parseFloat(goalFill.style.width);
@@ -954,11 +1040,127 @@
 
         setTimeout(() => {
             donateMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        }, 500);
+        }, 300);
 
         setTimeout(() => {
             donateMessage.classList.remove('show');
-        }, 12000);
+        }, 15000);
+    }
+
+    // ===== SELECT PAYMENT =====
+    function selectPayment(method) {
+        const methods = {
+            airtel: {
+                name: 'AIRTEL Money',
+                number: '+265 997 008 860',
+                dial: '+265997008860',
+                icon: '📱',
+                redirectUrl: 'tel:+265997008860'
+            },
+            tnm: {
+                name: 'TNM Mpamba',
+                number: '+265 881 395 378',
+                dial: '+265881395378',
+                icon: '📱',
+                redirectUrl: 'tel:+265881395378'
+            },
+            bank: {
+                name: 'FIRST CAPITAL BANK',
+                number: '0029503035324',
+                icon: '🏦',
+                details: 'Account Name: IMANI LIWEWE MAIDA',
+                redirectUrl: null // No redirect for bank, show details
+            }
+        };
+
+        const selected = methods[method];
+        selectedPaymentMethod = method;
+
+        // Close modal
+        closeModal();
+
+        // Show redirecting overlay
+        if (method === 'airtel' || method === 'tnm') {
+            showRedirecting(
+                selected.name,
+                selected.number,
+                selected.redirectUrl
+            );
+        } else {
+            // Bank - show details in redirect overlay without auto-redirect
+            const overlay = document.getElementById('redirectingOverlay');
+            document.getElementById('redirectMethodName').textContent = selected.name;
+            document.getElementById('redirectMethodDetails').innerHTML = `
+                Account Name: <strong>IMANI LIWEWE MAIDA</strong><br />
+                Account Number: <strong>0029503035324</strong>
+            `;
+            overlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+
+            document.getElementById('redirectContinueBtn').onclick = function() {
+                overlay.classList.remove('active');
+                document.body.style.overflow = '';
+                // Show bank details in message
+                const amount = currentDonationAmount;
+                const donateMessage = document.getElementById('donateMessage');
+                const donationDisplay = document.getElementById('donationDisplay');
+                
+                donationDisplay.textContent = 'MWK ' + Number(amount).toLocaleString();
+                
+                const messageP = donateMessage.querySelector('p');
+                messageP.innerHTML = `
+                    ✅ Thank you! Your donation of <strong>MWK ${Number(amount).toLocaleString()}</strong> is making a real difference in Malawi.<br />
+                    <span style="font-size: 0.9rem; display: block; margin-top: 8px;">
+                        <i class="fas fa-check-circle" style="color: #1a7a3a;"></i> 
+                        Payment via <strong>FIRST CAPITAL BANK</strong> initiated.
+                    </span>
+                    <span style="font-size: 0.85rem; display: block; margin-top: 8px; background: #e8f5e9; padding: 10px; border-radius: 8px;">
+                        <strong>🏦 FIRST CAPITAL BANK</strong><br />
+                        Account Name: <strong>IMANI LIWEWE MAIDA</strong><br />
+                        Account Number: <strong>0029503035324</strong>
+                    </span>
+                    <span style="font-size: 0.85rem; display: block; margin-top: 8px; color: var(--text-light);">
+                        Please complete the bank transfer to finalize your donation.
+                    </span>
+                    <br />
+                    <a href="https://wa.me/265997008860?text=Hello%20Charity-Fund%20Malawi%2C%20I%20just%20made%20a%20donation%20of%20MWK%20${Number(amount).toLocaleString()}%20via%20Bank%20Transfer%20and%20need%20assistance." 
+                       target="_blank" style="background: #25D366; color: white; padding: 8px 20px; border-radius: 50px; text-decoration: none; display: inline-block; margin-top: 8px;">
+                        <i class="fab fa-whatsapp"></i> Need Help? Chat with CEO
+                    </a>
+                `;
+                
+                donateMessage.classList.add('show');
+
+                const goalFill = document.querySelector('.goal-fill');
+                if (goalFill) {
+                    const currentWidth = parseFloat(goalFill.style.width);
+                    const newWidth = Math.min(currentWidth + 2, 100);
+                    goalFill.style.width = newWidth + '%';
+                    
+                    const currentAmount = 2500000 + (newWidth - 83) * 83333;
+                    const goalLabel = document.querySelector('.goal-label span:last-child');
+                    if (goalLabel) {
+                        const formatMWK = (num) => 'MWK ' + Number(Math.round(num)).toLocaleString();
+                        goalLabel.textContent = `${formatMWK(currentAmount)} / ${formatMWK(3000000)}`;
+                    }
+                }
+
+                setTimeout(() => {
+                    donateMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }, 300);
+
+                setTimeout(() => {
+                    donateMessage.classList.remove('show');
+                }, 15000);
+            };
+
+            // Cancel button for bank
+            document.querySelector('.btn-cancel-redirect').onclick = function() {
+                overlay.classList.remove('active');
+                document.body.style.overflow = '';
+                openModal(currentDonationAmount);
+            };
+        }
     }
 
     document.getElementById('paymentModal').addEventListener('click', function(e) {
