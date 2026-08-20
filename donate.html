@@ -51,15 +51,69 @@
             right: 0;
             height: 6px;
         }
+        /* AIRTEL - Keep Red */
         .payment-card.airtel .brand-banner {
             background: linear-gradient(90deg, #ff0000, #cc0000, #ff0000);
         }
+        .payment-card.airtel .logo-container {
+            background: #fff5f5;
+            border-color: #ff0000;
+        }
+        .payment-card.airtel .number {
+            color: #cc0000;
+            background: #fff0f0;
+        }
+        .payment-card.airtel .badge {
+            background: #ff000015;
+            color: #cc0000;
+            border: 1px solid #ff000030;
+        }
+        .payment-card.airtel .icon-large {
+            color: #cc0000;
+        }
+
+        /* TNM - Green Theme */
         .payment-card.tnm .brand-banner {
-            background: linear-gradient(90deg, #004d99, #0066cc, #004d99);
+            background: linear-gradient(90deg, #1a7a3a, #2d9b4e, #1a7a3a);
         }
+        .payment-card.tnm .logo-container {
+            background: #e8f5e9;
+            border-color: #1a7a3a;
+        }
+        .payment-card.tnm .number {
+            color: #1a7a3a;
+            background: #e8f5e9;
+        }
+        .payment-card.tnm .badge {
+            background: #1a7a3a15;
+            color: #1a7a3a;
+            border: 1px solid #1a7a3a30;
+        }
+        .payment-card.tnm .icon-large {
+            color: #1a7a3a;
+        }
+
+        /* Bank - Green Theme */
         .payment-card.bank .brand-banner {
-            background: linear-gradient(90deg, #1a237e, #283593, #1a237e);
+            background: linear-gradient(90deg, #1a7a3a, #2d9b4e, #1a7a3a);
         }
+        .payment-card.bank .logo-container {
+            background: #e8f5e9;
+            border-color: #1a7a3a;
+        }
+        .payment-card.bank .number {
+            color: #1a7a3a;
+            background: #e8f5e9;
+        }
+        .payment-card.bank .badge {
+            background: #1a7a3a15;
+            color: #1a7a3a;
+            border: 1px solid #1a7a3a30;
+        }
+        .payment-card.bank .icon-large {
+            color: #1a7a3a;
+        }
+
         .payment-card .logo-container {
             width: 120px;
             height: 120px;
@@ -72,18 +126,6 @@
             padding: 15px;
             border: 3px solid var(--medium-gray);
             transition: var(--transition);
-        }
-        .payment-card.airtel .logo-container {
-            background: #fff5f5;
-            border-color: #ff0000;
-        }
-        .payment-card.tnm .logo-container {
-            background: #f0f7ff;
-            border-color: #004d99;
-        }
-        .payment-card.bank .logo-container {
-            background: #e8eaf6;
-            border-color: #1a237e;
         }
         .payment-card .logo-container img {
             width: 80px;
@@ -99,11 +141,9 @@
         .payment-card .number {
             font-size: 1.4rem;
             font-weight: 700;
-            color: var(--primary);
             margin: 10px 0;
             letter-spacing: 1px;
             font-family: 'Courier New', monospace;
-            background: var(--light-gray);
             padding: 8px 16px;
             border-radius: 8px;
             display: inline-block;
@@ -111,18 +151,6 @@
         .payment-card .number i {
             margin-right: 8px;
             font-size: 1.1rem;
-        }
-        .payment-card.airtel .number {
-            color: #cc0000;
-            background: #fff0f0;
-        }
-        .payment-card.tnm .number {
-            color: #004d99;
-            background: #e8f0ff;
-        }
-        .payment-card.bank .number {
-            color: #1a237e;
-            background: #e8eaf6;
         }
         .payment-card p {
             color: var(--text-light);
@@ -137,33 +165,9 @@
             font-weight: 600;
             margin-top: 8px;
         }
-        .payment-card.airtel .badge {
-            background: #ff000015;
-            color: #cc0000;
-            border: 1px solid #ff000030;
-        }
-        .payment-card.tnm .badge {
-            background: #004d9915;
-            color: #004d99;
-            border: 1px solid #004d9930;
-        }
-        .payment-card.bank .badge {
-            background: #1a237e15;
-            color: #1a237e;
-            border: 1px solid #1a237e30;
-        }
         .payment-card .icon-large {
             font-size: 3.5rem;
             margin-bottom: 10px;
-        }
-        .payment-card.airtel .icon-large {
-            color: #cc0000;
-        }
-        .payment-card.tnm .icon-large {
-            color: #004d99;
-        }
-        .payment-card.bank .icon-large {
-            color: #1a237e;
         }
         .payment-card .copy-btn {
             background: transparent;
@@ -198,7 +202,7 @@
         }
         .payment-card .call-btn {
             display: inline-block;
-            background: #25D366;
+            background: var(--primary);
             color: white;
             padding: 8px 20px;
             border-radius: 50px;
@@ -210,10 +214,17 @@
         }
         .payment-card .call-btn:hover {
             transform: scale(1.05);
-            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+            box-shadow: 0 4px 15px rgba(26, 122, 58, 0.4);
         }
         .payment-card .call-btn i {
             margin-right: 8px;
+        }
+        /* AIRTEL keeps red call button */
+        .payment-card.airtel .call-btn {
+            background: #cc0000;
+        }
+        .payment-card.airtel .call-btn:hover {
+            box-shadow: 0 4px 15px rgba(204, 0, 0, 0.4);
         }
 
         /* ===== PAYMENT MODAL ===== */
@@ -321,10 +332,10 @@
             background: #cc0000;
         }
         .modal-payment-options button .payment-icon.tnm-icon {
-            background: #004d99;
+            background: #1a7a3a;
         }
         .modal-payment-options button .payment-icon.bank-icon {
-            background: #1a237e;
+            background: #1a7a3a;
         }
         .modal-payment-options button .payment-detail {
             flex: 1;
@@ -345,33 +356,20 @@
             background: #ffebeb;
         }
         .modal-payment-options button.tnm-option {
-            border-color: #004d9940;
-            background: #f0f7ff;
+            border-color: #1a7a3a40;
+            background: #e8f5e9;
         }
         .modal-payment-options button.tnm-option:hover {
-            border-color: #004d99;
-            background: #e0edff;
+            border-color: #1a7a3a;
+            background: #d4edda;
         }
         .modal-payment-options button.bank-option {
-            border-color: #1a237e40;
-            background: #e8eaf6;
+            border-color: #1a7a3a40;
+            background: #e8f5e9;
         }
         .modal-payment-options button.bank-option:hover {
-            border-color: #1a237e;
-            background: #c5cae9;
-        }
-        .modal-close-btn {
-            background: transparent;
-            border: none;
-            color: var(--text-light);
-            font-size: 1.1rem;
-            cursor: pointer;
-            padding: 10px 20px;
-            margin-top: 10px;
-            transition: var(--transition);
-        }
-        .modal-close-btn:hover {
-            color: var(--text-dark);
+            border-color: #1a7a3a;
+            background: #d4edda;
         }
         .modal-cancel-btn {
             background: var(--light-gray);
@@ -411,6 +409,7 @@
         .whatsapp-float:hover {
             transform: scale(1.1);
             box-shadow: 0 6px 30px rgba(37, 211, 102, 0.6);
+            color: white;
         }
         @keyframes pulse {
             0% { box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4); }
@@ -418,7 +417,6 @@
             100% { box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4); }
         }
 
-        /* ===== WHATSAPP MODAL BUTTON ===== */
         .whatsapp-modal-btn {
             display: inline-block;
             background: #25D366;
@@ -434,6 +432,7 @@
         .whatsapp-modal-btn:hover {
             transform: scale(1.05);
             box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+            color: white;
         }
         .whatsapp-modal-btn i {
             margin-right: 8px;
@@ -461,19 +460,19 @@
     </style>
 </head>
 <body>
-    <button id="themeToggle" class="theme-toggle"><i class="fas fa-moon"></i></button>
-
     <!-- WhatsApp Floating Button -->
-    <a href="https://wa.me/265997008860?text=Hello%20Charity-Fund%20Malawi%2C%20I%20would%20like%20to%20know%20more%20about%20your%20organization%20and%20how%20to%20donate." 
+    <a href="https://wa.me/265997008860?text=Hello%20Charity-Fund%20Malawi%2C%20I%20need%20assistance%20with%20my%20donation." 
        class="whatsapp-float" target="_blank" title="Chat with us on WhatsApp">
         <i class="fab fa-whatsapp"></i>
     </a>
+
+    <button id="themeToggle" class="theme-toggle"><i class="fas fa-moon"></i></button>
 
     <nav class="navbar">
         <div class="container nav-flex">
             <div class="logo">
                 <img src="https://img.icons8.com/fluency/48/africa.png" alt="Logo" style="width: 40px; vertical-align: middle; margin-right: 10px;" />
-                Charity-Fund <span style="font-size: 0.8rem; color: #2d7d46;">Malawi</span>
+                Charity-Fund <span style="font-size: 0.8rem; color: #1a7a3a;">Malawi</span>
             </div>
             <ul class="nav-links">
                 <li><a href="index.html">Home</a></li>
@@ -500,7 +499,7 @@
         <div class="container">
             <div class="donate-wrapper">
                 <div class="donate-info animate-fade-up">
-                    <span class="section-tag" style="color: #2d7d46; background: rgba(45,125,70,0.1);">💝 Make a Difference in Malawi</span>
+                    <span class="section-tag" style="color: #1a7a3a; background: rgba(26,122,58,0.1);">💝 Make a Difference in Malawi</span>
                     <h2>Your Donation <br/>Changes Everything</h2>
                     <p>Every contribution, no matter how small, helps us reach more communities in need across Malawi.</p>
                     
@@ -588,7 +587,7 @@
                 </div>
 
                 <div class="payment-methods">
-                    <!-- AIRTEL Money -->
+                    <!-- AIRTEL Money - KEEP RED -->
                     <div class="payment-card airtel">
                         <div class="brand-banner"></div>
                         <div class="logo-container">
@@ -606,7 +605,7 @@
                         <span class="badge"><i class="fas fa-check-circle"></i> Available 24/7</span>
                     </div>
 
-                    <!-- TNM Mpamba -->
+                    <!-- TNM Mpamba - GREEN THEME -->
                     <div class="payment-card tnm">
                         <div class="brand-banner"></div>
                         <div class="logo-container">
@@ -624,7 +623,7 @@
                         <span class="badge"><i class="fas fa-check-circle"></i> Available 24/7</span>
                     </div>
 
-                    <!-- FIRST CAPITAL BANK -->
+                    <!-- FIRST CAPITAL BANK - GREEN THEME -->
                     <div class="payment-card bank">
                         <div class="brand-banner"></div>
                         <div class="logo-container">
@@ -658,7 +657,7 @@
                        target="_blank" class="whatsapp-modal-btn" style="display: inline-block; margin-top: 10px;">
                         <i class="fab fa-whatsapp"></i> Chat on WhatsApp
                     </a>
-                    <a href="tel:+265997008860" class="whatsapp-modal-btn" style="background: #cc0000; margin-left: 10px;">
+                    <a href="tel:+265997008860" class="whatsapp-modal-btn" style="background: var(--primary); margin-left: 10px;">
                         <i class="fas fa-phone"></i> Call Now
                     </a>
                 </div>
@@ -695,7 +694,7 @@
                         TNM Mpamba
                         <small>Send via +265 881 395 378</small>
                     </span>
-                    <i class="fas fa-phone" style="color: #004d99;"></i>
+                    <i class="fas fa-phone" style="color: #1a7a3a;"></i>
                 </button>
 
                 <button class="bank-option" onclick="selectPayment('bank')">
@@ -704,7 +703,7 @@
                         FIRST CAPITAL BANK
                         <small>IMANI LIWEWE MAIDA · 0029503035324</small>
                     </span>
-                    <i class="fas fa-chevron-right" style="color: #1a237e;"></i>
+                    <i class="fas fa-chevron-right" style="color: #1a7a3a;"></i>
                 </button>
             </div>
 
@@ -868,10 +867,8 @@
         const amount = currentDonationAmount;
         selectedPaymentMethod = method;
 
-        // Close modal
         closeModal();
 
-        // Show success message with payment details
         const donateMessage = document.getElementById('donateMessage');
         const donationDisplay = document.getElementById('donationDisplay');
         
@@ -890,27 +887,25 @@
                     Click the phone icon below to dial
                 </span>
             `;
-            // Automatically dial the number
             setTimeout(() => {
                 dialNumber(selected.dial);
             }, 1000);
         } else if (method === 'tnm') {
             extraDetails = `
                 <br /><span style="font-size: 0.9rem; display: block; margin-top: 8px;">
-                    <i class="fas fa-phone" style="color: #004d99;"></i> 
+                    <i class="fas fa-phone" style="color: #1a7a3a;"></i> 
                     <strong>TNM Mpamba:</strong> ${selected.number}
                 </span>
                 <span style="font-size: 0.85rem; display: block; margin-top: 4px; color: var(--text-light);">
                     Click the phone icon below to dial
                 </span>
             `;
-            // Automatically dial the number
             setTimeout(() => {
                 dialNumber(selected.dial);
             }, 1000);
         } else if (method === 'bank') {
             extraDetails = `
-                <br /><span style="font-size: 0.85rem; display: block; margin-top: 8px; background: #e8eaf6; padding: 10px; border-radius: 8px;">
+                <br /><span style="font-size: 0.85rem; display: block; margin-top: 8px; background: #e8f5e9; padding: 10px; border-radius: 8px;">
                     <strong>🏦 FIRST CAPITAL BANK</strong><br />
                     Account Name: <strong>IMANI LIWEWE MAIDA</strong><br />
                     Account Number: <strong>0029503035324</strong>
@@ -918,7 +913,6 @@
             `;
         }
 
-        // WhatsApp link for support
         whatsappLink = `
             <br /><span style="font-size: 0.9rem; display: block; margin-top: 12px;">
                 <a href="https://wa.me/265997008860?text=Hello%20Charity-Fund%20Malawi%2C%20I%20just%20made%20a%20donation%20of%20MWK%20${Number(amount).toLocaleString()}%20via%20${selected.name}%20and%20need%20assistance." 
@@ -932,7 +926,7 @@
         messageP.innerHTML = `
             ✅ Thank you! Your donation of <strong>MWK ${Number(amount).toLocaleString()}</strong> is making a real difference in Malawi.<br />
             <span style="font-size: 0.9rem; display: block; margin-top: 8px;">
-                <i class="fas fa-check-circle" style="color: #2d7d46;"></i> 
+                <i class="fas fa-check-circle" style="color: #1a7a3a;"></i> 
                 Payment via <strong>${selected.name}</strong> initiated.
             </span>
             ${extraDetails}
@@ -944,7 +938,6 @@
         
         donateMessage.classList.add('show');
 
-        // Update goal progress
         const goalFill = document.querySelector('.goal-fill');
         if (goalFill) {
             const currentWidth = parseFloat(goalFill.style.width);
@@ -959,25 +952,21 @@
             }
         }
 
-        // Scroll to message
         setTimeout(() => {
             donateMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }, 500);
 
-        // Auto-hide after 12 seconds
         setTimeout(() => {
             donateMessage.classList.remove('show');
         }, 12000);
     }
 
-    // Close modal on outside click
     document.getElementById('paymentModal').addEventListener('click', function(e) {
         if (e.target === this) {
             closeModal();
         }
     });
 
-    // Close modal on ESC key
     document.addEventListener('keydown', function(e) {
         if (e.key === 'Escape') {
             closeModal();
@@ -1060,7 +1049,6 @@
                     document.querySelector('.amount-btn[data-amount="2500"]').classList.add('active');
                 }
 
-                // Open payment modal
                 openModal(amount);
             });
         }
