@@ -238,7 +238,7 @@
         .payment-method-card .method-ussd {
             font-family: 'Courier New', monospace;
             font-weight: 700;
-            font-size: 2rem;
+            font-size: 2.2rem;
             padding: 12px 24px;
             border-radius: 12px;
             display: inline-block;
@@ -246,6 +246,12 @@
             border: 3px solid var(--primary);
             background: var(--primary-light);
             color: var(--primary);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .payment-method-card .method-ussd:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 15px rgba(26, 122, 58, 0.2);
         }
         .payment-method-card p {
             color: var(--text-light);
@@ -265,11 +271,11 @@
             display: inline-block;
             background: var(--primary);
             color: white;
-            padding: 12px 28px;
+            padding: 14px 28px;
             border-radius: 50px;
             text-decoration: none;
             font-weight: 600;
-            font-size: 1rem;
+            font-size: 1.05rem;
             margin-top: 10px;
             transition: var(--transition);
             border: none;
@@ -283,26 +289,8 @@
         .payment-method-card .call-btn i {
             margin-right: 8px;
         }
-        .payment-method-card .copy-ussd-btn {
-            background: transparent;
-            border: 2px solid var(--medium-gray);
-            padding: 6px 16px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            cursor: pointer;
-            transition: var(--transition);
-            color: var(--text-light);
-            margin-top: 6px;
-        }
-        .payment-method-card .copy-ussd-btn:hover {
-            background: var(--primary);
-            color: white;
-            border-color: var(--primary);
-        }
-        .payment-method-card .copy-ussd-btn.copied {
-            background: #4ade80;
-            color: white;
-            border-color: #4ade80;
+        .payment-method-card .call-btn:active {
+            transform: scale(0.95);
         }
         .payment-method-card.airtel .method-ussd {
             color: #cc0000;
@@ -379,6 +367,24 @@
             background: #4ade80;
             color: white;
             border-color: #4ade80;
+        }
+        /* Mobile detection banner */
+        .mobile-dial-banner {
+            display: none;
+            background: #e3f2fd;
+            border: 2px solid #0d47a1;
+            border-radius: var(--radius);
+            padding: 16px 20px;
+            margin: 16px 0;
+            text-align: center;
+        }
+        .mobile-dial-banner.show {
+            display: block;
+        }
+        .mobile-dial-banner i {
+            color: #0d47a1;
+            font-size: 1.5rem;
+            margin-right: 10px;
         }
 
         /* ===== MODAL ===== */
@@ -614,7 +620,7 @@
         }
         .redirecting-content .payment-method-display .ussd-code {
             font-family: 'Courier New', monospace;
-            font-size: 2.5rem;
+            font-size: 3rem;
             font-weight: 800;
             display: block;
             margin-top: 8px;
@@ -637,25 +643,28 @@
             color: var(--primary);
             margin-right: 8px;
         }
-        .redirecting-content .btn-continue {
+        .redirecting-content .btn-dial-ussd {
             background: var(--primary);
             color: white;
             border: none;
-            padding: 14px 30px;
+            padding: 16px 30px;
             border-radius: 50px;
-            font-size: 1rem;
-            font-weight: 600;
+            font-size: 1.2rem;
+            font-weight: 700;
             cursor: pointer;
             transition: var(--transition);
             margin-top: 10px;
             width: 100%;
         }
-        .redirecting-content .btn-continue:hover {
+        .redirecting-content .btn-dial-ussd:hover {
             background: var(--primary-dark);
             transform: scale(1.02);
         }
-        .redirecting-content .btn-continue i {
-            margin-right: 8px;
+        .redirecting-content .btn-dial-ussd:active {
+            transform: scale(0.95);
+        }
+        .redirecting-content .btn-dial-ussd i {
+            margin-right: 10px;
         }
         .redirecting-content .btn-cancel-redirect {
             background: transparent;
@@ -763,11 +772,27 @@
                 grid-template-columns: 1fr;
             }
             .redirecting-content .payment-method-display .ussd-code {
+                font-size: 2.5rem;
+            }
+            .payment-method-card .method-ussd {
+                font-size: 1.8rem;
+                padding: 8px 16px;
+            }
+            .redirecting-content .btn-dial-ussd {
+                font-size: 1rem;
+                padding: 14px 20px;
+            }
+        }
+        @media (max-width: 480px) {
+            .redirecting-content .payment-method-display .ussd-code {
                 font-size: 2rem;
             }
             .payment-method-card .method-ussd {
                 font-size: 1.5rem;
-                padding: 8px 16px;
+            }
+            .redirecting-content .btn-dial-ussd {
+                font-size: 0.9rem;
+                padding: 12px 16px;
             }
         }
     </style>
@@ -894,7 +919,7 @@
                 <div class="section-header">
                     <span class="section-tag">📱 Payment Methods</span>
                     <h2>Donate via Mobile Money</h2>
-                    <p>Dial the USSD code to complete your donation</p>
+                    <p>Tap the USSD code to dial directly on your phone</p>
                 </div>
 
                 <div class="payment-methods-grid">
@@ -904,8 +929,8 @@
                             <img src="images/airtel-logo.png" alt="AIRTEL Money" onerror="this.src='https://img.icons8.com/color/96/airtel.png'" />
                         </div>
                         <h3>AIRTEL Money</h3>
-                        <div class="method-ussd">*211#</div>
-                        <p>Dial the USSD code to send your donation</p>
+                        <div class="method-ussd" onclick="dialUSSD('*211#')">*211#</div>
+                        <p>Tap the code to dial on your phone</p>
                         <button class="call-btn" onclick="dialUSSD('*211#')">
                             <i class="fas fa-phone"></i> Dial *211#
                         </button>
@@ -918,8 +943,8 @@
                             <img src="images/tnm-logo.png" alt="TNM Mpamba" onerror="this.src='https://img.icons8.com/color/96/tnm.png'" />
                         </div>
                         <h3>TNM Mpamba</h3>
-                        <div class="method-ussd">*444#</div>
-                        <p>Dial the USSD code to send your donation</p>
+                        <div class="method-ussd" onclick="dialUSSD('*444#')">*444#</div>
+                        <p>Tap the code to dial on your phone</p>
                         <button class="call-btn" onclick="dialUSSD('*444#')">
                             <i class="fas fa-phone"></i> Dial *444#
                         </button>
@@ -932,7 +957,7 @@
                             <img src="images/first-capital-bank-logo.png" alt="FIRST CAPITAL BANK" onerror="this.src='https://img.icons8.com/color/96/bank.png'" />
                         </div>
                         <h3>FIRST CAPITAL BANK</h3>
-                        <div class="method-ussd">*1111#</div>
+                        <div class="method-ussd" onclick="dialUSSD('*1111#')">*1111#</div>
                         <div class="bank-details">
                             <strong>Account Name:</strong> IMANI LIWEWE MAIDA<br />
                             <strong>Account Number:</strong> 0029503035324<br />
@@ -1038,8 +1063,8 @@
     <div class="redirecting-overlay" id="redirectingOverlay">
         <div class="redirecting-content">
             <div class="spinner"></div>
-            <h3>📱 USSD Code Ready</h3>
-            <p>Copy the code and dial on your phone</p>
+            <h3>📱 Dialing USSD Code</h3>
+            <p>Your phone will open the dialer</p>
             
             <div class="payment-method-display">
                 <strong id="redirectMethodName">AIRTEL Money</strong>
@@ -1049,7 +1074,7 @@
 
             <div class="instruction-text">
                 <i class="fas fa-info-circle"></i>
-                <span id="redirectInstructions">Dial *211# on your phone to send your donation via AIRTEL Money. Follow the prompts to complete the transaction.</span>
+                <span id="redirectInstructions">Tap "Dial Now" to open your phone dialer with the USSD code pre-entered.</span>
             </div>
 
             <p style="font-size: 0.85rem; color: var(--text-light); margin-top: 10px;">
@@ -1057,8 +1082,8 @@
                 Your donation will be processed securely
             </p>
 
-            <button class="btn-continue" id="redirectContinueBtn">
-                <i class="fas fa-check-circle"></i> I've Completed Payment
+            <button class="btn-dial-ussd" id="redirectDialBtn">
+                <i class="fas fa-phone"></i> Dial Now
             </button>
             <br />
             <button class="btn-cancel-redirect" onclick="cancelRedirect()">
@@ -1146,12 +1171,24 @@
     // CHARITY-FUND MALAWI - DONATE PAGE JAVASCRIPT
     // ============================================
 
-    // ===== USSD DIAL FUNCTION =====
+    // ===== USSD DIAL FUNCTION - WORKS ON MOBILE =====
     function dialUSSD(code) {
-        // Try to open phone dialer with USSD code
-        // This works on mobile phones
+        // Encode the USSD code for tel: link
+        // This works on mobile browsers
         var encodedCode = encodeURIComponent(code);
-        window.location.href = 'tel:' + encodedCode;
+        var telLink = 'tel:' + encodedCode;
+        
+        // Try to open the dialer
+        window.location.href = telLink;
+        
+        // Fallback: If the above doesn't work, show the code
+        setTimeout(function() {
+            // If the page is still visible, the dialer didn't open
+            // Show a helpful message
+            if (!document.hidden) {
+                alert('Please dial ' + code + ' on your phone to complete the donation.');
+            }
+        }, 2000);
     }
 
     // ===== COPY USSD CODE =====
@@ -1195,6 +1232,7 @@
     // ===== MODAL FUNCTIONS =====
     var currentDonationAmount = 2500;
     var redirectTimer = null;
+    var currentUssdCode = '*211#';
 
     function openModal(amount) {
         currentDonationAmount = amount;
@@ -1217,21 +1255,22 @@
             airtel: {
                 name: 'AIRTEL Money',
                 ussd: '*211#',
-                instructions: 'Dial *211# on your phone to send your donation via AIRTEL Money. Follow the prompts to complete the transaction.'
+                instructions: 'Tap "Dial Now" to open your phone dialer with *211# pre-entered. Follow the prompts to complete the transaction.'
             },
             tnm: {
                 name: 'TNM Mpamba',
                 ussd: '*444#',
-                instructions: 'Dial *444# on your phone to send your donation via TNM Mpamba. Follow the prompts to complete the transaction.'
+                instructions: 'Tap "Dial Now" to open your phone dialer with *444# pre-entered. Follow the prompts to complete the transaction.'
             },
             bank: {
                 name: 'FIRST CAPITAL BANK',
                 ussd: '*1111#',
-                instructions: 'Dial *1111# on your phone for FIRST CAPITAL BANK services. Use Account: 0029503035324, Name: IMANI LIWEWE MAIDA'
+                instructions: 'Tap "Dial Now" to open your phone dialer with *1111# pre-entered. Use Account: 0029503035324, Name: IMANI LIWEWE MAIDA'
             }
         };
 
         var selected = methods[method];
+        currentUssdCode = selected.ussd;
         closeModal();
 
         // Show redirecting overlay with USSD code
@@ -1243,6 +1282,17 @@
         overlay.classList.add('active');
         document.body.style.overflow = 'hidden';
 
+        // Set the dial button to use the USSD code
+        document.getElementById('redirectDialBtn').onclick = function() {
+            dialUSSD(selected.ussd);
+            // Complete donation after dialing
+            setTimeout(function() {
+                completeDonation(selected.name);
+                overlay.classList.remove('active');
+                document.body.style.overflow = '';
+            }, 3000);
+        };
+
         // Auto show copy hint
         var copyBtn = document.querySelector('.copy-ussd-btn-large');
         if (copyBtn) {
@@ -1250,12 +1300,15 @@
             copyBtn.classList.remove('copied');
         }
 
-        // Continue button - user clicks after completing payment
-        document.getElementById('redirectContinueBtn').onclick = function() {
-            completeDonation(selected.name);
-            overlay.classList.remove('active');
-            document.body.style.overflow = '';
-        };
+        // Auto dial after 3 seconds
+        redirectTimer = setTimeout(function() {
+            dialUSSD(selected.ussd);
+            setTimeout(function() {
+                completeDonation(selected.name);
+                overlay.classList.remove('active');
+                document.body.style.overflow = '';
+            }, 3000);
+        }, 3000);
     }
 
     function cancelRedirect() {
@@ -1278,13 +1331,13 @@
             ✅ Thank you! Your donation of <strong>MWK ${Number(amount).toLocaleString()}</strong> is making a real difference in Malawi.<br />
             <span style="font-size: 0.9rem; display: block; margin-top: 8px;">
                 <i class="fas fa-check-circle" style="color: #1a7a3a;"></i> 
-                Payment via <strong>${methodName}</strong> completed successfully!
+                Payment via <strong>${methodName}</strong> initiated successfully!
             </span>
             <span style="font-size: 0.85rem; display: block; margin-top: 4px; color: var(--text-light);">
-                Thank you for your generosity and support.
+                Please follow the USSD prompts to complete your donation.
             </span>
             <br />
-            <a href="https://wa.me/265997008860?text=Hello%20Charity-Fund%20Malawi%2C%20I%20just%20completed%20a%20donation%20of%20MWK%20${Number(amount).toLocaleString()}%20via%20${methodName}." 
+            <a href="https://wa.me/265997008860?text=Hello%20Charity-Fund%20Malawi%2C%20I%20just%20initiated%20a%20donation%20of%20MWK%20${Number(amount).toLocaleString()}%20via%20${methodName}." 
                target="_blank" style="background: #25D366; color: white; padding: 8px 20px; border-radius: 50px; text-decoration: none; display: inline-block; margin-top: 8px;">
                 <i class="fab fa-whatsapp"></i> Need Help? Chat with CEO
             </a>
