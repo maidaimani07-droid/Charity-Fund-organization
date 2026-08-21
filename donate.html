@@ -238,12 +238,12 @@
         .payment-method-card .method-ussd {
             font-family: 'Courier New', monospace;
             font-weight: 700;
-            font-size: 1.4rem;
-            padding: 8px 16px;
-            border-radius: 8px;
+            font-size: 2rem;
+            padding: 12px 24px;
+            border-radius: 12px;
             display: inline-block;
             margin: 8px 0;
-            border: 2px dashed var(--primary);
+            border: 3px solid var(--primary);
             background: var(--primary-light);
             color: var(--primary);
         }
@@ -265,22 +265,44 @@
             display: inline-block;
             background: var(--primary);
             color: white;
-            padding: 10px 24px;
+            padding: 12px 28px;
             border-radius: 50px;
             text-decoration: none;
             font-weight: 600;
-            font-size: 0.95rem;
+            font-size: 1rem;
             margin-top: 10px;
             transition: var(--transition);
             border: none;
             cursor: pointer;
+            width: 100%;
         }
         .payment-method-card .call-btn:hover {
             transform: scale(1.05);
             box-shadow: 0 4px 15px rgba(26, 122, 58, 0.4);
         }
         .payment-method-card .call-btn i {
-            margin-right: 6px;
+            margin-right: 8px;
+        }
+        .payment-method-card .copy-ussd-btn {
+            background: transparent;
+            border: 2px solid var(--medium-gray);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: var(--transition);
+            color: var(--text-light);
+            margin-top: 6px;
+        }
+        .payment-method-card .copy-ussd-btn:hover {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+        .payment-method-card .copy-ussd-btn.copied {
+            background: #4ade80;
+            color: white;
+            border-color: #4ade80;
         }
         .payment-method-card.airtel .method-ussd {
             color: #cc0000;
@@ -580,7 +602,7 @@
         }
         .redirecting-content .payment-method-display {
             background: var(--primary-light);
-            padding: 16px;
+            padding: 20px;
             border-radius: 12px;
             margin: 16px 0;
             border: 2px solid var(--primary);
@@ -588,16 +610,32 @@
         .redirecting-content .payment-method-display strong {
             color: var(--primary);
             font-size: 1.2rem;
+            display: block;
         }
         .redirecting-content .payment-method-display .ussd-code {
             font-family: 'Courier New', monospace;
-            font-size: 2rem;
+            font-size: 2.5rem;
             font-weight: 800;
             display: block;
-            margin-top: 6px;
-            padding: 8px;
+            margin-top: 8px;
+            padding: 12px;
             background: var(--white);
+            border-radius: 12px;
+            letter-spacing: 2px;
+        }
+        .redirecting-content .instruction-text {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            background: var(--light-gray);
+            padding: 14px;
             border-radius: 8px;
+            margin-top: 12px;
+            text-align: left;
+            line-height: 1.6;
+        }
+        .redirecting-content .instruction-text i {
+            color: var(--primary);
+            margin-right: 8px;
         }
         .redirecting-content .btn-continue {
             background: var(--primary);
@@ -616,6 +654,9 @@
             background: var(--primary-dark);
             transform: scale(1.02);
         }
+        .redirecting-content .btn-continue i {
+            margin-right: 8px;
+        }
         .redirecting-content .btn-cancel-redirect {
             background: transparent;
             border: none;
@@ -628,18 +669,26 @@
         .redirecting-content .btn-cancel-redirect:hover {
             color: var(--text-dark);
         }
-        .redirecting-content .instruction-text {
-            font-size: 0.9rem;
+        .redirecting-content .copy-ussd-btn-large {
+            background: transparent;
+            border: 2px solid var(--medium-gray);
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: var(--transition);
             color: var(--text-light);
-            background: var(--light-gray);
-            padding: 12px;
-            border-radius: 8px;
-            margin-top: 12px;
-            text-align: left;
+            margin-top: 8px;
         }
-        .redirecting-content .instruction-text i {
-            color: var(--primary);
-            margin-right: 8px;
+        .redirecting-content .copy-ussd-btn-large:hover {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+        .redirecting-content .copy-ussd-btn-large.copied {
+            background: #4ade80;
+            color: white;
+            border-color: #4ade80;
         }
 
         /* ===== WHATSAPP FLOATING ===== */
@@ -714,7 +763,11 @@
                 grid-template-columns: 1fr;
             }
             .redirecting-content .payment-method-display .ussd-code {
+                font-size: 2rem;
+            }
+            .payment-method-card .method-ussd {
                 font-size: 1.5rem;
+                padding: 8px 16px;
             }
         }
     </style>
@@ -985,17 +1038,18 @@
     <div class="redirecting-overlay" id="redirectingOverlay">
         <div class="redirecting-content">
             <div class="spinner"></div>
-            <h3>📱 Dialing USSD Code</h3>
-            <p>Your phone will open the USSD dialer</p>
+            <h3>📱 USSD Code Ready</h3>
+            <p>Copy the code and dial on your phone</p>
             
             <div class="payment-method-display">
                 <strong id="redirectMethodName">AIRTEL Money</strong>
                 <span class="ussd-code" id="redirectUssdCode">*211#</span>
+                <button class="copy-ussd-btn-large" onclick="copyUssdCode()">📋 Copy Code</button>
             </div>
 
             <div class="instruction-text">
                 <i class="fas fa-info-circle"></i>
-                <span id="redirectInstructions">Dial *211# to send your donation via AIRTEL Money</span>
+                <span id="redirectInstructions">Dial *211# on your phone to send your donation via AIRTEL Money. Follow the prompts to complete the transaction.</span>
             </div>
 
             <p style="font-size: 0.85rem; color: var(--text-light); margin-top: 10px;">
@@ -1004,7 +1058,7 @@
             </p>
 
             <button class="btn-continue" id="redirectContinueBtn">
-                <i class="fas fa-phone"></i> Open Dialer
+                <i class="fas fa-check-circle"></i> I've Completed Payment
             </button>
             <br />
             <button class="btn-cancel-redirect" onclick="cancelRedirect()">
@@ -1094,8 +1148,26 @@
 
     // ===== USSD DIAL FUNCTION =====
     function dialUSSD(code) {
-        // Open phone dialer with USSD code
-        window.location.href = 'tel:' + encodeURIComponent(code);
+        // Try to open phone dialer with USSD code
+        // This works on mobile phones
+        var encodedCode = encodeURIComponent(code);
+        window.location.href = 'tel:' + encodedCode;
+    }
+
+    // ===== COPY USSD CODE =====
+    function copyUssdCode() {
+        var ussdCode = document.getElementById('redirectUssdCode').textContent;
+        navigator.clipboard.writeText(ussdCode).then(function() {
+            var btn = document.querySelector('.copy-ussd-btn-large');
+            btn.textContent = '✅ Copied!';
+            btn.classList.add('copied');
+            setTimeout(function() {
+                btn.textContent = '📋 Copy Code';
+                btn.classList.remove('copied');
+            }, 2000);
+        }).catch(function() {
+            alert('Copy the code manually: ' + ussdCode);
+        });
     }
 
     // ===== COPY BANK DETAILS =====
@@ -1145,17 +1217,17 @@
             airtel: {
                 name: 'AIRTEL Money',
                 ussd: '*211#',
-                instructions: 'Dial *211# to send your donation via AIRTEL Money. Follow the prompts to complete the transaction.'
+                instructions: 'Dial *211# on your phone to send your donation via AIRTEL Money. Follow the prompts to complete the transaction.'
             },
             tnm: {
                 name: 'TNM Mpamba',
                 ussd: '*444#',
-                instructions: 'Dial *444# to send your donation via TNM Mpamba. Follow the prompts to complete the transaction.'
+                instructions: 'Dial *444# on your phone to send your donation via TNM Mpamba. Follow the prompts to complete the transaction.'
             },
             bank: {
                 name: 'FIRST CAPITAL BANK',
                 ussd: '*1111#',
-                instructions: 'Dial *1111# for FIRST CAPITAL BANK services. Use Account: 0029503035324, Name: IMANI LIWEWE MAIDA'
+                instructions: 'Dial *1111# on your phone for FIRST CAPITAL BANK services. Use Account: 0029503035324, Name: IMANI LIWEWE MAIDA'
             }
         };
 
@@ -1171,21 +1243,19 @@
         overlay.classList.add('active');
         document.body.style.overflow = 'hidden';
 
-        // Continue button - dial USSD
+        // Auto show copy hint
+        var copyBtn = document.querySelector('.copy-ussd-btn-large');
+        if (copyBtn) {
+            copyBtn.textContent = '📋 Copy Code';
+            copyBtn.classList.remove('copied');
+        }
+
+        // Continue button - user clicks after completing payment
         document.getElementById('redirectContinueBtn').onclick = function() {
-            dialUSSD(selected.ussd);
             completeDonation(selected.name);
             overlay.classList.remove('active');
             document.body.style.overflow = '';
         };
-
-        // Auto redirect after 3 seconds
-        redirectTimer = setTimeout(function() {
-            dialUSSD(selected.ussd);
-            completeDonation(selected.name);
-            overlay.classList.remove('active');
-            document.body.style.overflow = '';
-        }, 3000);
     }
 
     function cancelRedirect() {
@@ -1208,13 +1278,13 @@
             ✅ Thank you! Your donation of <strong>MWK ${Number(amount).toLocaleString()}</strong> is making a real difference in Malawi.<br />
             <span style="font-size: 0.9rem; display: block; margin-top: 8px;">
                 <i class="fas fa-check-circle" style="color: #1a7a3a;"></i> 
-                Payment via <strong>${methodName}</strong> initiated.
+                Payment via <strong>${methodName}</strong> completed successfully!
             </span>
             <span style="font-size: 0.85rem; display: block; margin-top: 4px; color: var(--text-light);">
-                Please follow the USSD prompts to complete the transaction.
+                Thank you for your generosity and support.
             </span>
             <br />
-            <a href="https://wa.me/265997008860?text=Hello%20Charity-Fund%20Malawi%2C%20I%20just%20made%20a%20donation%20of%20MWK%20${Number(amount).toLocaleString()}%20via%20${methodName}%20and%20need%20assistance." 
+            <a href="https://wa.me/265997008860?text=Hello%20Charity-Fund%20Malawi%2C%20I%20just%20completed%20a%20donation%20of%20MWK%20${Number(amount).toLocaleString()}%20via%20${methodName}." 
                target="_blank" style="background: #25D366; color: white; padding: 8px 20px; border-radius: 50px; text-decoration: none; display: inline-block; margin-top: 8px;">
                 <i class="fab fa-whatsapp"></i> Need Help? Chat with CEO
             </a>
