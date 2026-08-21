@@ -6,7 +6,7 @@
     <title>Charity-Fund Malawi · Testimonials</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <link rel="stylesheet" href="style.css" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@700;800;900&display=swap" rel="stylesheet" />
     <style>
         .page-header {
             background: linear-gradient(135deg, #0b2b4a 0%, #1a4a6a 100%);
@@ -18,6 +18,7 @@
         .page-header h1 {
             font-size: 3rem;
             font-weight: 800;
+            font-family: 'Playfair Display', serif;
         }
         .page-header p {
             opacity: 0.85;
@@ -76,6 +77,7 @@
         .testimonial-card-full h4 {
             font-size: 1.1rem;
             color: var(--text-dark);
+            font-family: 'Inter', sans-serif;
         }
         .testimonial-card-full span {
             font-size: 0.9rem;
@@ -89,6 +91,47 @@
             line-height: 1;
             margin-bottom: 5px;
         }
+
+        /* ===== WHATSAPP FLOATING ===== */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 100px;
+            right: 30px;
+            z-index: 999;
+            background: #25D366;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+            text-decoration: none;
+            transition: var(--transition);
+            animation: pulse 2s infinite;
+        }
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 30px rgba(37, 211, 102, 0.6);
+            color: white;
+        }
+        @keyframes pulse {
+            0% { box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4); }
+            50% { box-shadow: 0 4px 30px rgba(37, 211, 102, 0.7); }
+            100% { box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4); }
+        }
+        @media (max-width: 768px) {
+            .whatsapp-float {
+                width: 50px;
+                height: 50px;
+                font-size: 1.6rem;
+                bottom: 80px;
+                right: 15px;
+            }
+        }
+
         @media (max-width: 968px) {
             .testimonials-grid-full {
                 grid-template-columns: repeat(2, 1fr);
@@ -98,17 +141,26 @@
             .testimonials-grid-full {
                 grid-template-columns: 1fr;
             }
+            .page-header h1 {
+                font-size: 2.2rem;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/265997008860?text=Hello%20Charity-Fund%20Malawi%2C%20I%20would%20like%20to%20share%20my%20testimonial%20or%20learn%20more%20about%20your%20work." 
+       class="whatsapp-float" target="_blank" title="Chat with us on WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
 
-    <!-- ===== NAVBAR ===== -->
+    <button id="themeToggle" class="theme-toggle"><i class="fas fa-moon"></i></button>
+
     <nav class="navbar">
         <div class="container">
             <div class="nav-flex">
                 <div class="logo">
-                    <img src="images/logo.png" alt="Charity-Fund Logo" onerror="this.src='https://img.icons8.com/fluency/48/africa.png'" />
+                    <img src="images/logo.png" alt="Logo" onerror="this.src='https://img.icons8.com/fluency/48/africa.png'" />
                     <span>Charity-Fund</span>
                     <small>Malawi</small>
                 </div>
@@ -127,19 +179,18 @@
         </div>
     </nav>
 
-    <!-- ===== PAGE HEADER ===== -->
     <section class="page-header">
         <div class="container">
-            <h1>📣 What Our Supporters Say</h1>
+            <h1>What Our Supporters Say</h1>
             <p>Real stories from people making a difference in Malawi</p>
         </div>
     </section>
 
-    <!-- ===== TESTIMONIALS LIST ===== -->
     <section class="testimonials-page">
         <div class="container">
             <div class="testimonials-grid-full">
 
+                <!-- Testimonial 1 - John Banda (Unique Image 1) -->
                 <div class="testimonial-card-full">
                     <div class="quote-icon">"</div>
                     <div class="testimonial-image">
@@ -151,6 +202,7 @@
                     <span>Donor from Lilongwe</span>
                 </div>
 
+                <!-- Testimonial 2 - Sarah Phiri (Unique Image 2) -->
                 <div class="testimonial-card-full">
                     <div class="quote-icon">"</div>
                     <div class="testimonial-image">
@@ -162,6 +214,7 @@
                     <span>Monthly Donor from Blantyre</span>
                 </div>
 
+                <!-- Testimonial 3 - Robert Mwale (Unique Image 3) -->
                 <div class="testimonial-card-full">
                     <div class="quote-icon">"</div>
                     <div class="testimonial-image">
@@ -173,10 +226,11 @@
                     <span>Corporate Partner in Mzuzu</span>
                 </div>
 
+                <!-- Testimonial 4 - Grace Mwale (NEW Unique Image 4) -->
                 <div class="testimonial-card-full">
                     <div class="quote-icon">"</div>
                     <div class="testimonial-image">
-                        <img src="images/testimonial-1.jpg" alt="Grace Mwale" onerror="this.src='https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&crop=face'" />
+                        <img src="images/testimonial-4.jpg" alt="Grace Mwale" onerror="this.src='https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&crop=face'" />
                     </div>
                     <div class="stars">⭐⭐⭐⭐⭐</div>
                     <div class="quote">"I've been supporting Charity-Fund for 3 years now. The impact in my community is visible. More children are in school and families have clean water."</div>
@@ -184,10 +238,11 @@
                     <span>Community Leader in Dowa</span>
                 </div>
 
+                <!-- Testimonial 5 - David Kamanga (NEW Unique Image 5) -->
                 <div class="testimonial-card-full">
                     <div class="quote-icon">"</div>
                     <div class="testimonial-image">
-                        <img src="images/testimonial-2.jpg" alt="David Kamanga" onerror="this.src='https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face'" />
+                        <img src="images/testimonial-5.jpg" alt="David Kamanga" onerror="this.src='https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face'" />
                     </div>
                     <div class="stars">⭐⭐⭐⭐⭐</div>
                     <div class="quote">"The mobile health clinics have saved lives in our village. My children now get regular checkups. Thank you Charity-Fund Malawi!"</div>
@@ -195,10 +250,11 @@
                     <span>Beneficiary from Salima</span>
                 </div>
 
+                <!-- Testimonial 6 - Margaret Chikwanda (NEW Unique Image 6) -->
                 <div class="testimonial-card-full">
                     <div class="quote-icon">"</div>
                     <div class="testimonial-image">
-                        <img src="images/testimonial-3.jpg" alt="Margaret Chikwanda" onerror="this.src='https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=100&h=100&fit=crop&crop=face'" />
+                        <img src="images/testimonial-6.jpg" alt="Margaret Chikwanda" onerror="this.src='https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=100&h=100&fit=crop&crop=face'" />
                     </div>
                     <div class="stars">⭐⭐⭐⭐⭐</div>
                     <div class="quote">"As a corporate partner, we've seen the impact of our donations. The team is professional and truly committed to empowering Malawian communities."</div>
@@ -274,15 +330,6 @@
             </div>
         </div>
     </footer>
-
-    <!-- WhatsApp Floating Button -->
-    <a href="https://wa.me/265997008860" class="whatsapp-float" target="_blank">
-        <i class="fab fa-whatsapp"></i>
-    </a>
-
-    <button id="themeToggle" class="theme-toggle">
-        <i class="fas fa-moon"></i>
-    </button>
 
     <script src="script.js"></script>
 </body>
