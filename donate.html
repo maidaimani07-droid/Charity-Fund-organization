@@ -8,6 +8,42 @@
     <link rel="stylesheet" href="style.css" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
     <style>
+        /* ===== GREEN HANDSHAKE EMOJI ===== */
+        .green-handshake {
+            color: #1a7a3a !important;
+            font-size: 1.8rem;
+            display: inline-block;
+            margin-right: 8px;
+            vertical-align: middle;
+        }
+        .donation-header h3 .green-handshake {
+            color: #1a7a3a !important;
+        }
+        .btn-primary .green-handshake {
+            color: #ffffff !important;
+        }
+        .donate-message .green-handshake {
+            color: #1a7a3a !important;
+        }
+        .payment-card .green-handshake {
+            color: #1a7a3a !important;
+        }
+        .section-tag .green-handshake {
+            color: #1a7a3a !important;
+        }
+        .modal-header .green-handshake {
+            color: #1a7a3a !important;
+        }
+        .page-header .green-handshake {
+            color: #ffffff !important;
+        }
+        .whatsapp-float .green-handshake {
+            color: #ffffff !important;
+        }
+        .footer-tagline .green-handshake {
+            color: #1a7a3a !important;
+        }
+
         .page-header {
             background: linear-gradient(135deg, #0b2b4a 0%, #1a4a6a 100%);
             color: white;
@@ -367,24 +403,6 @@
             background: #4ade80;
             color: white;
             border-color: #4ade80;
-        }
-        /* Mobile detection banner */
-        .mobile-dial-banner {
-            display: none;
-            background: #e3f2fd;
-            border: 2px solid #0d47a1;
-            border-radius: var(--radius);
-            padding: 16px 20px;
-            margin: 16px 0;
-            text-align: center;
-        }
-        .mobile-dial-banner.show {
-            display: block;
-        }
-        .mobile-dial-banner i {
-            color: #0d47a1;
-            font-size: 1.5rem;
-            margin-right: 10px;
         }
 
         /* ===== MODAL ===== */
@@ -826,7 +844,7 @@
     <!-- ===== PAGE HEADER ===== -->
     <section class="page-header">
         <div class="container">
-            <h1>💝 Make a Donation</h1>
+            <h1>🤝 Make a Donation</h1>
             <p>Your contribution changes lives across Malawi</p>
         </div>
     </section>
@@ -836,7 +854,7 @@
         <div class="container">
             <div class="donate-wrapper">
                 <div class="donate-info">
-                    <span class="section-tag" style="color: #1a7a3a; background: rgba(26,122,58,0.1);">💝 Make a Difference</span>
+                    <span class="section-tag" style="color: #1a7a3a; background: rgba(26,122,58,0.1);">🤝 Make a Difference</span>
                     <h2>Your Donation <br/>Changes Everything</h2>
                     <p>Every contribution, no matter how small, helps us reach more communities in need across Malawi.</p>
                     <div class="impact-stats-donate">
@@ -866,7 +884,7 @@
 
                 <div class="donate-box">
                     <div class="donation-header">
-                        <h3><span class="green-heart">❤️</span> Make a Donation</h3>
+                        <h3><span class="green-handshake">🤝</span> Make a Donation</h3>
                         <p>Select an amount in Malawi Kwacha (MWK)</p>
                     </div>
 
@@ -894,7 +912,7 @@
                     </div>
 
                     <button id="donateNowBtn" class="btn-primary btn-full">
-                        💳 Donate Now
+                        🤝 Donate Now
                     </button>
 
                     <div id="donateMessage" class="donate-message">
@@ -997,7 +1015,7 @@
     <div class="payment-modal" id="paymentModal">
         <div class="payment-modal-content">
             <div class="modal-header">
-                <h2>💳 Choose Payment Method</h2>
+                <h2>🤝 Choose Payment Method</h2>
                 <p>Select how you'd like to complete your donation</p>
             </div>
             
@@ -1171,20 +1189,13 @@
     // CHARITY-FUND MALAWI - DONATE PAGE JAVASCRIPT
     // ============================================
 
-    // ===== USSD DIAL FUNCTION - WORKS ON MOBILE =====
+    // ===== USSD DIAL FUNCTION =====
     function dialUSSD(code) {
-        // Encode the USSD code for tel: link
-        // This works on mobile browsers
         var encodedCode = encodeURIComponent(code);
         var telLink = 'tel:' + encodedCode;
-        
-        // Try to open the dialer
         window.location.href = telLink;
         
-        // Fallback: If the above doesn't work, show the code
         setTimeout(function() {
-            // If the page is still visible, the dialer didn't open
-            // Show a helpful message
             if (!document.hidden) {
                 alert('Please dial ' + code + ' on your phone to complete the donation.');
             }
@@ -1273,7 +1284,6 @@
         currentUssdCode = selected.ussd;
         closeModal();
 
-        // Show redirecting overlay with USSD code
         var overlay = document.getElementById('redirectingOverlay');
         document.getElementById('redirectMethodName').textContent = selected.name;
         document.getElementById('redirectUssdCode').textContent = selected.ussd;
@@ -1282,10 +1292,8 @@
         overlay.classList.add('active');
         document.body.style.overflow = 'hidden';
 
-        // Set the dial button to use the USSD code
         document.getElementById('redirectDialBtn').onclick = function() {
             dialUSSD(selected.ussd);
-            // Complete donation after dialing
             setTimeout(function() {
                 completeDonation(selected.name);
                 overlay.classList.remove('active');
@@ -1293,14 +1301,12 @@
             }, 3000);
         };
 
-        // Auto show copy hint
         var copyBtn = document.querySelector('.copy-ussd-btn-large');
         if (copyBtn) {
             copyBtn.textContent = '📋 Copy Code';
             copyBtn.classList.remove('copied');
         }
 
-        // Auto dial after 3 seconds
         redirectTimer = setTimeout(function() {
             dialUSSD(selected.ussd);
             setTimeout(function() {
@@ -1345,7 +1351,6 @@
         
         donateMessage.classList.add('show');
 
-        // Update goal progress
         var goalFill = document.querySelector('.goal-fill');
         if (goalFill) {
             var currentWidth = parseFloat(goalFill.style.width);
@@ -1369,7 +1374,6 @@
         }, 15000);
     }
 
-    // Close modal on outside click
     document.getElementById('paymentModal').addEventListener('click', function(e) {
         if (e.target === this) {
             closeModal();
