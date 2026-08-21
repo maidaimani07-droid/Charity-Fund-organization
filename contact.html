@@ -106,35 +106,44 @@
         .contact-support-item {
             display: flex;
             align-items: center;
-            gap: 12px;
-            padding: 8px 0;
+            gap: 16px;
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(26, 122, 58, 0.1);
         }
-        .contact-support-item .brand-icon {
-            width: 40px;
-            height: 40px;
+        .contact-support-item:last-child {
+            border-bottom: none;
+        }
+        .contact-support-item .brand-logo {
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
+            overflow: hidden;
+            flex-shrink: 0;
+            background: white;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: 700;
-            font-size: 0.8rem;
-            color: white;
-            flex-shrink: 0;
+            padding: 8px;
+            border: 2px solid var(--medium-gray);
         }
-        .contact-support-item .brand-icon.airtel {
-            background: #cc0000;
+        .contact-support-item .brand-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
         }
-        .contact-support-item .brand-icon.tnm {
-            background: #1a7a3a;
-        }
-        .contact-support-item .number {
+        .contact-support-item .brand-info .number {
             font-weight: 700;
             font-family: 'Courier New', monospace;
             font-size: 1.1rem;
+            color: var(--text-dark);
         }
-        .contact-support-item .label {
+        .contact-support-item .brand-info .label {
             color: var(--text-light);
             font-size: 0.85rem;
+        }
+        .contact-support-item .brand-info .label .highlight {
+            color: var(--primary);
+            font-weight: 600;
         }
         .whatsapp-btn {
             display: inline-block;
@@ -154,6 +163,17 @@
         }
         .whatsapp-btn i {
             margin-right: 8px;
+        }
+        .location-map {
+            margin-top: 20px;
+            border-radius: var(--radius);
+            overflow: hidden;
+            border: 2px solid var(--medium-gray);
+        }
+        .location-map iframe {
+            width: 100%;
+            height: 200px;
+            border: none;
         }
         @media (max-width: 768px) {
             .contact-wrapper {
@@ -207,35 +227,62 @@
                     <h2>Contact Information</h2>
                     <p>Have questions about our programs in Malawi or want to partner with us? Reach out!</p>
                     <div class="contact-details">
-                        <div><i class="fas fa-map-marker-alt"></i> 123 Kamuzu Road, Lilongwe, Malawi</div>
+                        <div><i class="fas fa-map-marker-alt"></i> Kamuzu Road Market, Post Office Box 21, Salima, Malawi</div>
                         <div><i class="fas fa-envelope"></i> info@charity-fund.mw</div>
                         <div><i class="fas fa-clock"></i> Mon-Fri: 8:00 AM - 5:00 PM</div>
                     </div>
 
                     <div class="contact-support-box">
                         <h4>📱 Mobile Money Support</h4>
+                        
+                        <!-- AIRTEL Money -->
                         <div class="contact-support-item">
-                            <div class="brand-icon airtel">A</div>
-                            <div>
+                            <div class="brand-logo">
+                                <img src="images/airtel-logo.png" alt="AIRTEL Money" onerror="this.src='https://img.icons8.com/color/48/airtel.png'" />
+                            </div>
+                            <div class="brand-info">
                                 <div class="number">+265 997 008 860</div>
-                                <div class="label">AIRTEL Money</div>
+                                <div class="label"><span class="highlight">AIRTEL Money</span> · Available 24/7</div>
                             </div>
                         </div>
+
+                        <!-- TNM Mpamba -->
                         <div class="contact-support-item">
-                            <div class="brand-icon tnm">T</div>
-                            <div>
+                            <div class="brand-logo">
+                                <img src="images/tnm-logo.png" alt="TNM Mpamba" onerror="this.src='https://img.icons8.com/color/48/tnm.png'" />
+                            </div>
+                            <div class="brand-info">
                                 <div class="number">+265 881 395 378</div>
-                                <div class="label">TNM Mpamba</div>
+                                <div class="label"><span class="highlight">TNM Mpamba</span> · Available 24/7</div>
                             </div>
                         </div>
+
+                        <!-- FIRST CAPITAL BANK -->
+                        <div class="contact-support-item">
+                            <div class="brand-logo">
+                                <img src="images/first-capital-bank-logo.png" alt="FIRST CAPITAL BANK" onerror="this.src='https://img.icons8.com/color/48/bank.png'" />
+                            </div>
+                            <div class="brand-info">
+                                <div class="number">FIRST CAPITAL BANK</div>
+                                <div class="label">Account: <span class="highlight">0029503035324</span></div>
+                                <div class="label" style="font-size: 0.8rem;">Name: <span class="highlight">IMANI LIWEWE MAIDA</span></div>
+                            </div>
+                        </div>
+
                         <p style="margin-top: 12px; font-size: 0.9rem; color: var(--text-light);">
                             <i class="fas fa-check-circle" style="color: var(--primary);"></i> 
-                            Available 24/7 for donations
+                            All donations are secure and 100% transparent
                         </p>
                         <a href="https://wa.me/265997008860?text=Hello%20Charity-Fund%20Malawi%2C%20I%20need%20assistance." 
                            target="_blank" class="whatsapp-btn">
                             <i class="fab fa-whatsapp"></i> Chat with CEO on WhatsApp
                         </a>
+                    </div>
+
+                    <!-- Location Map -->
+                    <div class="location-map">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15275.123456789!2d34.123456!3d-13.123456!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTPCsDA3JzI0LjQiUyAzNMKwMDcnMjQuMCJF!5e0!3m2!1sen!2smw!4v1234567890" 
+                                allowfullscreen="" loading="lazy"></iframe>
                     </div>
                 </div>
 
