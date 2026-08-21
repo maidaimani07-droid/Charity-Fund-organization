@@ -3,201 +3,300 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Charity-Fund Malawi · Home</title>
+    <title>Charity-Fund Malawi · Giving Hope</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <link rel="stylesheet" href="style.css" />
-    <style>
-        .project-image {
-            position: relative;
-            overflow: hidden;
-            height: 280px;
-        }
-        .project-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-            transition: transform 0.5s ease;
-        }
-        .project-card:hover .project-image img {
-            transform: scale(1.05);
-        }
-
-        /* ===== WHATSAPP FLOATING BUTTON ===== */
-        .whatsapp-float {
-            position: fixed;
-            bottom: 100px;
-            right: 30px;
-            z-index: 999;
-            background: #25D366;
-            color: white;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2rem;
-            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
-            text-decoration: none;
-            transition: var(--transition);
-            animation: pulse 2s infinite;
-        }
-        .whatsapp-float:hover {
-            transform: scale(1.1);
-            box-shadow: 0 6px 30px rgba(37, 211, 102, 0.6);
-            color: white;
-        }
-        @keyframes pulse {
-            0% { box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4); }
-            50% { box-shadow: 0 4px 30px rgba(37, 211, 102, 0.7); }
-            100% { box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4); }
-        }
-
-        @media (max-width: 768px) {
-            .whatsapp-float {
-                width: 50px;
-                height: 50px;
-                font-size: 1.6rem;
-                bottom: 80px;
-                right: 15px;
-            }
-        }
-    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
 </head>
 <body>
-    <!-- WhatsApp Floating Button -->
-    <a href="https://wa.me/265997008860?text=Hello%20Charity-Fund%20Malawi%2C%20I%20would%20like%20to%20know%20more%20about%20your%20organization%20and%20how%20to%20donate." 
-       class="whatsapp-float" target="_blank" title="Chat with us on WhatsApp">
-        <i class="fab fa-whatsapp"></i>
-    </a>
 
-    <button id="themeToggle" class="theme-toggle">
-        <i class="fas fa-moon"></i>
-    </button>
-
+    <!-- ===== NAVBAR ===== -->
     <nav class="navbar">
-        <div class="container nav-flex">
-            <div class="logo">
-                <img src="https://img.icons8.com/fluency/48/africa.png" alt="Charity-Fund Logo" style="width: 40px; vertical-align: middle; margin-right: 10px;" />
-                Charity-Fund <span style="font-size: 0.8rem; color: #2d7d46;">Malawi</span>
-            </div>
-            <ul class="nav-links">
-                <li><a href="index.html" class="active">Home</a></li>
-                <li><a href="projects.html">Projects</a></li>
-                <li><a href="donate.html">Donate</a></li>
-                <li><a href="testimonials.html">Testimonials</a></li>
-                <li><a href="contact.html">Contact</a></li>
-                <li><a href="donate.html" class="btn-donate-nav">Donate Now</a></li>
-            </ul>
-            <div class="hamburger" id="hamburger">
-                <span></span><span></span><span></span>
+        <div class="container">
+            <div class="nav-flex">
+                <div class="logo">
+                    <img src="images/logo.png" alt="Charity-Fund Logo" onerror="this.src='https://img.icons8.com/fluency/48/africa.png'" />
+                    <span>Charity-Fund</span>
+                    <small>Malawi</small>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="index.html" class="active">Home</a></li>
+                    <li><a href="projects.html">Projects</a></li>
+                    <li><a href="donate.html">Donate</a></li>
+                    <li><a href="testimonials.html">Testimonials</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="donate.html" class="btn-donate-nav"><i class="fas fa-heart"></i> Donate</a></li>
+                </ul>
+                <div class="hamburger" id="hamburger">
+                    <span></span><span></span><span></span>
+                </div>
             </div>
         </div>
     </nav>
 
-    <section class="hero" id="home">
-        <div class="hero-overlay"></div>
+    <!-- ===== HERO SECTION ===== -->
+    <section class="hero">
+        <div class="hero-pattern"></div>
         <div class="container hero-content">
-            <div class="hero-text animate-fade-up">
-                <span class="badge">Empowering Malawi Since 2020</span>
-                <h1>Give <span class="highlight">Hope</span>,<br />Transform <span class="highlight">Futures</span></h1>
-                <p>Every donation creates a ripple effect of change across Malawi. Join thousands of supporters making a difference in communities across Africa.</p>
-                <div class="hero-buttons">
-                    <a href="donate.html" class="btn-primary">Donate Now</a>
-                    <a href="projects.html" class="btn-secondary">Learn More</a>
+            <div class="hero-grid">
+                <div class="hero-text">
+                    <div class="hero-badge">
+                        <i class="fas fa-award"></i> Trusted Since 2015
+                    </div>
+                    <h1>Give <span class="highlight">Hope</span>,<br />Transform <span class="highlight">Lives</span></h1>
+                    <p>Every donation creates a ripple effect of change across Malawi. Join 12,000+ supporters making a difference.</p>
+                    <div class="hero-buttons">
+                        <a href="donate.html" class="btn-primary btn-large">
+                            <i class="fas fa-heart"></i> Donate Now
+                        </a>
+                        <a href="projects.html" class="btn-secondary">
+                            <i class="fas fa-play-circle"></i> See Our Work
+                        </a>
+                    </div>
+                    <div class="hero-trust">
+                        <div class="trust-item">
+                            <i class="fas fa-shield-alt"></i>
+                            <span>100% Transparent</span>
+                        </div>
+                        <div class="trust-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Verified Charity</span>
+                        </div>
+                        <div class="trust-item">
+                            <i class="fas fa-globe-africa"></i>
+                            <span>Local Impact</span>
+                        </div>
+                    </div>
                 </div>
-                <div class="hero-stats">
-                    <div class="stat-item">
-                        <h3 class="counter" data-target="15000">0</h3>
-                        <p>Children Educated</p>
+                <div class="hero-image-wrapper">
+                    <div class="hero-image">
+                        <img src="images/hero-bg.jpg" alt="Helping communities in Malawi" onerror="this.src='https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=600&h=450&fit=crop'" />
+                        <div class="hero-floating-card">
+                            <div class="floating-stat">
+                                <span class="stat-number">12,000+</span>
+                                <span class="stat-label">Lives Impacted</span>
+                            </div>
+                        </div>
                     </div>
-                    <div class="stat-item">
-                        <h3 class="counter" data-target="500">0</h3>
-                        <p>Clean Water Projects</p>
-                    </div>
-                    <div class="stat-item">
-                        <h3 class="counter" data-target="25000">0</h3>
-                        <p>Lives Impacted</p>
-                    </div>
-                    <div class="stat-item">
-                        <h3 class="counter" data-target="98">0<small>%</small></h3>
-                        <p>Funds to Programs</p>
-                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="hero-wave">
+            <svg viewBox="0 0 1440 100" preserveAspectRatio="none">
+                <path d="M0,50 C360,100 720,0 1080,50 L1440,100 L1440,100 L0,100 Z" fill="#f8fafc"/>
+            </svg>
+        </div>
+    </section>
+
+    <!-- ===== IMPACT STATS ===== -->
+    <section class="impact-stats-section">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-icon"><i class="fas fa-child"></i></div>
+                    <h3 class="counter" data-target="15000">0</h3>
+                    <p>Children Educated</p>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-icon"><i class="fas fa-water"></i></div>
+                    <h3 class="counter" data-target="500">0</h3>
+                    <p>Clean Water Projects</p>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-icon"><i class="fas fa-users"></i></div>
+                    <h3 class="counter" data-target="25000">0</h3>
+                    <p>Lives Impacted</p>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-icon"><i class="fas fa-percent"></i></div>
+                    <h3 class="counter" data-target="98">0<small>%</small></h3>
+                    <p>Funds to Programs</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="projects" id="projects">
+    <!-- ===== FEATURED PROJECTS ===== -->
+    <section class="featured-projects">
         <div class="container">
             <div class="section-header">
-                <span class="section-tag">🇲🇼 Featured Projects</span>
-                <h2>Our Impact in Malawi</h2>
-                <p>Discover how your donations are changing lives across Malawi</p>
+                <span class="section-tag"><i class="fas fa-heart"></i> Our Work</span>
+                <h2>Featured Projects in Malawi</h2>
+                <p>See the real impact your donations are making</p>
             </div>
             <div class="project-grid">
                 <div class="project-card">
                     <div class="project-image">
-                        <img src="https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=600&h=350&fit=crop" alt="Building Schools in Malawi" />
-                        <div class="project-progress">
-                            <div class="progress-bar" style="width: 85%"></div>
-                            <span>85% funded</span>
+                        <img src="images/school-building.jpg" alt="Building Schools" onerror="this.src='https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=600&h=350&fit=crop'" />
+                        <div class="project-overlay">
+                            <span class="project-tag">Education</span>
+                            <div class="progress-bar"><div style="width:85%"></div></div>
+                            <span class="progress-text">85% Funded</span>
                         </div>
                     </div>
                     <div class="project-info">
                         <h3>Building Schools in Rural Malawi</h3>
                         <p>Providing access to quality education for 500+ children in remote communities.</p>
-                        <a href="projects.html" class="btn-donate-small">Learn More →</a>
+                        <a href="projects.html" class="btn-outline">Learn More →</a>
                     </div>
                 </div>
-
                 <div class="project-card">
                     <div class="project-image">
-                        <img src="https://images.unsplash.com/photo-1548839140-29a749e1cf4d?w=600&h=350&fit=crop" alt="Clean Water Malawi" />
-                        <div class="project-progress">
-                            <div class="progress-bar" style="width: 92%"></div>
-                            <span>92% funded</span>
+                        <img src="images/clean-water.jpg" alt="Clean Water" onerror="this.src='https://images.unsplash.com/photo-1548839140-29a749e1cf4d?w=600&h=350&fit=crop'" />
+                        <div class="project-overlay">
+                            <span class="project-tag">Water</span>
+                            <div class="progress-bar"><div style="width:92%"></div></div>
+                            <span class="progress-text">92% Funded</span>
                         </div>
                     </div>
                     <div class="project-info">
-                        <h3> Clean Water for Malawi Villages</h3>
+                        <h3>Clean Water for Malawi Villages</h3>
                         <p>Installing sustainable water systems in 50 villages across Malawi.</p>
-                        <a href="projects.html" class="btn-donate-small">Learn More →</a>
+                        <a href="projects.html" class="btn-outline">Learn More →</a>
                     </div>
                 </div>
-
                 <div class="project-card">
                     <div class="project-image">
-                        <img src="https://images.unsplash.com/photo-1631815588090-d4bfec5b1ccb?w=600&h=350&fit=crop" alt="Mobile Health Clinics Malawi" />
-                        <div class="project-progress">
-                            <div class="progress-bar" style="width: 78%"></div>
-                            <span>78% funded</span>
+                        <img src="images/healthcare.jpg" alt="Healthcare" onerror="this.src='https://images.unsplash.com/photo-1631815588090-d4bfec5b1ccb?w=600&h=350&fit=crop'" />
+                        <div class="project-overlay">
+                            <span class="project-tag">Health</span>
+                            <div class="progress-bar"><div style="width:78%"></div></div>
+                            <span class="progress-text">78% Funded</span>
                         </div>
                     </div>
                     <div class="project-info">
                         <h3>Mobile Health Clinics in Malawi</h3>
                         <p>Bringing essential healthcare to underserved communities.</p>
-                        <a href="projects.html" class="btn-donate-small">Learn More →</a>
+                        <a href="projects.html" class="btn-outline">Learn More →</a>
                     </div>
                 </div>
             </div>
-            <div style="text-align: center; margin-top: 40px;">
+            <div class="section-cta">
                 <a href="projects.html" class="btn-primary">View All Projects</a>
             </div>
         </div>
     </section>
 
+    <!-- ===== WHY DONATE SECTION ===== -->
+    <section class="why-donate">
+        <div class="container">
+            <div class="why-donate-grid">
+                <div class="why-donate-image">
+                    <img src="images/about-us.jpg" alt="Why donate" onerror="this.src='https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=600&h=400&fit=crop'" />
+                    <div class="image-badge">
+                        <i class="fas fa-certificate"></i> 
+                        <span>Registered Charity</span>
+                    </div>
+                </div>
+                <div class="why-donate-content">
+                    <span class="section-tag"><i class="fas fa-info-circle"></i> Why Donate</span>
+                    <h2>Your Donation Changes Everything</h2>
+                    <p>Every contribution, no matter how small, helps us reach more communities in need across Malawi.</p>
+                    <div class="benefits-list">
+                        <div class="benefit-item">
+                            <div class="benefit-icon"><i class="fas fa-check-circle"></i></div>
+                            <div>
+                                <h4>100% Transparency</h4>
+                                <p>See exactly where your donation goes with real-time updates.</p>
+                            </div>
+                        </div>
+                        <div class="benefit-item">
+                            <div class="benefit-icon"><i class="fas fa-check-circle"></i></div>
+                            <div>
+                                <h4>Local Impact</h4>
+                                <p>100% of funds go directly to programs in Malawi communities.</p>
+                            </div>
+                        </div>
+                        <div class="benefit-item">
+                            <div class="benefit-icon"><i class="fas fa-check-circle"></i></div>
+                            <div>
+                                <h4>Tax Deductible</h4>
+                                <p>All donations are tax-deductible. You'll receive a receipt.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="donate.html" class="btn-primary"><i class="fas fa-heart"></i> Donate Now</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== TESTIMONIALS PREVIEW ===== -->
+    <section class="testimonials-preview">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag"><i class="fas fa-quote-left"></i> Testimonials</span>
+                <h2>What Our Supporters Say</h2>
+                <p>Real stories from people making a difference</p>
+            </div>
+            <div class="testimonial-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-image">
+                        <img src="images/testimonial-1.jpg" alt="John Banda" onerror="this.src='https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face'" />
+                    </div>
+                    <div class="testimonial-content">
+                        <div class="stars">⭐⭐⭐⭐⭐</div>
+                        <p>"Charity-Fund Malawi changed my perspective on giving. The impact is incredible."</p>
+                        <h4>John Banda</h4>
+                        <span>Donor from Lilongwe</span>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-image">
+                        <img src="images/testimonial-2.jpg" alt="Sarah Phiri" onerror="this.src='https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop&crop=face'" />
+                    </div>
+                    <div class="testimonial-content">
+                        <div class="stars">⭐⭐⭐⭐⭐</div>
+                        <p>"I know my monthly donation is reaching those who need it most in Malawi's rural areas."</p>
+                        <h4>Sarah Phiri</h4>
+                        <span>Monthly Donor</span>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-image">
+                        <img src="images/testimonial-3.jpg" alt="Robert Mwale" onerror="this.src='https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop&crop=face'" />
+                    </div>
+                    <div class="testimonial-content">
+                        <div class="stars">⭐⭐⭐⭐⭐</div>
+                        <p>"Seeing the progress of projects makes me feel connected to the cause. Highly recommend!"</p>
+                        <h4>Robert Mwale</h4>
+                        <span>Corporate Partner</span>
+                    </div>
+                </div>
+            </div>
+            <div class="section-cta">
+                <a href="testimonials.html" class="btn-outline">Read More Stories</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== CTA SECTION ===== -->
+    <section class="cta-section">
+        <div class="cta-overlay"></div>
+        <div class="container">
+            <div class="cta-content">
+                <h2>Ready to Make a Difference?</h2>
+                <p>Join thousands of supporters changing lives in Malawi. Your donation today creates hope for tomorrow.</p>
+                <div class="cta-buttons">
+                    <a href="donate.html" class="btn-primary btn-large"><i class="fas fa-heart"></i> Donate Now</a>
+                    <a href="contact.html" class="btn-secondary">Contact Us</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
     <footer>
         <div class="container">
             <div class="footer-grid">
                 <div class="footer-brand">
+                    <img src="images/logo.png" alt="Charity-Fund" onerror="this.src='https://img.icons8.com/fluency/48/africa.png'" />
                     <h3>Charity-Fund Malawi</h3>
                     <p>Making hope possible through community action and global support across Malawi and Africa.</p>
-                    <div class="social-links">
+                    <div class="footer-social">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
                         <a href="#"><i class="fab fa-twitter"></i></a>
                         <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
                         <a href="#"><i class="fab fa-youtube"></i></a>
                         <a href="#"><i class="fab fa-linkedin-in"></i></a>
                     </div>
@@ -225,16 +324,26 @@
                     <h4>Newsletter</h4>
                     <p>Subscribe for updates from Malawi</p>
                     <form>
-                        <input type="email" placeholder="Enter email" />
+                        <input type="email" placeholder="Your email" />
                         <button type="submit"><i class="fas fa-arrow-right"></i></button>
                     </form>
                 </div>
             </div>
             <div class="footer-bottom">
                 <p>© 2026 Charity-Fund Malawi. All rights reserved.</p>
+                <p class="footer-tagline">Built with <i class="fas fa-heart" style="color: #1a7a3a;"></i> for a better world</p>
             </div>
         </div>
     </footer>
+
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/265997008860" class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <button id="themeToggle" class="theme-toggle">
+        <i class="fas fa-moon"></i>
+    </button>
 
     <script src="script.js"></script>
 </body>
