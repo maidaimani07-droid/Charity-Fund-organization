@@ -1,5 +1,5 @@
 // ============================================
-// COMPLETE FUNCTIONALITY FOR CHARITY-FUND MALAWI
+// CHARITY-FUND MALAWI - MAIN JAVASCRIPT
 // ============================================
 
 (function() {
@@ -52,13 +52,13 @@
     }
 
     // ===== INTERSECTION OBSERVER FOR COUNTERS =====
-    const heroSection = document.querySelector('.hero');
+    const heroSection = document.querySelector('.hero, .page-header');
     let countersAnimated = false;
 
     if (heroSection) {
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
-                if (entry.isIntersecting && !countersAnimated) {
+                if (entry.isIntersecting && !countersAnimated && counters.length > 0) {
                     animateCounters();
                     countersAnimated = true;
                 }
@@ -67,6 +67,68 @@
 
         observer.observe(heroSection);
     }
+
+    // ===== CONTACT FORM =====
+    const contactForm = document.getElementById('contactForm');
+
+    if (contactForm) {
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const name = this.querySelector('input[placeholder="Your Name"]').value;
+            const email = this.querySelector('input[placeholder="Your Email"]').value;
+            const message = this.querySelector('textarea').value;
+
+            if (!name || !email || !message) {
+                alert('⚠️ Please fill in all required fields.');
+                return;
+            }
+
+            if (!isValidEmail(email)) {
+                alert('⚠️ Please enter a valid email address.');
+                return;
+            }
+
+            alert('✅ Thank you for reaching out! We\'ll get back to you within 24 hours.');
+            this.reset();
+        });
+    }
+
+    // ===== NEWSLETTER SUBSCRIPTION =====
+    const newsletterForms = document.querySelectorAll('.footer-newsletter form');
+
+    newsletterForms.forEach(form => {
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const input = this.querySelector('input[type="email"]');
+            if (input && input.value) {
+                alert('✅ Thank you for subscribing to our newsletter!');
+                input.value = '';
+            }
+        });
+    });
+
+    // ===== VALIDATION HELPER =====
+    function isValidEmail(email) {
+        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    }
+
+    // ===== SMOOTH SCROLL =====
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            const targetId = this.getAttribute('href');
+            if (targetId === '#') return;
+            
+            e.preventDefault();
+            const target = document.querySelector(targetId);
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+                if (navLinks) navLinks.classList.remove('active');
+            }
+        });
+    });
 
     // ===== DONATION FUNCTIONALITY =====
     const amountBtns = document.querySelectorAll('.amount-btn');
@@ -78,12 +140,11 @@
     const frequencySelect = document.getElementById('donationFrequency');
 
     if (amountBtns.length > 0) {
-        let selectedAmount = 1000;
+        let selectedAmount = 2500;
         let donationFrequency = 'one-time';
-        const currencySymbol = 'MWK';
 
         function formatMWK(amount) {
-            return `${currencySymbol} ${Number(amount).toLocaleString()}`;
+            return 'MWK ' + Number(amount).toLocaleString();
         }
 
         amountBtns.forEach(btn => {
@@ -122,9 +183,9 @@
         function updateTotal() {
             let amount = selectedAmount;
             if (donationFrequency === 'monthly') {
-                totalDisplay.textContent = `${formatMWK(amount * 12)} / year`;
+                totalDisplay.textContent = formatMWK(amount * 12) + ' / year';
             } else if (donationFrequency === 'yearly') {
-                totalDisplay.textContent = `${formatMWK(amount * 2)} / 2 years`;
+                totalDisplay.textContent = formatMWK(amount * 2) + ' / 2 years';
             } else {
                 totalDisplay.textContent = formatMWK(amount);
             }
@@ -142,35 +203,57 @@
                 }
 
                 if (isNaN(amount) || amount <= 0) {
-                    amount = 1000;
-                    selectedAmount = 1000;
+                    amount = 2500;
+                    selectedAmount = 2500;
                     amountBtns.forEach(b => b.classList.remove('active'));
-                    document.querySelector('.amount-btn[data-amount="1000"]').classList.add('active');
+                    document.querySelector('.amount-btn[data-amount="2500"]').classList.add('active');
                 }
 
-                let frequencyText = '';
-                if (donationFrequency === 'monthly') frequencyText = ' monthly';
-                else if (donationFrequency === 'yearly') frequencyText = ' yearly';
+                // Show success message directly
+                if (donateMessage && donationDisplay) {
+                    donationDisplay.textContent = formatMWK(amount);
+                    
+                    const messageP = donateMessage.querySelector('p');
+                    if (messageP) {
+                        messageP.innerHTML = `
+                            ✅ Thank you! Your donation of <strong>${formatMWK(amount)}</strong> is making a real difference in Malawi.<br />
+                            <span style="font-size: 0.9rem; display: block; margin-top: 8px;">
+                                <i class="fas fa-check-circle" style="color: #1a7a3a;"></i> 
+                                Payment initiated successfully.
+                            </span>
+                            <br />
+                            <a href="https://wa.me/265997008860?text=Hello%20Charity-Fund%20Malawi%2C%20I%20just%20made%20a%20donation%20of%20MWK%20${Number(amount).toLocaleString()}%20and%20need%20assistance." 
+                               target="_blank" style="background: #25D366; color: white; padding: 8px 20px; border-radius: 50px; text-decoration: none; display: inline-block; margin-top: 8px;">
+                                <i class="fab fa-whatsapp"></i> Need Help? Chat with CEO
+                            </a>
+                        `;
+                    }
+                    donateMessage.classList.add('show');
+                }
 
-                donationDisplay.textContent = `${formatMWK(amount)}${frequencyText}`;
-                donateMessage.classList.add('show');
-
+                // Update goal progress
                 const goalFill = document.querySelector('.goal-fill');
                 if (goalFill) {
                     const currentWidth = parseFloat(goalFill.style.width);
-                    const newWidth = Math.min(currentWidth + 5, 100);
+                    const newWidth = Math.min(currentWidth + 2, 100);
                     goalFill.style.width = newWidth + '%';
                     
                     const currentAmount = 2500000 + (newWidth - 83) * 83333;
                     const goalLabel = document.querySelector('.goal-label span:last-child');
                     if (goalLabel) {
-                        goalLabel.textContent = `${formatMWK(Math.round(currentAmount))} / ${formatMWK(3000000)}`;
+                        goalLabel.textContent = formatMWK(Math.round(currentAmount)) + ' / ' + formatMWK(3000000);
                     }
                 }
 
-                setTimeout(() => {
-                    donateMessage.classList.remove('show');
-                }, 5000);
+                if (donateMessage) {
+                    setTimeout(() => {
+                        donateMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }, 300);
+
+                    setTimeout(() => {
+                        donateMessage.classList.remove('show');
+                    }, 15000);
+                }
             });
         }
 
@@ -186,77 +269,5 @@
         updateTotal();
     }
 
-    // ===== CONTACT FORM =====
-    const contactForm = document.getElementById('contactForm');
-
-    if (contactForm) {
-        contactForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            const name = this.querySelector('input[placeholder="Your Name"]').value;
-            const email = this.querySelector('input[placeholder="Your Email"]').value;
-            const message = this.querySelector('textarea').value;
-
-            if (!name || !email || !message) {
-                alert('⚠️ Please fill in all required fields.');
-                return;
-            }
-
-            if (!isValidEmail(email)) {
-                alert('⚠️ Please enter a valid email address.');
-                return;
-            }
-
-            alert('✅ Thank you for reaching out! We\'ll get back to you within 24 hours.');
-            this.reset();
-        });
-    }
-
-    // ===== NEWSLETTER SUBSCRIPTION =====
-    const newsletterForm = document.querySelector('.footer-newsletter form');
-
-    if (newsletterForm) {
-        newsletterForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            const input = this.querySelector('input[type="email"]');
-            if (input && input.value) {
-                alert('✅ Thank you for subscribing to our newsletter!');
-                input.value = '';
-            }
-        });
-    }
-
-    // ===== VALIDATION HELPER =====
-    function isValidEmail(email) {
-        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-    }
-
-    // ===== SMOOTH SCROLL FOR NAV LINKS =====
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
-            const targetId = this.getAttribute('href');
-            if (targetId === '#') return;
-            
-            e.preventDefault();
-            const target = document.querySelector(targetId);
-            if (target) {
-                target.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
-                if (navLinks) navLinks.classList.remove('active');
-            }
-        });
-    });
-
-    // ===== PARALLAX EFFECT =====
-    window.addEventListener('scroll', function() {
-        const scrolled = window.pageYOffset;
-        const hero = document.querySelector('.hero');
-        if (hero) {
-            hero.style.backgroundPosition = `center ${scrolled * 0.5}px`;
-        }
-    });
-
-    console.log('🇲🇼 Charity-Fund Malawi website loaded successfully!');
-
+    console.log('🌱 Charity-Fund Malawi website loaded successfully!');
 })();
