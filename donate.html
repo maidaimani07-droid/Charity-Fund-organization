@@ -246,6 +246,18 @@
             display: inline-block;
             margin: 8px 0;
         }
+        .payment-method-card .method-ussd {
+            font-family: 'Courier New', monospace;
+            font-weight: 700;
+            font-size: 1.4rem;
+            color: var(--primary);
+            padding: 8px 16px;
+            background: var(--primary-light);
+            border-radius: 8px;
+            display: inline-block;
+            margin: 8px 0;
+            border: 2px dashed var(--primary);
+        }
         .payment-method-card p {
             color: var(--text-light);
             font-size: 0.95rem;
@@ -264,13 +276,15 @@
             display: inline-block;
             background: var(--primary);
             color: white;
-            padding: 8px 20px;
+            padding: 10px 24px;
             border-radius: 50px;
             text-decoration: none;
             font-weight: 600;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             margin-top: 10px;
             transition: var(--transition);
+            border: none;
+            cursor: pointer;
         }
         .payment-method-card .call-btn:hover {
             transform: scale(1.05);
@@ -279,8 +293,10 @@
         .payment-method-card .call-btn i {
             margin-right: 6px;
         }
-        .payment-method-card.airtel .method-number {
+        .payment-method-card.airtel .method-ussd {
             color: #cc0000;
+            border-color: #cc0000;
+            background: #fff0f0;
         }
         .payment-method-card.airtel .badge {
             background: #ff000015;
@@ -292,8 +308,10 @@
         .payment-method-card.airtel .call-btn:hover {
             box-shadow: 0 4px 15px rgba(204, 0, 0, 0.4);
         }
-        .payment-method-card.tnm .method-number {
+        .payment-method-card.tnm .method-ussd {
             color: #004d99;
+            border-color: #004d99;
+            background: #e8f0ff;
         }
         .payment-method-card.tnm .badge {
             background: #004d9915;
@@ -305,8 +323,10 @@
         .payment-method-card.tnm .call-btn:hover {
             box-shadow: 0 4px 15px rgba(0, 77, 153, 0.4);
         }
-        .payment-method-card.bank .method-number {
+        .payment-method-card.bank .method-ussd {
             color: #1a237e;
+            border-color: #1a237e;
+            background: #e8eaf6;
         }
         .payment-method-card.bank .badge {
             background: #1a237e15;
@@ -460,6 +480,14 @@
             font-weight: 400;
             font-size: 0.8rem;
         }
+        .modal-payment-options button .payment-ussd {
+            font-family: 'Courier New', monospace;
+            font-weight: 700;
+            font-size: 0.9rem;
+            padding: 2px 10px;
+            border-radius: 4px;
+            background: var(--light-gray);
+        }
         .modal-payment-options button.airtel-option {
             border-color: #ff000040;
             background: #fff5f5;
@@ -467,6 +495,10 @@
         .modal-payment-options button.airtel-option:hover {
             border-color: #cc0000;
             background: #ffebeb;
+        }
+        .modal-payment-options button.airtel-option .payment-ussd {
+            color: #cc0000;
+            background: #fff0f0;
         }
         .modal-payment-options button.tnm-option {
             border-color: #004d9940;
@@ -476,6 +508,10 @@
             border-color: #004d99;
             background: #e0edff;
         }
+        .modal-payment-options button.tnm-option .payment-ussd {
+            color: #004d99;
+            background: #e8f0ff;
+        }
         .modal-payment-options button.bank-option {
             border-color: #1a237e40;
             background: #e8eaf6;
@@ -483,6 +519,10 @@
         .modal-payment-options button.bank-option:hover {
             border-color: #1a237e;
             background: #c5cae9;
+        }
+        .modal-payment-options button.bank-option .payment-ussd {
+            color: #1a237e;
+            background: #e8eaf6;
         }
         .modal-cancel-btn {
             background: var(--light-gray);
@@ -543,6 +583,121 @@
             100% { box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4); }
         }
 
+        /* ===== REDIRECTING OVERLAY ===== */
+        .redirecting-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: 10000;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(10px);
+            animation: modalFadeIn 0.4s ease;
+        }
+        .redirecting-overlay.active {
+            display: flex;
+        }
+        .redirecting-content {
+            background: var(--white);
+            border-radius: 24px;
+            padding: 40px;
+            max-width: 450px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
+            animation: bounceIn 0.5s ease;
+        }
+        @keyframes bounceIn {
+            0% { transform: scale(0.8); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        .redirecting-content .spinner {
+            width: 60px;
+            height: 60px;
+            border: 4px solid var(--primary-light);
+            border-top: 4px solid var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+        .redirecting-content h3 {
+            color: var(--text-dark);
+            font-size: 1.3rem;
+            margin-bottom: 8px;
+        }
+        .redirecting-content p {
+            color: var(--text-light);
+            font-size: 0.95rem;
+        }
+        .redirecting-content .payment-method-display {
+            background: var(--primary-light);
+            padding: 16px;
+            border-radius: 12px;
+            margin: 16px 0;
+            border: 2px solid var(--primary);
+        }
+        .redirecting-content .payment-method-display strong {
+            color: var(--primary);
+            font-size: 1.2rem;
+        }
+        .redirecting-content .payment-method-display .ussd-code {
+            font-family: 'Courier New', monospace;
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--primary);
+            display: block;
+            margin-top: 6px;
+            padding: 8px;
+            background: var(--white);
+            border-radius: 8px;
+        }
+        .redirecting-content .btn-continue {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 14px 30px;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            margin-top: 10px;
+            width: 100%;
+        }
+        .redirecting-content .btn-continue:hover {
+            background: var(--primary-dark);
+            transform: scale(1.02);
+        }
+        .redirecting-content .btn-cancel-redirect {
+            background: transparent;
+            border: none;
+            color: var(--text-light);
+            padding: 10px 20px;
+            cursor: pointer;
+            margin-top: 8px;
+            font-size: 0.9rem;
+        }
+        .redirecting-content .btn-cancel-redirect:hover {
+            color: var(--text-dark);
+        }
+        .redirecting-content .instruction-text {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            background: var(--light-gray);
+            padding: 12px;
+            border-radius: 8px;
+            margin-top: 12px;
+            text-align: left;
+        }
+        .redirecting-content .instruction-text i {
+            color: var(--primary);
+            margin-right: 8px;
+        }
+
         @media (max-width: 968px) {
             .donate-wrapper {
                 grid-template-columns: 1fr;
@@ -560,6 +715,9 @@
             }
             .payment-methods-grid {
                 grid-template-columns: 1fr;
+            }
+            .redirecting-content .payment-method-display .ussd-code {
+                font-size: 1.5rem;
             }
         }
     </style>
@@ -681,56 +839,59 @@
                 </div>
             </div>
 
-            <!-- ===== PAYMENT METHODS WITH IMAGES ===== -->
+            <!-- ===== PAYMENT METHODS WITH USSD CODES ===== -->
             <div class="payment-methods-section">
                 <div class="section-header">
                     <span class="section-tag">📱 Payment Methods</span>
                     <h2>Donate via Mobile Money</h2>
-                    <p>Send your donation directly using these mobile money options</p>
+                    <p>Dial the USSD code to complete your donation</p>
                 </div>
 
                 <div class="payment-methods-grid">
-                    <!-- AIRTEL Money -->
+                    <!-- AIRTEL Money - *211# -->
                     <div class="payment-method-card airtel">
                         <div class="method-logo">
                             <img src="images/airtel-logo.png" alt="AIRTEL Money" onerror="this.src='https://img.icons8.com/color/96/airtel.png'" />
                         </div>
                         <h3>AIRTEL Money</h3>
-                        <div class="method-number">+265 997 008 860</div>
-                        <p>Send your donation via AIRTEL Money</p>
-                        <a href="tel:+265997008860" class="call-btn">
-                            <i class="fas fa-phone"></i> Tap to Call
-                        </a>
+                        <div class="method-ussd">*211#</div>
+                        <p>Dial the USSD code to send your donation</p>
+                        <button class="call-btn" onclick="dialUSSD('*211#')">
+                            <i class="fas fa-phone"></i> Dial *211#
+                        </button>
                         <span class="badge"><i class="fas fa-check-circle"></i> Available 24/7</span>
                     </div>
 
-                    <!-- TNM Mpamba -->
+                    <!-- TNM Mpamba - *444# -->
                     <div class="payment-method-card tnm">
                         <div class="method-logo">
                             <img src="images/tnm-logo.png" alt="TNM Mpamba" onerror="this.src='https://img.icons8.com/color/96/tnm.png'" />
                         </div>
                         <h3>TNM Mpamba</h3>
-                        <div class="method-number">+265 881 395 378</div>
-                        <p>Send your donation via TNM Mpamba</p>
-                        <a href="tel:+265881395378" class="call-btn">
-                            <i class="fas fa-phone"></i> Tap to Call
-                        </a>
+                        <div class="method-ussd">*444#</div>
+                        <p>Dial the USSD code to send your donation</p>
+                        <button class="call-btn" onclick="dialUSSD('*444#')">
+                            <i class="fas fa-phone"></i> Dial *444#
+                        </button>
                         <span class="badge"><i class="fas fa-check-circle"></i> Available 24/7</span>
                     </div>
 
-                    <!-- FIRST CAPITAL BANK -->
+                    <!-- FIRST CAPITAL BANK - *1111# -->
                     <div class="payment-method-card bank">
                         <div class="method-logo">
                             <img src="images/first-capital-bank-logo.png" alt="FIRST CAPITAL BANK" onerror="this.src='https://img.icons8.com/color/96/bank.png'" />
                         </div>
                         <h3>FIRST CAPITAL BANK</h3>
-                        <div class="method-number">IMANI LIWEWE MAIDA</div>
+                        <div class="method-ussd">*1111#</div>
                         <div class="bank-details">
                             <strong>Account Name:</strong> IMANI LIWEWE MAIDA<br />
                             <strong>Account Number:</strong> 0029503035324<br />
                             <strong>Bank:</strong> FIRST CAPITAL BANK
                             <button class="copy-btn" onclick="copyBankDetails()">Copy Bank Details</button>
                         </div>
+                        <button class="call-btn" onclick="dialUSSD('*1111#')">
+                            <i class="fas fa-phone"></i> Dial *1111#
+                        </button>
                         <span class="badge"><i class="fas fa-check-circle"></i> Direct Bank Transfer</span>
                     </div>
                 </div>
@@ -771,38 +932,38 @@
             </div>
 
             <div class="modal-payment-options">
-                <!-- AIRTEL Money -->
+                <!-- AIRTEL Money - *211# -->
                 <button class="airtel-option" onclick="selectPayment('airtel')">
                     <span class="payment-icon">
                         <img src="images/airtel-logo.png" alt="AIRTEL" onerror="this.innerHTML='<span class=\'icon-fallback\'>A</span>'" />
                     </span>
                     <span class="payment-detail">
                         AIRTEL Money
-                        <small>Send via +265 997 008 860</small>
+                        <small>Dial <span class="payment-ussd">*211#</span> to donate</small>
                     </span>
                     <i class="fas fa-phone" style="color: #cc0000;"></i>
                 </button>
 
-                <!-- TNM Mpamba -->
+                <!-- TNM Mpamba - *444# -->
                 <button class="tnm-option" onclick="selectPayment('tnm')">
                     <span class="payment-icon">
                         <img src="images/tnm-logo.png" alt="TNM" onerror="this.innerHTML='<span class=\'icon-fallback\'>T</span>'" />
                     </span>
                     <span class="payment-detail">
                         TNM Mpamba
-                        <small>Send via +265 881 395 378</small>
+                        <small>Dial <span class="payment-ussd">*444#</span> to donate</small>
                     </span>
                     <i class="fas fa-phone" style="color: #004d99;"></i>
                 </button>
 
-                <!-- FIRST CAPITAL BANK -->
+                <!-- FIRST CAPITAL BANK - *1111# -->
                 <button class="bank-option" onclick="selectPayment('bank')">
                     <span class="payment-icon">
                         <img src="images/first-capital-bank-logo.png" alt="Bank" onerror="this.innerHTML='<span class=\'icon-fallback\'>B</span>'" />
                     </span>
                     <span class="payment-detail">
                         FIRST CAPITAL BANK
-                        <small>IMANI LIWEWE MAIDA · 0029503035324</small>
+                        <small>Dial <span class="payment-ussd">*1111#</span> to donate</small>
                     </span>
                     <i class="fas fa-chevron-right" style="color: #1a237e;"></i>
                 </button>
@@ -822,6 +983,38 @@
 
             <button class="modal-cancel-btn" onclick="closeModal()">
                 <i class="fas fa-times"></i> Cancel Donation
+            </button>
+        </div>
+    </div>
+
+    <!-- ===== REDIRECTING OVERLAY ===== -->
+    <div class="redirecting-overlay" id="redirectingOverlay">
+        <div class="redirecting-content">
+            <div class="spinner"></div>
+            <h3>📱 Dialing USSD Code</h3>
+            <p>Your phone will open the USSD dialer</p>
+            
+            <div class="payment-method-display">
+                <strong id="redirectMethodName">AIRTEL Money</strong>
+                <span class="ussd-code" id="redirectUssdCode">*211#</span>
+            </div>
+
+            <div class="instruction-text">
+                <i class="fas fa-info-circle"></i>
+                <span id="redirectInstructions">Dial *211# to send your donation via AIRTEL Money</span>
+            </div>
+
+            <p style="font-size: 0.85rem; color: var(--text-light); margin-top: 10px;">
+                <i class="fas fa-shield-alt" style="color: var(--primary);"></i> 
+                Your donation will be processed securely
+            </p>
+
+            <button class="btn-continue" id="redirectContinueBtn">
+                <i class="fas fa-phone"></i> Open Dialer
+            </button>
+            <br />
+            <button class="btn-cancel-redirect" onclick="cancelRedirect()">
+                <i class="fas fa-times"></i> Cancel
             </button>
         </div>
     </div>
@@ -901,7 +1094,2740 @@
     </button>
 
     <script>
-    // Copy Bank Details
+    // ===== USSD DIAL FUNCTION =====
+    function dialUSSD(code) {
+        // Open phone dialer with USSD code
+        window.location.href = 'tel:' + encodeURIComponent(code);
+    }
+
+    // ===== COPY BANK DETAILS =====
+    function copyBankDetails() {
+        const details = 'FIRST CAPITAL BANK\nAccount Name: IMANI LIWEWE MAIDA\nAccount Number: 0029503035324';
+        navigator.clipboard.writeText(details).then(() => {
+            const btn = event.target;
+            btn.textContent = 'Copied!';
+            btn.classList.add('copied');
+            setTimeout(() => {
+                btn.textContent = 'Copy Bank Details';
+                btn.classList.remove('copied');
+            }, 2000);
+        }).catch(() => {
+            const input = document.createElement('input');
+            input.value = details;
+            document.body.appendChild(input);
+            input.select();
+            document.execCommand('copy');
+            document.body.removeChild(input);
+            alert('Bank details copied!');
+        });
+    }
+
+    // ===== MODAL FUNCTIONS =====
+    var currentDonationAmount = 2500;
+    let redirectTimer = null;
+
+    function openModal(amount) {
+        currentDonationAmount = amount;
+        const modal = document.getElementById('paymentModal');
+        const display = document.getElementById('modalDonationAmount');
+        display.textContent = 'MWK ' + Number(amount).toLocaleString();
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+        const modal = document.getElementById('paymentModal');
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+
+    // ===== SELECT PAYMENT =====
+    function selectPayment(method) {
+        const methods = {
+            airtel: {
+                name: 'AIRTEL Money',
+                ussd: '*211#',
+                instructions: 'Dial *211# to send your donation via AIRTEL Money. Follow the prompts to complete the transaction.',
+                color: '#cc0000'
+            },
+            tnm: {
+                name: 'TNM Mpamba',
+                ussd: '*444#',
+                instructions: 'Dial *444# to send your donation via TNM Mpamba. Follow the prompts to complete the transaction.',
+                color: '#004d99'
+            },
+            bank: {
+                name: 'FIRST CAPITAL BANK',
+                ussd: '*1111#',
+                instructions: 'Dial *1111# for FIRST CAPITAL BANK services. Use Account: 0029503035324, Name: IMANI LIWEWE MAIDA',
+                color: '#1a237e'
+            }
+        };
+
+        const selected = methods[method];
+        closeModal();
+
+        // Show redirecting overlay with USSD code
+        const overlay = document.getElementById('redirectingOverlay');
+        document.getElementById('redirectMethodName').textContent = selected.name;
+        document.getElementById('redirectUssdCode').textContent = selected.ussd;
+        document.getElementById('redirectInstructions').textContent = selected.instructions;
+        
+        // Set color for USSD code
+        document.getElementById('redirectUssdCode').style.color = selected.color;
+        
+        overlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+
+        // Continue button - dial USSD
+        document.getElementById('redirectContinueBtn').onclick = function() {
+            dialUSSD(selected.ussd);
+            completeDonation(selected.name);
+            overlay.classList.remove('active');
+            document.body.style.overflow = '';
+        };
+
+        // Auto redirect after 3 seconds
+        redirectTimer = setTimeout(() => {
+            dialUSSD(selected.ussd);
+            completeDonation(selected.name);
+            overlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }, 3000);
+    }
+
+    function cancelRedirect() {
+        clearTimeout(redirectTimer);
+        document.getElementById('redirectingOverlay').classList.remove('active');
+        document.body.style.overflow = '';
+        openModal(currentDonationAmount);
+    }
+
+    // ===== COMPLETE DONATION =====
+    function completeDonation(methodName) {
+        const amount = currentDonationAmount;
+        const donateMessage = document.getElementById('donateMessage');
+        const donationDisplay = document.getElementById('donationDisplay');
+        
+        donationDisplay.textContent = 'MWK ' + Number(amount).toLocaleString();
+        
+        const messageP = donateMessage.querySelector('p');
+        messageP.innerHTML = `
+            ✅ Thank you! Your donation of <strong>MWK ${Number(amount).toLocaleString()}</strong> is making a real difference in Malawi.<br />
+            <span style="font-size: 0.9rem; display: block; margin-top: 8px;">
+                <i class="fas fa-check-circle" style="color: #1a7a3a;"></i> 
+                Payment via <strong>${methodName}</strong> initiated.
+            </span>
+            <span style="font-size: 0.85rem; display: block; margin-top: 4px; color: var(--text-light);">
+                Please follow the USSD prompts to complete the transaction.
+            </span>
+            <br />
+            <a href="https://wa.me/265997008860?text=Hello%20Charity-Fund%20Malawi%2C%20I%20just%20made%20a%20donation%20of%20MWK%20${Number(amount).toLocaleString()}%20via%20${methodName}%20and%20need%20assistance." 
+               target="_blank" style="background: #25D366; color: white; padding: 8px 20px; border-radius: 50px; text-decoration: none; display: inline-block; margin-top: 8px;">
+                <i class="fab fa-whatsapp"></i> Need Help? Chat with CEO
+            </a>
+        `;
+        
+        donateMessage.classList.add('show');
+
+        // Update goal progress
+        const goalFill = document.querySelector('.goal-fill');
+        if (goalFill) {
+            const currentWidth = parseFloat(goalFill.style.width);
+            const newWidth = Math.min(currentWidth + 2, 100);
+            goalFill.style.width = newWidth + '%';
+            
+            const currentAmount = 2500000 + (newWidth - 83) * 83333;
+            const goalLabel = document.querySelector('.goal-label span:last-child');
+            if (goalLabel) {
+                const formatMWK = (num) => 'MWK ' + Number(Math.round(num)).toLocaleString();
+                goalLabel.textContent = formatMWK(currentAmount) + ' / ' + formatMWK(3000000);
+            }
+        }
+
+        setTimeout(() => {
+            donateMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }, 300);
+
+        setTimeout(() => {
+            donateMessage.classList.remove('show');
+        }, 15000);
+    }
+
+    // Close modal on outside click
+    document.getElementById('paymentModal').addEventListener('click', function(e) {
+        if (e.target === this) {
+            closeModal();
+        }
+    });
+
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            closeModal();
+        }
+    });
+
+    // ===== DONATION FUNCTIONALITY =====
+    (function() {
+        const amountBtns = document.querySelectorAll('.amount-btn');
+        const customInput = document.getElementById('customAmount');
+        const donateBtn = document.getElementById('donateNowBtn');
+        const totalDisplay = document.getElementById('totalDisplay');
+        const frequencySelect = document.getElementById('donationFrequency');
+
+        let selectedAmount = 2500;
+        let donationFrequency = 'one-time';
+
+        function formatMWK(amount) {
+            return 'MWK ' + Number(amount).toLocaleString();
+        }
+
+        amountBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                const amount = parseInt(this.getAttribute('data-amount'));
+                if (!isNaN(amount) && amount > 0) {
+                    selectedAmount = amount;
+                    amountBtns.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    if (customInput) customInput.value = '';
+                    updateTotal();
+                }
+            });
+        });
+
+        if (customInput) {
+            customInput.addEventListener('input', function() {
+                const val = parseFloat(this.value);
+                if (!isNaN(val) && val > 0) {
+                    selectedAmount = val;
+                    amountBtns.forEach(b => b.classList.remove('active'));
+                    updateTotal();
+                }
+            });
+        }
+
+        if (frequencySelect) {
+            frequencySelect.addEventListener('change', function() {
+                donationFrequency = this.value;
+                updateTotal();
+            });
+        }
+
+        function updateTotal() {
+            let amount = selectedAmount;
+            if (donationFrequency === 'monthly') {
+                totalDisplay.textContent = formatMWK(amount * 12) + ' / year';
+            } else if (donationFrequency === 'yearly') {
+                totalDisplay.textContent = formatMWK(amount * 2) + ' / 2 years';
+            } else {
+                totalDisplay.textContent = formatMWK(amount);
+            }
+        }
+
+        if (donateBtn) {
+            donateBtn.addEventListener('click', function() {
+                let amount = selectedAmount;
+
+                if (customInput) {
+                    const customVal = parseFloat(customInput.value);
+                    if (!isNaN(customVal) && customVal > 0) {
+                        amount = customVal;
+                    }
+                }
+
+                if (isNaN(amount) || amount <= 0) {
+                    amount = 2500;
+                    selectedAmount = 2500;
+                    amountBtns.forEach(b => b.classList.remove('active'));
+                    document.querySelector('.amount-btn[data-amount="2500"]').classList.add('active');
+                }
+
+                openModal(amount);
+            });
+        }
+
+        if (customInput) {
+            customInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter' && donateBtn) {
+                    e.preventDefault();
+                    donateBtn.click();
+                }
+            });
+        }
+
+        updateTotal();
+    })();
+    </script>
+    <script src="script.js"></script>
+</body>
+</html><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Charity-Fund Malawi · Donate</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <link rel="stylesheet" href="style.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <style>
+        .page-header {
+            background: linear-gradient(135deg, #0b2b4a 0%, #1a4a6a 100%);
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+            position: relative;
+        }
+        .page-header h1 {
+            font-size: 3rem;
+            font-weight: 800;
+        }
+        .page-header p {
+            opacity: 0.85;
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 10px auto 0;
+        }
+        .donate-page {
+            padding: 60px 0;
+            background: var(--white);
+        }
+        .donate-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: start;
+        }
+        .donate-info h2 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 16px;
+        }
+        .donate-info p {
+            color: var(--text-light);
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+        }
+        .impact-stats-donate {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .impact-item-donate {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 16px;
+            background: var(--light-gray);
+            border-radius: var(--radius);
+        }
+        .impact-item-donate img {
+            width: 40px;
+            height: 40px;
+            object-fit: contain;
+        }
+        .impact-item-donate h4 {
+            color: var(--text-dark);
+            font-size: 1.1rem;
+        }
+        .impact-item-donate p {
+            margin: 0;
+            font-size: 0.95rem;
+        }
+        .donate-box {
+            background: var(--light-gray);
+            padding: 40px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+        }
+        .donation-header h3 {
+            font-size: 1.8rem;
+            color: var(--text-dark);
+            margin-bottom: 4px;
+        }
+        .donation-header p {
+            color: var(--text-light);
+            margin-bottom: 24px;
+        }
+        .amount-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .amount-btn {
+            padding: 12px;
+            border: 2px solid var(--medium-gray);
+            border-radius: 10px;
+            background: var(--white);
+            color: var(--text-dark);
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+        .amount-btn.active,
+        .amount-btn:hover {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+        .custom-donate {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        .custom-donate input,
+        .custom-donate select {
+            padding: 12px 16px;
+            border: 2px solid var(--medium-gray);
+            border-radius: 10px;
+            font-size: 1rem;
+            background: var(--white);
+            color: var(--text-dark);
+            transition: var(--transition);
+        }
+        .custom-donate input:focus,
+        .custom-donate select:focus {
+            border-color: var(--primary);
+            outline: none;
+        }
+        .custom-donate input {
+            flex: 1;
+        }
+        .donation-total {
+            display: flex;
+            justify-content: space-between;
+            padding: 16px 0;
+            border-top: 2px solid var(--medium-gray);
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+        .donation-total strong {
+            font-size: 1.4rem;
+            color: var(--primary);
+        }
+        .btn-full {
+            width: 100%;
+            justify-content: center;
+            padding: 16px;
+        }
+        .donate-message {
+            display: none;
+            margin-top: 20px;
+            padding: 20px;
+            background: var(--primary-light);
+            border-radius: var(--radius);
+            border-left: 4px solid var(--primary);
+        }
+        .donate-message.show {
+            display: block;
+        }
+        .donation-goal {
+            margin-top: 24px;
+        }
+        .goal-label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            color: var(--text-light);
+            margin-bottom: 8px;
+        }
+        .goal-progress {
+            height: 8px;
+            background: var(--medium-gray);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        .goal-fill {
+            height: 100%;
+            background: var(--primary-gradient);
+            border-radius: 4px;
+            transition: width 1s ease-out;
+        }
+
+        /* ===== PAYMENT METHODS WITH IMAGES ===== */
+        .payment-methods-section {
+            margin-top: 60px;
+        }
+        .payment-methods-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 30px;
+        }
+        .payment-method-card {
+            background: var(--white);
+            border-radius: var(--radius);
+            padding: 30px;
+            text-align: center;
+            border: 2px solid var(--medium-gray);
+            transition: var(--transition);
+            box-shadow: var(--shadow);
+        }
+        .payment-method-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-hover);
+            border-color: var(--primary);
+        }
+        .payment-method-card .method-logo {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 16px;
+            border-radius: 50%;
+            overflow: hidden;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 15px;
+            border: 3px solid var(--medium-gray);
+            transition: var(--transition);
+        }
+        .payment-method-card:hover .method-logo {
+            border-color: var(--primary);
+            transform: scale(1.05);
+        }
+        .payment-method-card .method-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+        .payment-method-card h3 {
+            font-size: 1.3rem;
+            color: var(--text-dark);
+            margin-bottom: 4px;
+        }
+        .payment-method-card .method-number {
+            font-family: 'Courier New', monospace;
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: var(--primary);
+            padding: 8px 12px;
+            background: var(--light-gray);
+            border-radius: 8px;
+            display: inline-block;
+            margin: 8px 0;
+        }
+        .payment-method-card .method-ussd {
+            font-family: 'Courier New', monospace;
+            font-weight: 700;
+            font-size: 1.4rem;
+            color: var(--primary);
+            padding: 8px 16px;
+            background: var(--primary-light);
+            border-radius: 8px;
+            display: inline-block;
+            margin: 8px 0;
+            border: 2px dashed var(--primary);
+        }
+        .payment-method-card p {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            margin: 8px 0;
+        }
+        .payment-method-card .badge {
+            display: inline-block;
+            padding: 4px 14px;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            background: var(--primary-light);
+            color: var(--primary);
+        }
+        .payment-method-card .call-btn {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 10px 24px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            margin-top: 10px;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+        }
+        .payment-method-card .call-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 15px rgba(26, 122, 58, 0.4);
+        }
+        .payment-method-card .call-btn i {
+            margin-right: 6px;
+        }
+        .payment-method-card.airtel .method-ussd {
+            color: #cc0000;
+            border-color: #cc0000;
+            background: #fff0f0;
+        }
+        .payment-method-card.airtel .badge {
+            background: #ff000015;
+            color: #cc0000;
+        }
+        .payment-method-card.airtel .call-btn {
+            background: #cc0000;
+        }
+        .payment-method-card.airtel .call-btn:hover {
+            box-shadow: 0 4px 15px rgba(204, 0, 0, 0.4);
+        }
+        .payment-method-card.tnm .method-ussd {
+            color: #004d99;
+            border-color: #004d99;
+            background: #e8f0ff;
+        }
+        .payment-method-card.tnm .badge {
+            background: #004d9915;
+            color: #004d99;
+        }
+        .payment-method-card.tnm .call-btn {
+            background: #004d99;
+        }
+        .payment-method-card.tnm .call-btn:hover {
+            box-shadow: 0 4px 15px rgba(0, 77, 153, 0.4);
+        }
+        .payment-method-card.bank .method-ussd {
+            color: #1a237e;
+            border-color: #1a237e;
+            background: #e8eaf6;
+        }
+        .payment-method-card.bank .badge {
+            background: #1a237e15;
+            color: #1a237e;
+        }
+        .payment-method-card.bank .call-btn {
+            background: #1a237e;
+        }
+        .payment-method-card.bank .call-btn:hover {
+            box-shadow: 0 4px 15px rgba(26, 35, 126, 0.4);
+        }
+        .payment-method-card .bank-details {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            line-height: 1.8;
+            text-align: center;
+            padding: 8px 0;
+        }
+        .payment-method-card .bank-details strong {
+            color: var(--text-dark);
+        }
+        .payment-method-card .copy-btn {
+            background: transparent;
+            border: 1px solid var(--medium-gray);
+            padding: 4px 14px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            cursor: pointer;
+            transition: var(--transition);
+            color: var(--text-light);
+            margin-top: 6px;
+        }
+        .payment-method-card .copy-btn:hover {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+        .payment-method-card .copy-btn.copied {
+            background: #4ade80;
+            color: white;
+            border-color: #4ade80;
+        }
+
+        /* ===== MODAL STYLES ===== */
+        .payment-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 9999;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(5px);
+            animation: modalFadeIn 0.3s ease;
+        }
+        .payment-modal.active {
+            display: flex;
+        }
+        @keyframes modalFadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        .payment-modal-content {
+            background: var(--white);
+            border-radius: 24px;
+            padding: 40px;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        .payment-modal-content .modal-header {
+            margin-bottom: 30px;
+        }
+        .payment-modal-content .modal-header h2 {
+            font-size: 2rem;
+            color: var(--text-dark);
+            margin-bottom: 8px;
+        }
+        .payment-modal-content .modal-header p {
+            color: var(--text-light);
+            font-size: 1.05rem;
+        }
+        .payment-modal-content .donation-amount-display {
+            background: var(--primary-light);
+            padding: 12px 20px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            font-size: 1.2rem;
+            border: 2px solid var(--primary);
+        }
+        .payment-modal-content .donation-amount-display strong {
+            color: var(--primary);
+            font-size: 1.5rem;
+        }
+        .modal-payment-options {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin: 20px 0;
+        }
+        .modal-payment-options button {
+            padding: 16px 20px;
+            border: 2px solid var(--medium-gray);
+            border-radius: 12px;
+            background: var(--white);
+            cursor: pointer;
+            font-size: 1.05rem;
+            font-weight: 600;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            color: var(--text-dark);
+            width: 100%;
+        }
+        .modal-payment-options button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        .modal-payment-options button .payment-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            background: white;
+            padding: 6px;
+        }
+        .modal-payment-options button .payment-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+        .modal-payment-options button .payment-detail {
+            flex: 1;
+            text-align: left;
+        }
+        .modal-payment-options button .payment-detail small {
+            display: block;
+            color: var(--text-light);
+            font-weight: 400;
+            font-size: 0.8rem;
+        }
+        .modal-payment-options button .payment-ussd {
+            font-family: 'Courier New', monospace;
+            font-weight: 700;
+            font-size: 0.9rem;
+            padding: 2px 10px;
+            border-radius: 4px;
+            background: var(--light-gray);
+        }
+        .modal-payment-options button.airtel-option {
+            border-color: #ff000040;
+            background: #fff5f5;
+        }
+        .modal-payment-options button.airtel-option:hover {
+            border-color: #cc0000;
+            background: #ffebeb;
+        }
+        .modal-payment-options button.airtel-option .payment-ussd {
+            color: #cc0000;
+            background: #fff0f0;
+        }
+        .modal-payment-options button.tnm-option {
+            border-color: #004d9940;
+            background: #f0f7ff;
+        }
+        .modal-payment-options button.tnm-option:hover {
+            border-color: #004d99;
+            background: #e0edff;
+        }
+        .modal-payment-options button.tnm-option .payment-ussd {
+            color: #004d99;
+            background: #e8f0ff;
+        }
+        .modal-payment-options button.bank-option {
+            border-color: #1a237e40;
+            background: #e8eaf6;
+        }
+        .modal-payment-options button.bank-option:hover {
+            border-color: #1a237e;
+            background: #c5cae9;
+        }
+        .modal-payment-options button.bank-option .payment-ussd {
+            color: #1a237e;
+            background: #e8eaf6;
+        }
+        .modal-cancel-btn {
+            background: var(--light-gray);
+            border: none;
+            padding: 12px 30px;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            color: var(--text-dark);
+            margin-top: 10px;
+        }
+        .modal-cancel-btn:hover {
+            background: var(--medium-gray);
+        }
+        .modal-payment-options button .payment-icon .icon-fallback {
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+        .modal-payment-options button.airtel-option .payment-icon .icon-fallback {
+            color: #cc0000;
+        }
+        .modal-payment-options button.tnm-option .payment-icon .icon-fallback {
+            color: #004d99;
+        }
+        .modal-payment-options button.bank-option .payment-icon .icon-fallback {
+            color: #1a237e;
+        }
+
+        /* ===== WHATSAPP FLOATING ===== */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 100px;
+            right: 30px;
+            z-index: 999;
+            background: #25D366;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+            text-decoration: none;
+            transition: var(--transition);
+            animation: pulse 2s infinite;
+        }
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 30px rgba(37, 211, 102, 0.6);
+            color: white;
+        }
+        @keyframes pulse {
+            0% { box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4); }
+            50% { box-shadow: 0 4px 30px rgba(37, 211, 102, 0.7); }
+            100% { box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4); }
+        }
+
+        /* ===== REDIRECTING OVERLAY ===== */
+        .redirecting-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: 10000;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(10px);
+            animation: modalFadeIn 0.4s ease;
+        }
+        .redirecting-overlay.active {
+            display: flex;
+        }
+        .redirecting-content {
+            background: var(--white);
+            border-radius: 24px;
+            padding: 40px;
+            max-width: 450px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
+            animation: bounceIn 0.5s ease;
+        }
+        @keyframes bounceIn {
+            0% { transform: scale(0.8); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        .redirecting-content .spinner {
+            width: 60px;
+            height: 60px;
+            border: 4px solid var(--primary-light);
+            border-top: 4px solid var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+        .redirecting-content h3 {
+            color: var(--text-dark);
+            font-size: 1.3rem;
+            margin-bottom: 8px;
+        }
+        .redirecting-content p {
+            color: var(--text-light);
+            font-size: 0.95rem;
+        }
+        .redirecting-content .payment-method-display {
+            background: var(--primary-light);
+            padding: 16px;
+            border-radius: 12px;
+            margin: 16px 0;
+            border: 2px solid var(--primary);
+        }
+        .redirecting-content .payment-method-display strong {
+            color: var(--primary);
+            font-size: 1.2rem;
+        }
+        .redirecting-content .payment-method-display .ussd-code {
+            font-family: 'Courier New', monospace;
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--primary);
+            display: block;
+            margin-top: 6px;
+            padding: 8px;
+            background: var(--white);
+            border-radius: 8px;
+        }
+        .redirecting-content .btn-continue {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 14px 30px;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            margin-top: 10px;
+            width: 100%;
+        }
+        .redirecting-content .btn-continue:hover {
+            background: var(--primary-dark);
+            transform: scale(1.02);
+        }
+        .redirecting-content .btn-cancel-redirect {
+            background: transparent;
+            border: none;
+            color: var(--text-light);
+            padding: 10px 20px;
+            cursor: pointer;
+            margin-top: 8px;
+            font-size: 0.9rem;
+        }
+        .redirecting-content .btn-cancel-redirect:hover {
+            color: var(--text-dark);
+        }
+        .redirecting-content .instruction-text {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            background: var(--light-gray);
+            padding: 12px;
+            border-radius: 8px;
+            margin-top: 12px;
+            text-align: left;
+        }
+        .redirecting-content .instruction-text i {
+            color: var(--primary);
+            margin-right: 8px;
+        }
+
+        @media (max-width: 968px) {
+            .donate-wrapper {
+                grid-template-columns: 1fr;
+            }
+            .payment-methods-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        @media (max-width: 768px) {
+            .page-header h1 {
+                font-size: 2.2rem;
+            }
+            .amount-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .payment-methods-grid {
+                grid-template-columns: 1fr;
+            }
+            .redirecting-content .payment-method-display .ussd-code {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== NAVBAR ===== -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-flex">
+                <div class="logo">
+                    <img src="images/logo.png" alt="Charity-Fund Logo" onerror="this.src='https://img.icons8.com/fluency/48/africa.png'" />
+                    <span>Charity-Fund</span>
+                    <small>Malawi</small>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="projects.html">Projects</a></li>
+                    <li><a href="donate.html" class="active">Donate</a></li>
+                    <li><a href="testimonials.html">Testimonials</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="donate.html" class="btn-donate-nav"><i class="fas fa-heart"></i> Donate</a></li>
+                </ul>
+                <div class="hamburger" id="hamburger">
+                    <span></span><span></span><span></span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ===== PAGE HEADER ===== -->
+    <section class="page-header">
+        <div class="container">
+            <h1>💝 Make a Donation</h1>
+            <p>Your contribution changes lives across Malawi</p>
+        </div>
+    </section>
+
+    <!-- ===== DONATE SECTION ===== -->
+    <section class="donate-page">
+        <div class="container">
+            <div class="donate-wrapper">
+                <div class="donate-info">
+                    <span class="section-tag" style="color: #1a7a3a; background: rgba(26,122,58,0.1);">💝 Make a Difference</span>
+                    <h2>Your Donation <br/>Changes Everything</h2>
+                    <p>Every contribution, no matter how small, helps us reach more communities in need across Malawi.</p>
+                    <div class="impact-stats-donate">
+                        <div class="impact-item-donate">
+                            <img src="images/logo.png" alt="Education" onerror="this.src='https://img.icons8.com/fluency/48/school.png'" />
+                            <div>
+                                <h4>MWK 5,000</h4>
+                                <p>Provides a child with school supplies</p>
+                            </div>
+                        </div>
+                        <div class="impact-item-donate">
+                            <img src="images/logo.png" alt="Water" onerror="this.src='https://img.icons8.com/fluency/48/water.png'" />
+                            <div>
+                                <h4>MWK 10,000</h4>
+                                <p>Provides clean water for 1 family</p>
+                            </div>
+                        </div>
+                        <div class="impact-item-donate">
+                            <img src="images/logo.png" alt="Health" onerror="this.src='https://img.icons8.com/fluency/48/medical-doctor.png'" />
+                            <div>
+                                <h4>MWK 20,000</h4>
+                                <p>Medical checkup for 10 children</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="donate-box">
+                    <div class="donation-header">
+                        <h3><span class="green-heart">❤️</span> Make a Donation</h3>
+                        <p>Select an amount in Malawi Kwacha (MWK)</p>
+                    </div>
+
+                    <div class="amount-grid">
+                        <button class="amount-btn" data-amount="1000">MWK 1,000</button>
+                        <button class="amount-btn active" data-amount="2500">MWK 2,500</button>
+                        <button class="amount-btn" data-amount="5000">MWK 5,000</button>
+                        <button class="amount-btn" data-amount="10000">MWK 10,000</button>
+                        <button class="amount-btn" data-amount="25000">MWK 25,000</button>
+                        <button class="amount-btn" data-amount="50000">MWK 50,000</button>
+                    </div>
+
+                    <div class="custom-donate">
+                        <input type="number" id="customAmount" placeholder="Or enter custom amount (MWK)" min="100" />
+                        <select id="donationFrequency">
+                            <option value="one-time">One-time</option>
+                            <option value="monthly">Monthly</option>
+                            <option value="yearly">Yearly</option>
+                        </select>
+                    </div>
+
+                    <div class="donation-total">
+                        <span>Total Donation:</span>
+                        <strong id="totalDisplay">MWK 2,500</strong>
+                    </div>
+
+                    <button id="donateNowBtn" class="btn-primary btn-full">
+                        💳 Donate Now
+                    </button>
+
+                    <div id="donateMessage" class="donate-message">
+                        <p>✅ Thank you! Your donation of <span id="donationDisplay">MWK 2,500</span> is making a real difference in Malawi.</p>
+                        <small>💚 100% of your donation goes to our programs</small>
+                    </div>
+
+                    <div class="donation-goal">
+                        <div class="goal-label">
+                            <span>Monthly Goal</span>
+                            <span>MWK 2,500,000 / MWK 3,000,000</span>
+                        </div>
+                        <div class="goal-progress">
+                            <div class="goal-fill" style="width: 83%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== PAYMENT METHODS WITH USSD CODES ===== -->
+            <div class="payment-methods-section">
+                <div class="section-header">
+                    <span class="section-tag">📱 Payment Methods</span>
+                    <h2>Donate via Mobile Money</h2>
+                    <p>Dial the USSD code to complete your donation</p>
+                </div>
+
+                <div class="payment-methods-grid">
+                    <!-- AIRTEL Money - *211# -->
+                    <div class="payment-method-card airtel">
+                        <div class="method-logo">
+                            <img src="images/airtel-logo.png" alt="AIRTEL Money" onerror="this.src='https://img.icons8.com/color/96/airtel.png'" />
+                        </div>
+                        <h3>AIRTEL Money</h3>
+                        <div class="method-ussd">*211#</div>
+                        <p>Dial the USSD code to send your donation</p>
+                        <button class="call-btn" onclick="dialUSSD('*211#')">
+                            <i class="fas fa-phone"></i> Dial *211#
+                        </button>
+                        <span class="badge"><i class="fas fa-check-circle"></i> Available 24/7</span>
+                    </div>
+
+                    <!-- TNM Mpamba - *444# -->
+                    <div class="payment-method-card tnm">
+                        <div class="method-logo">
+                            <img src="images/tnm-logo.png" alt="TNM Mpamba" onerror="this.src='https://img.icons8.com/color/96/tnm.png'" />
+                        </div>
+                        <h3>TNM Mpamba</h3>
+                        <div class="method-ussd">*444#</div>
+                        <p>Dial the USSD code to send your donation</p>
+                        <button class="call-btn" onclick="dialUSSD('*444#')">
+                            <i class="fas fa-phone"></i> Dial *444#
+                        </button>
+                        <span class="badge"><i class="fas fa-check-circle"></i> Available 24/7</span>
+                    </div>
+
+                    <!-- FIRST CAPITAL BANK - *1111# -->
+                    <div class="payment-method-card bank">
+                        <div class="method-logo">
+                            <img src="images/first-capital-bank-logo.png" alt="FIRST CAPITAL BANK" onerror="this.src='https://img.icons8.com/color/96/bank.png'" />
+                        </div>
+                        <h3>FIRST CAPITAL BANK</h3>
+                        <div class="method-ussd">*1111#</div>
+                        <div class="bank-details">
+                            <strong>Account Name:</strong> IMANI LIWEWE MAIDA<br />
+                            <strong>Account Number:</strong> 0029503035324<br />
+                            <strong>Bank:</strong> FIRST CAPITAL BANK
+                            <button class="copy-btn" onclick="copyBankDetails()">Copy Bank Details</button>
+                        </div>
+                        <button class="call-btn" onclick="dialUSSD('*1111#')">
+                            <i class="fas fa-phone"></i> Dial *1111#
+                        </button>
+                        <span class="badge"><i class="fas fa-check-circle"></i> Direct Bank Transfer</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Support Section -->
+            <div style="text-align: center; background: var(--primary-light); padding: 24px; border-radius: var(--radius); margin-top: 40px;">
+                <p style="color: var(--text-dark); font-size: 1.1rem;">
+                    <i class="fas fa-shield-alt" style="color: var(--primary); margin-right: 10px;"></i>
+                    All donations are secure and 100% transparent. You'll receive a confirmation message.
+                </p>
+                <p style="margin-top: 12px; color: var(--text-light);">
+                    <i class="fas fa-headset" style="color: var(--primary);"></i> 
+                    Need help? Contact our CEO <strong>IMANI LIWEWE MAIDA</strong> directly:
+                </p>
+                <a href="https://wa.me/265997008860?text=Hello%20Charity-Fund%20Malawi%2C%20I%20need%20assistance%20with%20my%20donation." 
+                   target="_blank" style="display: inline-block; background: #25D366; color: white; padding: 10px 24px; border-radius: 50px; text-decoration: none; font-weight: 600; margin-top: 10px;">
+                    <i class="fab fa-whatsapp"></i> Chat on WhatsApp
+                </a>
+                <a href="tel:+265997008860" style="display: inline-block; background: var(--primary); color: white; padding: 10px 24px; border-radius: 50px; text-decoration: none; font-weight: 600; margin-top: 10px; margin-left: 10px;">
+                    <i class="fas fa-phone"></i> Call Now
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== PAYMENT MODAL ===== -->
+    <div class="payment-modal" id="paymentModal">
+        <div class="payment-modal-content">
+            <div class="modal-header">
+                <h2>💳 Choose Payment Method</h2>
+                <p>Select how you'd like to complete your donation</p>
+            </div>
+            
+            <div class="donation-amount-display">
+                <span>You're about to donate</span><br />
+                <strong id="modalDonationAmount">MWK 2,500</strong>
+            </div>
+
+            <div class="modal-payment-options">
+                <!-- AIRTEL Money - *211# -->
+                <button class="airtel-option" onclick="selectPayment('airtel')">
+                    <span class="payment-icon">
+                        <img src="images/airtel-logo.png" alt="AIRTEL" onerror="this.innerHTML='<span class=\'icon-fallback\'>A</span>'" />
+                    </span>
+                    <span class="payment-detail">
+                        AIRTEL Money
+                        <small>Dial <span class="payment-ussd">*211#</span> to donate</small>
+                    </span>
+                    <i class="fas fa-phone" style="color: #cc0000;"></i>
+                </button>
+
+                <!-- TNM Mpamba - *444# -->
+                <button class="tnm-option" onclick="selectPayment('tnm')">
+                    <span class="payment-icon">
+                        <img src="images/tnm-logo.png" alt="TNM" onerror="this.innerHTML='<span class=\'icon-fallback\'>T</span>'" />
+                    </span>
+                    <span class="payment-detail">
+                        TNM Mpamba
+                        <small>Dial <span class="payment-ussd">*444#</span> to donate</small>
+                    </span>
+                    <i class="fas fa-phone" style="color: #004d99;"></i>
+                </button>
+
+                <!-- FIRST CAPITAL BANK - *1111# -->
+                <button class="bank-option" onclick="selectPayment('bank')">
+                    <span class="payment-icon">
+                        <img src="images/first-capital-bank-logo.png" alt="Bank" onerror="this.innerHTML='<span class=\'icon-fallback\'>B</span>'" />
+                    </span>
+                    <span class="payment-detail">
+                        FIRST CAPITAL BANK
+                        <small>Dial <span class="payment-ussd">*1111#</span> to donate</small>
+                    </span>
+                    <i class="fas fa-chevron-right" style="color: #1a237e;"></i>
+                </button>
+            </div>
+
+            <!-- WhatsApp Help -->
+            <div style="margin: 16px 0; padding: 12px; background: #e8f5e9; border-radius: 12px;">
+                <p style="font-size: 0.9rem; color: var(--text-dark);">
+                    <i class="fab fa-whatsapp" style="color: #25D366; font-size: 1.2rem; margin-right: 8px;"></i>
+                    Need help? Chat with us on 
+                    <a href="https://wa.me/265997008860?text=Hello%20Charity-Fund%20Malawi%2C%20I%20need%20assistance%20with%20my%20donation." 
+                       target="_blank" style="color: #25D366; font-weight: 600; text-decoration: none;">
+                        WhatsApp
+                    </a>
+                </p>
+            </div>
+
+            <button class="modal-cancel-btn" onclick="closeModal()">
+                <i class="fas fa-times"></i> Cancel Donation
+            </button>
+        </div>
+    </div>
+
+    <!-- ===== REDIRECTING OVERLAY ===== -->
+    <div class="redirecting-overlay" id="redirectingOverlay">
+        <div class="redirecting-content">
+            <div class="spinner"></div>
+            <h3>📱 Dialing USSD Code</h3>
+            <p>Your phone will open the USSD dialer</p>
+            
+            <div class="payment-method-display">
+                <strong id="redirectMethodName">AIRTEL Money</strong>
+                <span class="ussd-code" id="redirectUssdCode">*211#</span>
+            </div>
+
+            <div class="instruction-text">
+                <i class="fas fa-info-circle"></i>
+                <span id="redirectInstructions">Dial *211# to send your donation via AIRTEL Money</span>
+            </div>
+
+            <p style="font-size: 0.85rem; color: var(--text-light); margin-top: 10px;">
+                <i class="fas fa-shield-alt" style="color: var(--primary);"></i> 
+                Your donation will be processed securely
+            </p>
+
+            <button class="btn-continue" id="redirectContinueBtn">
+                <i class="fas fa-phone"></i> Open Dialer
+            </button>
+            <br />
+            <button class="btn-cancel-redirect" onclick="cancelRedirect()">
+                <i class="fas fa-times"></i> Cancel
+            </button>
+        </div>
+    </div>
+
+    <!-- ===== CTA SECTION ===== -->
+    <section class="cta-section">
+        <div class="cta-overlay"></div>
+        <div class="container">
+            <div class="cta-content">
+                <h2>Every Donation Counts</h2>
+                <p>Your contribution helps us reach more communities in need across Malawi.</p>
+                <div class="cta-buttons">
+                    <a href="donate.html" class="btn-primary btn-large"><i class="fas fa-heart"></i> Donate Now</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <img src="images/logo.png" alt="Charity-Fund" onerror="this.src='https://img.icons8.com/fluency/48/africa.png'" />
+                    <h3>Charity-Fund Malawi</h3>
+                    <p>Making hope possible through community action and global support across Malawi and Africa.</p>
+                    <div class="footer-social">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="projects.html">Projects</a></li>
+                        <li><a href="donate.html">Donate</a></li>
+                        <li><a href="testimonials.html">Testimonials</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Volunteer</a></li>
+                    </ul>
+                </div>
+                <div class="footer-newsletter">
+                    <h4>Newsletter</h4>
+                    <p>Subscribe for updates from Malawi</p>
+                    <form>
+                        <input type="email" placeholder="Your email" />
+                        <button type="submit"><i class="fas fa-arrow-right"></i></button>
+                    </form>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2026 Charity-Fund Malawi. All rights reserved.</p>
+                <p class="footer-tagline">Built with <i class="fas fa-heart" style="color: #1a7a3a;"></i> for a better world</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/265997008860" class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <button id="themeToggle" class="theme-toggle">
+        <i class="fas fa-moon"></i>
+    </button>
+
+    <script>
+    // ===== USSD DIAL FUNCTION =====
+    function dialUSSD(code) {
+        // Open phone dialer with USSD code
+        window.location.href = 'tel:' + encodeURIComponent(code);
+    }
+
+    // ===== COPY BANK DETAILS =====
+    function copyBankDetails() {
+        const details = 'FIRST CAPITAL BANK\nAccount Name: IMANI LIWEWE MAIDA\nAccount Number: 0029503035324';
+        navigator.clipboard.writeText(details).then(() => {
+            const btn = event.target;
+            btn.textContent = 'Copied!';
+            btn.classList.add('copied');
+            setTimeout(() => {
+                btn.textContent = 'Copy Bank Details';
+                btn.classList.remove('copied');
+            }, 2000);
+        }).catch(() => {
+            const input = document.createElement('input');
+            input.value = details;
+            document.body.appendChild(input);
+            input.select();
+            document.execCommand('copy');
+            document.body.removeChild(input);
+            alert('Bank details copied!');
+        });
+    }
+
+    // ===== MODAL FUNCTIONS =====
+    // These globals may be initialized by more than one embedded script block.
+    // Use a global property instead of a block-scoped declaration so repeated
+    // page markup does not cause redeclaration errors.
+    var currentDonationAmount = 2500;
+    window.redirectTimer = null;
+
+    function openModal(amount) {
+        currentDonationAmount = amount;
+        const modal = document.getElementById('paymentModal');
+        const display = document.getElementById('modalDonationAmount');
+        display.textContent = 'MWK ' + Number(amount).toLocaleString();
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+        const modal = document.getElementById('paymentModal');
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+
+    // ===== SELECT PAYMENT =====
+    function selectPayment(method) {
+        const methods = {
+            airtel: {
+                name: 'AIRTEL Money',
+                ussd: '*211#',
+                instructions: 'Dial *211# to send your donation via AIRTEL Money. Follow the prompts to complete the transaction.',
+                color: '#cc0000'
+            },
+            tnm: {
+                name: 'TNM Mpamba',
+                ussd: '*444#',
+                instructions: 'Dial *444# to send your donation via TNM Mpamba. Follow the prompts to complete the transaction.',
+                color: '#004d99'
+            },
+            bank: {
+                name: 'FIRST CAPITAL BANK',
+                ussd: '*1111#',
+                instructions: 'Dial *1111# for FIRST CAPITAL BANK services. Use Account: 0029503035324, Name: IMANI LIWEWE MAIDA',
+                color: '#1a237e'
+            }
+        };
+
+        const selected = methods[method];
+        closeModal();
+
+        // Show redirecting overlay with USSD code
+        const overlay = document.getElementById('redirectingOverlay');
+        document.getElementById('redirectMethodName').textContent = selected.name;
+        document.getElementById('redirectUssdCode').textContent = selected.ussd;
+        document.getElementById('redirectInstructions').textContent = selected.instructions;
+        
+        // Set color for USSD code
+        document.getElementById('redirectUssdCode').style.color = selected.color;
+        
+        overlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+
+        // Continue button - dial USSD
+        document.getElementById('redirectContinueBtn').onclick = function() {
+            dialUSSD(selected.ussd);
+            completeDonation(selected.name);
+            overlay.classList.remove('active');
+            document.body.style.overflow = '';
+        };
+
+        // Auto redirect after 3 seconds
+        redirectTimer = setTimeout(() => {
+            dialUSSD(selected.ussd);
+            completeDonation(selected.name);
+            overlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }, 3000);
+    }
+
+    function cancelRedirect() {
+        clearTimeout(redirectTimer);
+        document.getElementById('redirectingOverlay').classList.remove('active');
+        document.body.style.overflow = '';
+        openModal(currentDonationAmount);
+    }
+
+    // ===== COMPLETE DONATION =====
+    function completeDonation(methodName) {
+        const amount = currentDonationAmount;
+        const donateMessage = document.getElementById('donateMessage');
+        const donationDisplay = document.getElementById('donationDisplay');
+        
+        donationDisplay.textContent = 'MWK ' + Number(amount).toLocaleString();
+        
+        const messageP = donateMessage.querySelector('p');
+        messageP.innerHTML = `
+            ✅ Thank you! Your donation of <strong>MWK ${Number(amount).toLocaleString()}</strong> is making a real difference in Malawi.<br />
+            <span style="font-size: 0.9rem; display: block; margin-top: 8px;">
+                <i class="fas fa-check-circle" style="color: #1a7a3a;"></i> 
+                Payment via <strong>${methodName}</strong> initiated.
+            </span>
+            <span style="font-size: 0.85rem; display: block; margin-top: 4px; color: var(--text-light);">
+                Please follow the USSD prompts to complete the transaction.
+            </span>
+            <br />
+            <a href="https://wa.me/265997008860?text=Hello%20Charity-Fund%20Malawi%2C%20I%20just%20made%20a%20donation%20of%20MWK%20${Number(amount).toLocaleString()}%20via%20${methodName}%20and%20need%20assistance." 
+               target="_blank" style="background: #25D366; color: white; padding: 8px 20px; border-radius: 50px; text-decoration: none; display: inline-block; margin-top: 8px;">
+                <i class="fab fa-whatsapp"></i> Need Help? Chat with CEO
+            </a>
+        `;
+        
+        donateMessage.classList.add('show');
+
+        // Update goal progress
+        const goalFill = document.querySelector('.goal-fill');
+        if (goalFill) {
+            const currentWidth = parseFloat(goalFill.style.width);
+            const newWidth = Math.min(currentWidth + 2, 100);
+            goalFill.style.width = newWidth + '%';
+            
+            const currentAmount = 2500000 + (newWidth - 83) * 83333;
+            const goalLabel = document.querySelector('.goal-label span:last-child');
+            if (goalLabel) {
+                const formatMWK = (num) => 'MWK ' + Number(Math.round(num)).toLocaleString();
+                goalLabel.textContent = formatMWK(currentAmount) + ' / ' + formatMWK(3000000);
+            }
+        }
+
+        setTimeout(() => {
+            donateMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }, 300);
+
+        setTimeout(() => {
+            donateMessage.classList.remove('show');
+        }, 15000);
+    }
+
+    // Close modal on outside click
+    document.getElementById('paymentModal').addEventListener('click', function(e) {
+        if (e.target === this) {
+            closeModal();
+        }
+    });
+
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            closeModal();
+        }
+    });
+
+    // ===== DONATION FUNCTIONALITY =====
+    (function() {
+        const amountBtns = document.querySelectorAll('.amount-btn');
+        const customInput = document.getElementById('customAmount');
+        const donateBtn = document.getElementById('donateNowBtn');
+        const totalDisplay = document.getElementById('totalDisplay');
+        const frequencySelect = document.getElementById('donationFrequency');
+
+        let selectedAmount = 2500;
+        let donationFrequency = 'one-time';
+
+        function formatMWK(amount) {
+            return 'MWK ' + Number(amount).toLocaleString();
+        }
+
+        amountBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                const amount = parseInt(this.getAttribute('data-amount'));
+                if (!isNaN(amount) && amount > 0) {
+                    selectedAmount = amount;
+                    amountBtns.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    if (customInput) customInput.value = '';
+                    updateTotal();
+                }
+            });
+        });
+
+        if (customInput) {
+            customInput.addEventListener('input', function() {
+                const val = parseFloat(this.value);
+                if (!isNaN(val) && val > 0) {
+                    selectedAmount = val;
+                    amountBtns.forEach(b => b.classList.remove('active'));
+                    updateTotal();
+                }
+            });
+        }
+
+        if (frequencySelect) {
+            frequencySelect.addEventListener('change', function() {
+                donationFrequency = this.value;
+                updateTotal();
+            });
+        }
+
+        function updateTotal() {
+            let amount = selectedAmount;
+            if (donationFrequency === 'monthly') {
+                totalDisplay.textContent = formatMWK(amount * 12) + ' / year';
+            } else if (donationFrequency === 'yearly') {
+                totalDisplay.textContent = formatMWK(amount * 2) + ' / 2 years';
+            } else {
+                totalDisplay.textContent = formatMWK(amount);
+            }
+        }
+
+        if (donateBtn) {
+            donateBtn.addEventListener('click', function() {
+                let amount = selectedAmount;
+
+                if (customInput) {
+                    const customVal = parseFloat(customInput.value);
+                    if (!isNaN(customVal) && customVal > 0) {
+                        amount = customVal;
+                    }
+                }
+
+                if (isNaN(amount) || amount <= 0) {
+                    amount = 2500;
+                    selectedAmount = 2500;
+                    amountBtns.forEach(b => b.classList.remove('active'));
+                    document.querySelector('.amount-btn[data-amount="2500"]').classList.add('active');
+                }
+
+                openModal(amount);
+            });
+        }
+
+        if (customInput) {
+            customInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter' && donateBtn) {
+                    e.preventDefault();
+                    donateBtn.click();
+                }
+            });
+        }
+
+        updateTotal();
+    })();
+    </script>
+    <script src="script.js"></script>
+</body>
+</html><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Charity-Fund Malawi · Donate</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <link rel="stylesheet" href="style.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <style>
+        .page-header {
+            background: linear-gradient(135deg, #0b2b4a 0%, #1a4a6a 100%);
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+            position: relative;
+        }
+        .page-header h1 {
+            font-size: 3rem;
+            font-weight: 800;
+        }
+        .page-header p {
+            opacity: 0.85;
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 10px auto 0;
+        }
+        .donate-page {
+            padding: 60px 0;
+            background: var(--white);
+        }
+        .donate-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: start;
+        }
+        .donate-info h2 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 16px;
+        }
+        .donate-info p {
+            color: var(--text-light);
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+        }
+        .impact-stats-donate {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .impact-item-donate {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 16px;
+            background: var(--light-gray);
+            border-radius: var(--radius);
+        }
+        .impact-item-donate img {
+            width: 40px;
+            height: 40px;
+            object-fit: contain;
+        }
+        .impact-item-donate h4 {
+            color: var(--text-dark);
+            font-size: 1.1rem;
+        }
+        .impact-item-donate p {
+            margin: 0;
+            font-size: 0.95rem;
+        }
+        .donate-box {
+            background: var(--light-gray);
+            padding: 40px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+        }
+        .donation-header h3 {
+            font-size: 1.8rem;
+            color: var(--text-dark);
+            margin-bottom: 4px;
+        }
+        .donation-header p {
+            color: var(--text-light);
+            margin-bottom: 24px;
+        }
+        .amount-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .amount-btn {
+            padding: 12px;
+            border: 2px solid var(--medium-gray);
+            border-radius: 10px;
+            background: var(--white);
+            color: var(--text-dark);
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+        .amount-btn.active,
+        .amount-btn:hover {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+        .custom-donate {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        .custom-donate input,
+        .custom-donate select {
+            padding: 12px 16px;
+            border: 2px solid var(--medium-gray);
+            border-radius: 10px;
+            font-size: 1rem;
+            background: var(--white);
+            color: var(--text-dark);
+            transition: var(--transition);
+        }
+        .custom-donate input:focus,
+        .custom-donate select:focus {
+            border-color: var(--primary);
+            outline: none;
+        }
+        .custom-donate input {
+            flex: 1;
+        }
+        .donation-total {
+            display: flex;
+            justify-content: space-between;
+            padding: 16px 0;
+            border-top: 2px solid var(--medium-gray);
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+        .donation-total strong {
+            font-size: 1.4rem;
+            color: var(--primary);
+        }
+        .btn-full {
+            width: 100%;
+            justify-content: center;
+            padding: 16px;
+        }
+        .donate-message {
+            display: none;
+            margin-top: 20px;
+            padding: 20px;
+            background: var(--primary-light);
+            border-radius: var(--radius);
+            border-left: 4px solid var(--primary);
+        }
+        .donate-message.show {
+            display: block;
+        }
+        .donation-goal {
+            margin-top: 24px;
+        }
+        .goal-label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            color: var(--text-light);
+            margin-bottom: 8px;
+        }
+        .goal-progress {
+            height: 8px;
+            background: var(--medium-gray);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        .goal-fill {
+            height: 100%;
+            background: var(--primary-gradient);
+            border-radius: 4px;
+            transition: width 1s ease-out;
+        }
+
+        /* ===== PAYMENT METHODS WITH IMAGES ===== */
+        .payment-methods-section {
+            margin-top: 60px;
+        }
+        .payment-methods-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 30px;
+        }
+        .payment-method-card {
+            background: var(--white);
+            border-radius: var(--radius);
+            padding: 30px;
+            text-align: center;
+            border: 2px solid var(--medium-gray);
+            transition: var(--transition);
+            box-shadow: var(--shadow);
+        }
+        .payment-method-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-hover);
+            border-color: var(--primary);
+        }
+        .payment-method-card .method-logo {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 16px;
+            border-radius: 50%;
+            overflow: hidden;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 15px;
+            border: 3px solid var(--medium-gray);
+            transition: var(--transition);
+        }
+        .payment-method-card:hover .method-logo {
+            border-color: var(--primary);
+            transform: scale(1.05);
+        }
+        .payment-method-card .method-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+        .payment-method-card h3 {
+            font-size: 1.3rem;
+            color: var(--text-dark);
+            margin-bottom: 4px;
+        }
+        .payment-method-card .method-number {
+            font-family: 'Courier New', monospace;
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: var(--primary);
+            padding: 8px 12px;
+            background: var(--light-gray);
+            border-radius: 8px;
+            display: inline-block;
+            margin: 8px 0;
+        }
+        .payment-method-card .method-ussd {
+            font-family: 'Courier New', monospace;
+            font-weight: 700;
+            font-size: 1.4rem;
+            color: var(--primary);
+            padding: 8px 16px;
+            background: var(--primary-light);
+            border-radius: 8px;
+            display: inline-block;
+            margin: 8px 0;
+            border: 2px dashed var(--primary);
+        }
+        .payment-method-card p {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            margin: 8px 0;
+        }
+        .payment-method-card .badge {
+            display: inline-block;
+            padding: 4px 14px;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            background: var(--primary-light);
+            color: var(--primary);
+        }
+        .payment-method-card .call-btn {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 10px 24px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            margin-top: 10px;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+        }
+        .payment-method-card .call-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 15px rgba(26, 122, 58, 0.4);
+        }
+        .payment-method-card .call-btn i {
+            margin-right: 6px;
+        }
+        .payment-method-card.airtel .method-ussd {
+            color: #cc0000;
+            border-color: #cc0000;
+            background: #fff0f0;
+        }
+        .payment-method-card.airtel .badge {
+            background: #ff000015;
+            color: #cc0000;
+        }
+        .payment-method-card.airtel .call-btn {
+            background: #cc0000;
+        }
+        .payment-method-card.airtel .call-btn:hover {
+            box-shadow: 0 4px 15px rgba(204, 0, 0, 0.4);
+        }
+        .payment-method-card.tnm .method-ussd {
+            color: #004d99;
+            border-color: #004d99;
+            background: #e8f0ff;
+        }
+        .payment-method-card.tnm .badge {
+            background: #004d9915;
+            color: #004d99;
+        }
+        .payment-method-card.tnm .call-btn {
+            background: #004d99;
+        }
+        .payment-method-card.tnm .call-btn:hover {
+            box-shadow: 0 4px 15px rgba(0, 77, 153, 0.4);
+        }
+        .payment-method-card.bank .method-ussd {
+            color: #1a237e;
+            border-color: #1a237e;
+            background: #e8eaf6;
+        }
+        .payment-method-card.bank .badge {
+            background: #1a237e15;
+            color: #1a237e;
+        }
+        .payment-method-card.bank .call-btn {
+            background: #1a237e;
+        }
+        .payment-method-card.bank .call-btn:hover {
+            box-shadow: 0 4px 15px rgba(26, 35, 126, 0.4);
+        }
+        .payment-method-card .bank-details {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            line-height: 1.8;
+            text-align: center;
+            padding: 8px 0;
+        }
+        .payment-method-card .bank-details strong {
+            color: var(--text-dark);
+        }
+        .payment-method-card .copy-btn {
+            background: transparent;
+            border: 1px solid var(--medium-gray);
+            padding: 4px 14px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            cursor: pointer;
+            transition: var(--transition);
+            color: var(--text-light);
+            margin-top: 6px;
+        }
+        .payment-method-card .copy-btn:hover {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+        .payment-method-card .copy-btn.copied {
+            background: #4ade80;
+            color: white;
+            border-color: #4ade80;
+        }
+
+        /* ===== MODAL STYLES ===== */
+        .payment-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 9999;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(5px);
+            animation: modalFadeIn 0.3s ease;
+        }
+        .payment-modal.active {
+            display: flex;
+        }
+        @keyframes modalFadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        .payment-modal-content {
+            background: var(--white);
+            border-radius: 24px;
+            padding: 40px;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        .payment-modal-content .modal-header {
+            margin-bottom: 30px;
+        }
+        .payment-modal-content .modal-header h2 {
+            font-size: 2rem;
+            color: var(--text-dark);
+            margin-bottom: 8px;
+        }
+        .payment-modal-content .modal-header p {
+            color: var(--text-light);
+            font-size: 1.05rem;
+        }
+        .payment-modal-content .donation-amount-display {
+            background: var(--primary-light);
+            padding: 12px 20px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            font-size: 1.2rem;
+            border: 2px solid var(--primary);
+        }
+        .payment-modal-content .donation-amount-display strong {
+            color: var(--primary);
+            font-size: 1.5rem;
+        }
+        .modal-payment-options {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin: 20px 0;
+        }
+        .modal-payment-options button {
+            padding: 16px 20px;
+            border: 2px solid var(--medium-gray);
+            border-radius: 12px;
+            background: var(--white);
+            cursor: pointer;
+            font-size: 1.05rem;
+            font-weight: 600;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            color: var(--text-dark);
+            width: 100%;
+        }
+        .modal-payment-options button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        .modal-payment-options button .payment-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            background: white;
+            padding: 6px;
+        }
+        .modal-payment-options button .payment-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+        .modal-payment-options button .payment-detail {
+            flex: 1;
+            text-align: left;
+        }
+        .modal-payment-options button .payment-detail small {
+            display: block;
+            color: var(--text-light);
+            font-weight: 400;
+            font-size: 0.8rem;
+        }
+        .modal-payment-options button .payment-ussd {
+            font-family: 'Courier New', monospace;
+            font-weight: 700;
+            font-size: 0.9rem;
+            padding: 2px 10px;
+            border-radius: 4px;
+            background: var(--light-gray);
+        }
+        .modal-payment-options button.airtel-option {
+            border-color: #ff000040;
+            background: #fff5f5;
+        }
+        .modal-payment-options button.airtel-option:hover {
+            border-color: #cc0000;
+            background: #ffebeb;
+        }
+        .modal-payment-options button.airtel-option .payment-ussd {
+            color: #cc0000;
+            background: #fff0f0;
+        }
+        .modal-payment-options button.tnm-option {
+            border-color: #004d9940;
+            background: #f0f7ff;
+        }
+        .modal-payment-options button.tnm-option:hover {
+            border-color: #004d99;
+            background: #e0edff;
+        }
+        .modal-payment-options button.tnm-option .payment-ussd {
+            color: #004d99;
+            background: #e8f0ff;
+        }
+        .modal-payment-options button.bank-option {
+            border-color: #1a237e40;
+            background: #e8eaf6;
+        }
+        .modal-payment-options button.bank-option:hover {
+            border-color: #1a237e;
+            background: #c5cae9;
+        }
+        .modal-payment-options button.bank-option .payment-ussd {
+            color: #1a237e;
+            background: #e8eaf6;
+        }
+        .modal-cancel-btn {
+            background: var(--light-gray);
+            border: none;
+            padding: 12px 30px;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            color: var(--text-dark);
+            margin-top: 10px;
+        }
+        .modal-cancel-btn:hover {
+            background: var(--medium-gray);
+        }
+        .modal-payment-options button .payment-icon .icon-fallback {
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+        .modal-payment-options button.airtel-option .payment-icon .icon-fallback {
+            color: #cc0000;
+        }
+        .modal-payment-options button.tnm-option .payment-icon .icon-fallback {
+            color: #004d99;
+        }
+        .modal-payment-options button.bank-option .payment-icon .icon-fallback {
+            color: #1a237e;
+        }
+
+        /* ===== WHATSAPP FLOATING ===== */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 100px;
+            right: 30px;
+            z-index: 999;
+            background: #25D366;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+            text-decoration: none;
+            transition: var(--transition);
+            animation: pulse 2s infinite;
+        }
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 30px rgba(37, 211, 102, 0.6);
+            color: white;
+        }
+        @keyframes pulse {
+            0% { box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4); }
+            50% { box-shadow: 0 4px 30px rgba(37, 211, 102, 0.7); }
+            100% { box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4); }
+        }
+
+        /* ===== REDIRECTING OVERLAY ===== */
+        .redirecting-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: 10000;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(10px);
+            animation: modalFadeIn 0.4s ease;
+        }
+        .redirecting-overlay.active {
+            display: flex;
+        }
+        .redirecting-content {
+            background: var(--white);
+            border-radius: 24px;
+            padding: 40px;
+            max-width: 450px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
+            animation: bounceIn 0.5s ease;
+        }
+        @keyframes bounceIn {
+            0% { transform: scale(0.8); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        .redirecting-content .spinner {
+            width: 60px;
+            height: 60px;
+            border: 4px solid var(--primary-light);
+            border-top: 4px solid var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+        .redirecting-content h3 {
+            color: var(--text-dark);
+            font-size: 1.3rem;
+            margin-bottom: 8px;
+        }
+        .redirecting-content p {
+            color: var(--text-light);
+            font-size: 0.95rem;
+        }
+        .redirecting-content .payment-method-display {
+            background: var(--primary-light);
+            padding: 16px;
+            border-radius: 12px;
+            margin: 16px 0;
+            border: 2px solid var(--primary);
+        }
+        .redirecting-content .payment-method-display strong {
+            color: var(--primary);
+            font-size: 1.2rem;
+        }
+        .redirecting-content .payment-method-display .ussd-code {
+            font-family: 'Courier New', monospace;
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--primary);
+            display: block;
+            margin-top: 6px;
+            padding: 8px;
+            background: var(--white);
+            border-radius: 8px;
+        }
+        .redirecting-content .btn-continue {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 14px 30px;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            margin-top: 10px;
+            width: 100%;
+        }
+        .redirecting-content .btn-continue:hover {
+            background: var(--primary-dark);
+            transform: scale(1.02);
+        }
+        .redirecting-content .btn-cancel-redirect {
+            background: transparent;
+            border: none;
+            color: var(--text-light);
+            padding: 10px 20px;
+            cursor: pointer;
+            margin-top: 8px;
+            font-size: 0.9rem;
+        }
+        .redirecting-content .btn-cancel-redirect:hover {
+            color: var(--text-dark);
+        }
+        .redirecting-content .instruction-text {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            background: var(--light-gray);
+            padding: 12px;
+            border-radius: 8px;
+            margin-top: 12px;
+            text-align: left;
+        }
+        .redirecting-content .instruction-text i {
+            color: var(--primary);
+            margin-right: 8px;
+        }
+
+        @media (max-width: 968px) {
+            .donate-wrapper {
+                grid-template-columns: 1fr;
+            }
+            .payment-methods-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        @media (max-width: 768px) {
+            .page-header h1 {
+                font-size: 2.2rem;
+            }
+            .amount-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .payment-methods-grid {
+                grid-template-columns: 1fr;
+            }
+            .redirecting-content .payment-method-display .ussd-code {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== NAVBAR ===== -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-flex">
+                <div class="logo">
+                    <img src="images/logo.png" alt="Charity-Fund Logo" onerror="this.src='https://img.icons8.com/fluency/48/africa.png'" />
+                    <span>Charity-Fund</span>
+                    <small>Malawi</small>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="projects.html">Projects</a></li>
+                    <li><a href="donate.html" class="active">Donate</a></li>
+                    <li><a href="testimonials.html">Testimonials</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="donate.html" class="btn-donate-nav"><i class="fas fa-heart"></i> Donate</a></li>
+                </ul>
+                <div class="hamburger" id="hamburger">
+                    <span></span><span></span><span></span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ===== PAGE HEADER ===== -->
+    <section class="page-header">
+        <div class="container">
+            <h1>💝 Make a Donation</h1>
+            <p>Your contribution changes lives across Malawi</p>
+        </div>
+    </section>
+
+    <!-- ===== DONATE SECTION ===== -->
+    <section class="donate-page">
+        <div class="container">
+            <div class="donate-wrapper">
+                <div class="donate-info">
+                    <span class="section-tag" style="color: #1a7a3a; background: rgba(26,122,58,0.1);">💝 Make a Difference</span>
+                    <h2>Your Donation <br/>Changes Everything</h2>
+                    <p>Every contribution, no matter how small, helps us reach more communities in need across Malawi.</p>
+                    <div class="impact-stats-donate">
+                        <div class="impact-item-donate">
+                            <img src="images/logo.png" alt="Education" onerror="this.src='https://img.icons8.com/fluency/48/school.png'" />
+                            <div>
+                                <h4>MWK 5,000</h4>
+                                <p>Provides a child with school supplies</p>
+                            </div>
+                        </div>
+                        <div class="impact-item-donate">
+                            <img src="images/logo.png" alt="Water" onerror="this.src='https://img.icons8.com/fluency/48/water.png'" />
+                            <div>
+                                <h4>MWK 10,000</h4>
+                                <p>Provides clean water for 1 family</p>
+                            </div>
+                        </div>
+                        <div class="impact-item-donate">
+                            <img src="images/logo.png" alt="Health" onerror="this.src='https://img.icons8.com/fluency/48/medical-doctor.png'" />
+                            <div>
+                                <h4>MWK 20,000</h4>
+                                <p>Medical checkup for 10 children</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="donate-box">
+                    <div class="donation-header">
+                        <h3><span class="green-heart">❤️</span> Make a Donation</h3>
+                        <p>Select an amount in Malawi Kwacha (MWK)</p>
+                    </div>
+
+                    <div class="amount-grid">
+                        <button class="amount-btn" data-amount="1000">MWK 1,000</button>
+                        <button class="amount-btn active" data-amount="2500">MWK 2,500</button>
+                        <button class="amount-btn" data-amount="5000">MWK 5,000</button>
+                        <button class="amount-btn" data-amount="10000">MWK 10,000</button>
+                        <button class="amount-btn" data-amount="25000">MWK 25,000</button>
+                        <button class="amount-btn" data-amount="50000">MWK 50,000</button>
+                    </div>
+
+                    <div class="custom-donate">
+                        <input type="number" id="customAmount" placeholder="Or enter custom amount (MWK)" min="100" />
+                        <select id="donationFrequency">
+                            <option value="one-time">One-time</option>
+                            <option value="monthly">Monthly</option>
+                            <option value="yearly">Yearly</option>
+                        </select>
+                    </div>
+
+                    <div class="donation-total">
+                        <span>Total Donation:</span>
+                        <strong id="totalDisplay">MWK 2,500</strong>
+                    </div>
+
+                    <button id="donateNowBtn" class="btn-primary btn-full">
+                        💳 Donate Now
+                    </button>
+
+                    <div id="donateMessage" class="donate-message">
+                        <p>✅ Thank you! Your donation of <span id="donationDisplay">MWK 2,500</span> is making a real difference in Malawi.</p>
+                        <small>💚 100% of your donation goes to our programs</small>
+                    </div>
+
+                    <div class="donation-goal">
+                        <div class="goal-label">
+                            <span>Monthly Goal</span>
+                            <span>MWK 2,500,000 / MWK 3,000,000</span>
+                        </div>
+                        <div class="goal-progress">
+                            <div class="goal-fill" style="width: 83%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== PAYMENT METHODS WITH USSD CODES ===== -->
+            <div class="payment-methods-section">
+                <div class="section-header">
+                    <span class="section-tag">📱 Payment Methods</span>
+                    <h2>Donate via Mobile Money</h2>
+                    <p>Dial the USSD code to complete your donation</p>
+                </div>
+
+                <div class="payment-methods-grid">
+                    <!-- AIRTEL Money - *211# -->
+                    <div class="payment-method-card airtel">
+                        <div class="method-logo">
+                            <img src="images/airtel-logo.png" alt="AIRTEL Money" onerror="this.src='https://img.icons8.com/color/96/airtel.png'" />
+                        </div>
+                        <h3>AIRTEL Money</h3>
+                        <div class="method-ussd">*211#</div>
+                        <p>Dial the USSD code to send your donation</p>
+                        <button class="call-btn" onclick="dialUSSD('*211#')">
+                            <i class="fas fa-phone"></i> Dial *211#
+                        </button>
+                        <span class="badge"><i class="fas fa-check-circle"></i> Available 24/7</span>
+                    </div>
+
+                    <!-- TNM Mpamba - *444# -->
+                    <div class="payment-method-card tnm">
+                        <div class="method-logo">
+                            <img src="images/tnm-logo.png" alt="TNM Mpamba" onerror="this.src='https://img.icons8.com/color/96/tnm.png'" />
+                        </div>
+                        <h3>TNM Mpamba</h3>
+                        <div class="method-ussd">*444#</div>
+                        <p>Dial the USSD code to send your donation</p>
+                        <button class="call-btn" onclick="dialUSSD('*444#')">
+                            <i class="fas fa-phone"></i> Dial *444#
+                        </button>
+                        <span class="badge"><i class="fas fa-check-circle"></i> Available 24/7</span>
+                    </div>
+
+                    <!-- FIRST CAPITAL BANK - *1111# -->
+                    <div class="payment-method-card bank">
+                        <div class="method-logo">
+                            <img src="images/first-capital-bank-logo.png" alt="FIRST CAPITAL BANK" onerror="this.src='https://img.icons8.com/color/96/bank.png'" />
+                        </div>
+                        <h3>FIRST CAPITAL BANK</h3>
+                        <div class="method-ussd">*1111#</div>
+                        <div class="bank-details">
+                            <strong>Account Name:</strong> IMANI LIWEWE MAIDA<br />
+                            <strong>Account Number:</strong> 0029503035324<br />
+                            <strong>Bank:</strong> FIRST CAPITAL BANK
+                            <button class="copy-btn" onclick="copyBankDetails()">Copy Bank Details</button>
+                        </div>
+                        <button class="call-btn" onclick="dialUSSD('*1111#')">
+                            <i class="fas fa-phone"></i> Dial *1111#
+                        </button>
+                        <span class="badge"><i class="fas fa-check-circle"></i> Direct Bank Transfer</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Support Section -->
+            <div style="text-align: center; background: var(--primary-light); padding: 24px; border-radius: var(--radius); margin-top: 40px;">
+                <p style="color: var(--text-dark); font-size: 1.1rem;">
+                    <i class="fas fa-shield-alt" style="color: var(--primary); margin-right: 10px;"></i>
+                    All donations are secure and 100% transparent. You'll receive a confirmation message.
+                </p>
+                <p style="margin-top: 12px; color: var(--text-light);">
+                    <i class="fas fa-headset" style="color: var(--primary);"></i> 
+                    Need help? Contact our CEO <strong>IMANI LIWEWE MAIDA</strong> directly:
+                </p>
+                <a href="https://wa.me/265997008860?text=Hello%20Charity-Fund%20Malawi%2C%20I%20need%20assistance%20with%20my%20donation." 
+                   target="_blank" style="display: inline-block; background: #25D366; color: white; padding: 10px 24px; border-radius: 50px; text-decoration: none; font-weight: 600; margin-top: 10px;">
+                    <i class="fab fa-whatsapp"></i> Chat on WhatsApp
+                </a>
+                <a href="tel:+265997008860" style="display: inline-block; background: var(--primary); color: white; padding: 10px 24px; border-radius: 50px; text-decoration: none; font-weight: 600; margin-top: 10px; margin-left: 10px;">
+                    <i class="fas fa-phone"></i> Call Now
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== PAYMENT MODAL ===== -->
+    <div class="payment-modal" id="paymentModal">
+        <div class="payment-modal-content">
+            <div class="modal-header">
+                <h2>💳 Choose Payment Method</h2>
+                <p>Select how you'd like to complete your donation</p>
+            </div>
+            
+            <div class="donation-amount-display">
+                <span>You're about to donate</span><br />
+                <strong id="modalDonationAmount">MWK 2,500</strong>
+            </div>
+
+            <div class="modal-payment-options">
+                <!-- AIRTEL Money - *211# -->
+                <button class="airtel-option" onclick="selectPayment('airtel')">
+                    <span class="payment-icon">
+                        <img src="images/airtel-logo.png" alt="AIRTEL" onerror="this.innerHTML='<span class=\'icon-fallback\'>A</span>'" />
+                    </span>
+                    <span class="payment-detail">
+                        AIRTEL Money
+                        <small>Dial <span class="payment-ussd">*211#</span> to donate</small>
+                    </span>
+                    <i class="fas fa-phone" style="color: #cc0000;"></i>
+                </button>
+
+                <!-- TNM Mpamba - *444# -->
+                <button class="tnm-option" onclick="selectPayment('tnm')">
+                    <span class="payment-icon">
+                        <img src="images/tnm-logo.png" alt="TNM" onerror="this.innerHTML='<span class=\'icon-fallback\'>T</span>'" />
+                    </span>
+                    <span class="payment-detail">
+                        TNM Mpamba
+                        <small>Dial <span class="payment-ussd">*444#</span> to donate</small>
+                    </span>
+                    <i class="fas fa-phone" style="color: #004d99;"></i>
+                </button>
+
+                <!-- FIRST CAPITAL BANK - *1111# -->
+                <button class="bank-option" onclick="selectPayment('bank')">
+                    <span class="payment-icon">
+                        <img src="images/first-capital-bank-logo.png" alt="Bank" onerror="this.innerHTML='<span class=\'icon-fallback\'>B</span>'" />
+                    </span>
+                    <span class="payment-detail">
+                        FIRST CAPITAL BANK
+                        <small>Dial <span class="payment-ussd">*1111#</span> to donate</small>
+                    </span>
+                    <i class="fas fa-chevron-right" style="color: #1a237e;"></i>
+                </button>
+            </div>
+
+            <!-- WhatsApp Help -->
+            <div style="margin: 16px 0; padding: 12px; background: #e8f5e9; border-radius: 12px;">
+                <p style="font-size: 0.9rem; color: var(--text-dark);">
+                    <i class="fab fa-whatsapp" style="color: #25D366; font-size: 1.2rem; margin-right: 8px;"></i>
+                    Need help? Chat with us on 
+                    <a href="https://wa.me/265997008860?text=Hello%20Charity-Fund%20Malawi%2C%20I%20need%20assistance%20with%20my%20donation." 
+                       target="_blank" style="color: #25D366; font-weight: 600; text-decoration: none;">
+                        WhatsApp
+                    </a>
+                </p>
+            </div>
+
+            <button class="modal-cancel-btn" onclick="closeModal()">
+                <i class="fas fa-times"></i> Cancel Donation
+            </button>
+        </div>
+    </div>
+
+    <!-- ===== REDIRECTING OVERLAY ===== -->
+    <div class="redirecting-overlay" id="redirectingOverlay">
+        <div class="redirecting-content">
+            <div class="spinner"></div>
+            <h3>📱 Dialing USSD Code</h3>
+            <p>Your phone will open the USSD dialer</p>
+            
+            <div class="payment-method-display">
+                <strong id="redirectMethodName">AIRTEL Money</strong>
+                <span class="ussd-code" id="redirectUssdCode">*211#</span>
+            </div>
+
+            <div class="instruction-text">
+                <i class="fas fa-info-circle"></i>
+                <span id="redirectInstructions">Dial *211# to send your donation via AIRTEL Money</span>
+            </div>
+
+            <p style="font-size: 0.85rem; color: var(--text-light); margin-top: 10px;">
+                <i class="fas fa-shield-alt" style="color: var(--primary);"></i> 
+                Your donation will be processed securely
+            </p>
+
+            <button class="btn-continue" id="redirectContinueBtn">
+                <i class="fas fa-phone"></i> Open Dialer
+            </button>
+            <br />
+            <button class="btn-cancel-redirect" onclick="cancelRedirect()">
+                <i class="fas fa-times"></i> Cancel
+            </button>
+        </div>
+    </div>
+
+    <!-- ===== CTA SECTION ===== -->
+    <section class="cta-section">
+        <div class="cta-overlay"></div>
+        <div class="container">
+            <div class="cta-content">
+                <h2>Every Donation Counts</h2>
+                <p>Your contribution helps us reach more communities in need across Malawi.</p>
+                <div class="cta-buttons">
+                    <a href="donate.html" class="btn-primary btn-large"><i class="fas fa-heart"></i> Donate Now</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <img src="images/logo.png" alt="Charity-Fund" onerror="this.src='https://img.icons8.com/fluency/48/africa.png'" />
+                    <h3>Charity-Fund Malawi</h3>
+                    <p>Making hope possible through community action and global support across Malawi and Africa.</p>
+                    <div class="footer-social">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="projects.html">Projects</a></li>
+                        <li><a href="donate.html">Donate</a></li>
+                        <li><a href="testimonials.html">Testimonials</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Volunteer</a></li>
+                    </ul>
+                </div>
+                <div class="footer-newsletter">
+                    <h4>Newsletter</h4>
+                    <p>Subscribe for updates from Malawi</p>
+                    <form>
+                        <input type="email" placeholder="Your email" />
+                        <button type="submit"><i class="fas fa-arrow-right"></i></button>
+                    </form>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2026 Charity-Fund Malawi. All rights reserved.</p>
+                <p class="footer-tagline">Built with <i class="fas fa-heart" style="color: #1a7a3a;"></i> for a better world</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/265997008860" class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <button id="themeToggle" class="theme-toggle">
+        <i class="fas fa-moon"></i>
+    </button>
+
+    <script>
+    // ===== USSD DIAL FUNCTION =====
+    function dialUSSD(code) {
+        // Open phone dialer with USSD code
+        window.location.href = 'tel:' + encodeURIComponent(code);
+    }
+
+    // ===== COPY BANK DETAILS =====
     function copyBankDetails() {
         const details = 'FIRST CAPITAL BANK\nAccount Name: IMANI LIWEWE MAIDA\nAccount Number: 0029503035324';
         navigator.clipboard.writeText(details).then(() => {
@@ -942,70 +3868,88 @@
         document.body.style.overflow = '';
     }
 
+    // ===== SELECT PAYMENT =====
     function selectPayment(method) {
         const methods = {
             airtel: {
                 name: 'AIRTEL Money',
-                number: '+265 997 008 860',
-                dial: '+265997008860'
+                ussd: '*211#',
+                instructions: 'Dial *211# to send your donation via AIRTEL Money. Follow the prompts to complete the transaction.',
+                color: '#cc0000'
             },
             tnm: {
                 name: 'TNM Mpamba',
-                number: '+265 881 395 378',
-                dial: '+265881395378'
+                ussd: '*444#',
+                instructions: 'Dial *444# to send your donation via TNM Mpamba. Follow the prompts to complete the transaction.',
+                color: '#004d99'
             },
             bank: {
                 name: 'FIRST CAPITAL BANK',
-                number: '0029503035324',
-                details: 'Account Name: IMANI LIWEWE MAIDA'
+                ussd: '*1111#',
+                instructions: 'Dial *1111# for FIRST CAPITAL BANK services. Use Account: 0029503035324, Name: IMANI LIWEWE MAIDA',
+                color: '#1a237e'
             }
         };
 
         const selected = methods[method];
-        const amount = currentDonationAmount;
         closeModal();
 
-        // Show success message
+        // Show redirecting overlay with USSD code
+        const overlay = document.getElementById('redirectingOverlay');
+        document.getElementById('redirectMethodName').textContent = selected.name;
+        document.getElementById('redirectUssdCode').textContent = selected.ussd;
+        document.getElementById('redirectInstructions').textContent = selected.instructions;
+        
+        // Set color for USSD code
+        document.getElementById('redirectUssdCode').style.color = selected.color;
+        
+        overlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+
+        // Continue button - dial USSD
+        document.getElementById('redirectContinueBtn').onclick = function() {
+            dialUSSD(selected.ussd);
+            completeDonation(selected.name);
+            overlay.classList.remove('active');
+            document.body.style.overflow = '';
+        };
+
+        // Auto redirect after 3 seconds
+        redirectTimer = setTimeout(() => {
+            dialUSSD(selected.ussd);
+            completeDonation(selected.name);
+            overlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }, 3000);
+    }
+
+    function cancelRedirect() {
+        clearTimeout(redirectTimer);
+        document.getElementById('redirectingOverlay').classList.remove('active');
+        document.body.style.overflow = '';
+        openModal(currentDonationAmount);
+    }
+
+    // ===== COMPLETE DONATION =====
+    function completeDonation(methodName) {
+        const amount = currentDonationAmount;
         const donateMessage = document.getElementById('donateMessage');
         const donationDisplay = document.getElementById('donationDisplay');
         
         donationDisplay.textContent = 'MWK ' + Number(amount).toLocaleString();
         
-        let extraDetails = '';
-        if (method === 'airtel' || method === 'tnm') {
-            extraDetails = `
-                <br /><span style="font-size: 0.9rem; display: block; margin-top: 8px;">
-                    <i class="fas fa-phone"></i> 
-                    <strong>${selected.name}:</strong> ${selected.number}
-                </span>
-                <span style="font-size: 0.85rem; display: block; margin-top: 4px; color: var(--text-light);">
-                    Please call to complete the transaction
-                </span>
-            `;
-            // Auto dial
-            setTimeout(() => {
-                window.location.href = 'tel:' + selected.dial;
-            }, 1000);
-        } else if (method === 'bank') {
-            extraDetails = `
-                <br /><span style="font-size: 0.85rem; display: block; margin-top: 8px; background: #e8eaf6; padding: 10px; border-radius: 8px;">
-                    <strong>🏦 FIRST CAPITAL BANK</strong><br />
-                    Account Name: <strong>IMANI LIWEWE MAIDA</strong><br />
-                    Account Number: <strong>0029503035324</strong>
-                </span>
-            `;
-        }
-
         const messageP = donateMessage.querySelector('p');
         messageP.innerHTML = `
             ✅ Thank you! Your donation of <strong>MWK ${Number(amount).toLocaleString()}</strong> is making a real difference in Malawi.<br />
             <span style="font-size: 0.9rem; display: block; margin-top: 8px;">
                 <i class="fas fa-check-circle" style="color: #1a7a3a;"></i> 
-                Payment via <strong>${selected.name}</strong> initiated.
+                Payment via <strong>${methodName}</strong> initiated.
             </span>
-            ${extraDetails}
+            <span style="font-size: 0.85rem; display: block; margin-top: 4px; color: var(--text-light);">
+                Please follow the USSD prompts to complete the transaction.
+            </span>
             <br />
-            <a href="https://wa.me/265997008860?text=Hello%20Charity-Fund%20Malawi%2C%20I%20just%20made%20a%20donation%20of%20MWK%20${Number(amount).toLocaleString()}%20via%20${selected.name}%20and%20need%20assistance." 
+            <a href="https://wa.me/265997008860?text=Hello%20Charity-Fund%20Malawi%2C%20I%20just%20made%20a%20donation%20of%20MWK%20${Number(amount).toLocaleString()}%20via%20${methodName}%20and%20need%20assistance." 
                target="_blank" style="background: #25D366; color: white; padding: 8px 20px; border-radius: 50px; text-decoration: none; display: inline-block; margin-top: 8px;">
                 <i class="fab fa-whatsapp"></i> Need Help? Chat with CEO
             </a>
@@ -1037,6 +3981,1369 @@
         }, 15000);
     }
 
+    // Close modal on outside click
+    document.getElementById('paymentModal').addEventListener('click', function(e) {
+        if (e.target === this) {
+            closeModal();
+        }
+    });
+
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            closeModal();
+        }
+    });
+
+    // ===== DONATION FUNCTIONALITY =====
+    (function() {
+        const amountBtns = document.querySelectorAll('.amount-btn');
+        const customInput = document.getElementById('customAmount');
+        const donateBtn = document.getElementById('donateNowBtn');
+        const totalDisplay = document.getElementById('totalDisplay');
+        const frequencySelect = document.getElementById('donationFrequency');
+
+        let selectedAmount = 2500;
+        let donationFrequency = 'one-time';
+
+        function formatMWK(amount) {
+            return 'MWK ' + Number(amount).toLocaleString();
+        }
+
+        amountBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                const amount = parseInt(this.getAttribute('data-amount'));
+                if (!isNaN(amount) && amount > 0) {
+                    selectedAmount = amount;
+                    amountBtns.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    if (customInput) customInput.value = '';
+                    updateTotal();
+                }
+            });
+        });
+
+        if (customInput) {
+            customInput.addEventListener('input', function() {
+                const val = parseFloat(this.value);
+                if (!isNaN(val) && val > 0) {
+                    selectedAmount = val;
+                    amountBtns.forEach(b => b.classList.remove('active'));
+                    updateTotal();
+                }
+            });
+        }
+
+        if (frequencySelect) {
+            frequencySelect.addEventListener('change', function() {
+                donationFrequency = this.value;
+                updateTotal();
+            });
+        }
+
+        function updateTotal() {
+            let amount = selectedAmount;
+            if (donationFrequency === 'monthly') {
+                totalDisplay.textContent = formatMWK(amount * 12) + ' / year';
+            } else if (donationFrequency === 'yearly') {
+                totalDisplay.textContent = formatMWK(amount * 2) + ' / 2 years';
+            } else {
+                totalDisplay.textContent = formatMWK(amount);
+            }
+        }
+
+        if (donateBtn) {
+            donateBtn.addEventListener('click', function() {
+                let amount = selectedAmount;
+
+                if (customInput) {
+                    const customVal = parseFloat(customInput.value);
+                    if (!isNaN(customVal) && customVal > 0) {
+                        amount = customVal;
+                    }
+                }
+
+                if (isNaN(amount) || amount <= 0) {
+                    amount = 2500;
+                    selectedAmount = 2500;
+                    amountBtns.forEach(b => b.classList.remove('active'));
+                    document.querySelector('.amount-btn[data-amount="2500"]').classList.add('active');
+                }
+
+                openModal(amount);
+            });
+        }
+
+        if (customInput) {
+            customInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter' && donateBtn) {
+                    e.preventDefault();
+                    donateBtn.click();
+                }
+            });
+        }
+
+        updateTotal();
+    })();
+    </script>
+    <script src="script.js"></script>
+</body>
+</html><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Charity-Fund Malawi · Donate</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <link rel="stylesheet" href="style.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <style>
+        .page-header {
+            background: linear-gradient(135deg, #0b2b4a 0%, #1a4a6a 100%);
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+            position: relative;
+        }
+        .page-header h1 {
+            font-size: 3rem;
+            font-weight: 800;
+        }
+        .page-header p {
+            opacity: 0.85;
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 10px auto 0;
+        }
+        .donate-page {
+            padding: 60px 0;
+            background: var(--white);
+        }
+        .donate-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: start;
+        }
+        .donate-info h2 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 16px;
+        }
+        .donate-info p {
+            color: var(--text-light);
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+        }
+        .impact-stats-donate {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .impact-item-donate {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 16px;
+            background: var(--light-gray);
+            border-radius: var(--radius);
+        }
+        .impact-item-donate img {
+            width: 40px;
+            height: 40px;
+            object-fit: contain;
+        }
+        .impact-item-donate h4 {
+            color: var(--text-dark);
+            font-size: 1.1rem;
+        }
+        .impact-item-donate p {
+            margin: 0;
+            font-size: 0.95rem;
+        }
+        .donate-box {
+            background: var(--light-gray);
+            padding: 40px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+        }
+        .donation-header h3 {
+            font-size: 1.8rem;
+            color: var(--text-dark);
+            margin-bottom: 4px;
+        }
+        .donation-header p {
+            color: var(--text-light);
+            margin-bottom: 24px;
+        }
+        .amount-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .amount-btn {
+            padding: 12px;
+            border: 2px solid var(--medium-gray);
+            border-radius: 10px;
+            background: var(--white);
+            color: var(--text-dark);
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+        .amount-btn.active,
+        .amount-btn:hover {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+        .custom-donate {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        .custom-donate input,
+        .custom-donate select {
+            padding: 12px 16px;
+            border: 2px solid var(--medium-gray);
+            border-radius: 10px;
+            font-size: 1rem;
+            background: var(--white);
+            color: var(--text-dark);
+            transition: var(--transition);
+        }
+        .custom-donate input:focus,
+        .custom-donate select:focus {
+            border-color: var(--primary);
+            outline: none;
+        }
+        .custom-donate input {
+            flex: 1;
+        }
+        .donation-total {
+            display: flex;
+            justify-content: space-between;
+            padding: 16px 0;
+            border-top: 2px solid var(--medium-gray);
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+        .donation-total strong {
+            font-size: 1.4rem;
+            color: var(--primary);
+        }
+        .btn-full {
+            width: 100%;
+            justify-content: center;
+            padding: 16px;
+        }
+        .donate-message {
+            display: none;
+            margin-top: 20px;
+            padding: 20px;
+            background: var(--primary-light);
+            border-radius: var(--radius);
+            border-left: 4px solid var(--primary);
+        }
+        .donate-message.show {
+            display: block;
+        }
+        .donation-goal {
+            margin-top: 24px;
+        }
+        .goal-label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            color: var(--text-light);
+            margin-bottom: 8px;
+        }
+        .goal-progress {
+            height: 8px;
+            background: var(--medium-gray);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        .goal-fill {
+            height: 100%;
+            background: var(--primary-gradient);
+            border-radius: 4px;
+            transition: width 1s ease-out;
+        }
+
+        /* ===== PAYMENT METHODS WITH IMAGES ===== */
+        .payment-methods-section {
+            margin-top: 60px;
+        }
+        .payment-methods-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 30px;
+        }
+        .payment-method-card {
+            background: var(--white);
+            border-radius: var(--radius);
+            padding: 30px;
+            text-align: center;
+            border: 2px solid var(--medium-gray);
+            transition: var(--transition);
+            box-shadow: var(--shadow);
+        }
+        .payment-method-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-hover);
+            border-color: var(--primary);
+        }
+        .payment-method-card .method-logo {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 16px;
+            border-radius: 50%;
+            overflow: hidden;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 15px;
+            border: 3px solid var(--medium-gray);
+            transition: var(--transition);
+        }
+        .payment-method-card:hover .method-logo {
+            border-color: var(--primary);
+            transform: scale(1.05);
+        }
+        .payment-method-card .method-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+        .payment-method-card h3 {
+            font-size: 1.3rem;
+            color: var(--text-dark);
+            margin-bottom: 4px;
+        }
+        .payment-method-card .method-number {
+            font-family: 'Courier New', monospace;
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: var(--primary);
+            padding: 8px 12px;
+            background: var(--light-gray);
+            border-radius: 8px;
+            display: inline-block;
+            margin: 8px 0;
+        }
+        .payment-method-card .method-ussd {
+            font-family: 'Courier New', monospace;
+            font-weight: 700;
+            font-size: 1.4rem;
+            color: var(--primary);
+            padding: 8px 16px;
+            background: var(--primary-light);
+            border-radius: 8px;
+            display: inline-block;
+            margin: 8px 0;
+            border: 2px dashed var(--primary);
+        }
+        .payment-method-card p {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            margin: 8px 0;
+        }
+        .payment-method-card .badge {
+            display: inline-block;
+            padding: 4px 14px;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            background: var(--primary-light);
+            color: var(--primary);
+        }
+        .payment-method-card .call-btn {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 10px 24px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            margin-top: 10px;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+        }
+        .payment-method-card .call-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 15px rgba(26, 122, 58, 0.4);
+        }
+        .payment-method-card .call-btn i {
+            margin-right: 6px;
+        }
+        .payment-method-card.airtel .method-ussd {
+            color: #cc0000;
+            border-color: #cc0000;
+            background: #fff0f0;
+        }
+        .payment-method-card.airtel .badge {
+            background: #ff000015;
+            color: #cc0000;
+        }
+        .payment-method-card.airtel .call-btn {
+            background: #cc0000;
+        }
+        .payment-method-card.airtel .call-btn:hover {
+            box-shadow: 0 4px 15px rgba(204, 0, 0, 0.4);
+        }
+        .payment-method-card.tnm .method-ussd {
+            color: #004d99;
+            border-color: #004d99;
+            background: #e8f0ff;
+        }
+        .payment-method-card.tnm .badge {
+            background: #004d9915;
+            color: #004d99;
+        }
+        .payment-method-card.tnm .call-btn {
+            background: #004d99;
+        }
+        .payment-method-card.tnm .call-btn:hover {
+            box-shadow: 0 4px 15px rgba(0, 77, 153, 0.4);
+        }
+        .payment-method-card.bank .method-ussd {
+            color: #1a237e;
+            border-color: #1a237e;
+            background: #e8eaf6;
+        }
+        .payment-method-card.bank .badge {
+            background: #1a237e15;
+            color: #1a237e;
+        }
+        .payment-method-card.bank .call-btn {
+            background: #1a237e;
+        }
+        .payment-method-card.bank .call-btn:hover {
+            box-shadow: 0 4px 15px rgba(26, 35, 126, 0.4);
+        }
+        .payment-method-card .bank-details {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            line-height: 1.8;
+            text-align: center;
+            padding: 8px 0;
+        }
+        .payment-method-card .bank-details strong {
+            color: var(--text-dark);
+        }
+        .payment-method-card .copy-btn {
+            background: transparent;
+            border: 1px solid var(--medium-gray);
+            padding: 4px 14px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            cursor: pointer;
+            transition: var(--transition);
+            color: var(--text-light);
+            margin-top: 6px;
+        }
+        .payment-method-card .copy-btn:hover {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+        .payment-method-card .copy-btn.copied {
+            background: #4ade80;
+            color: white;
+            border-color: #4ade80;
+        }
+
+        /* ===== MODAL STYLES ===== */
+        .payment-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 9999;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(5px);
+            animation: modalFadeIn 0.3s ease;
+        }
+        .payment-modal.active {
+            display: flex;
+        }
+        @keyframes modalFadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        .payment-modal-content {
+            background: var(--white);
+            border-radius: 24px;
+            padding: 40px;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        .payment-modal-content .modal-header {
+            margin-bottom: 30px;
+        }
+        .payment-modal-content .modal-header h2 {
+            font-size: 2rem;
+            color: var(--text-dark);
+            margin-bottom: 8px;
+        }
+        .payment-modal-content .modal-header p {
+            color: var(--text-light);
+            font-size: 1.05rem;
+        }
+        .payment-modal-content .donation-amount-display {
+            background: var(--primary-light);
+            padding: 12px 20px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            font-size: 1.2rem;
+            border: 2px solid var(--primary);
+        }
+        .payment-modal-content .donation-amount-display strong {
+            color: var(--primary);
+            font-size: 1.5rem;
+        }
+        .modal-payment-options {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin: 20px 0;
+        }
+        .modal-payment-options button {
+            padding: 16px 20px;
+            border: 2px solid var(--medium-gray);
+            border-radius: 12px;
+            background: var(--white);
+            cursor: pointer;
+            font-size: 1.05rem;
+            font-weight: 600;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            color: var(--text-dark);
+            width: 100%;
+        }
+        .modal-payment-options button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        .modal-payment-options button .payment-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            background: white;
+            padding: 6px;
+        }
+        .modal-payment-options button .payment-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+        .modal-payment-options button .payment-detail {
+            flex: 1;
+            text-align: left;
+        }
+        .modal-payment-options button .payment-detail small {
+            display: block;
+            color: var(--text-light);
+            font-weight: 400;
+            font-size: 0.8rem;
+        }
+        .modal-payment-options button .payment-ussd {
+            font-family: 'Courier New', monospace;
+            font-weight: 700;
+            font-size: 0.9rem;
+            padding: 2px 10px;
+            border-radius: 4px;
+            background: var(--light-gray);
+        }
+        .modal-payment-options button.airtel-option {
+            border-color: #ff000040;
+            background: #fff5f5;
+        }
+        .modal-payment-options button.airtel-option:hover {
+            border-color: #cc0000;
+            background: #ffebeb;
+        }
+        .modal-payment-options button.airtel-option .payment-ussd {
+            color: #cc0000;
+            background: #fff0f0;
+        }
+        .modal-payment-options button.tnm-option {
+            border-color: #004d9940;
+            background: #f0f7ff;
+        }
+        .modal-payment-options button.tnm-option:hover {
+            border-color: #004d99;
+            background: #e0edff;
+        }
+        .modal-payment-options button.tnm-option .payment-ussd {
+            color: #004d99;
+            background: #e8f0ff;
+        }
+        .modal-payment-options button.bank-option {
+            border-color: #1a237e40;
+            background: #e8eaf6;
+        }
+        .modal-payment-options button.bank-option:hover {
+            border-color: #1a237e;
+            background: #c5cae9;
+        }
+        .modal-payment-options button.bank-option .payment-ussd {
+            color: #1a237e;
+            background: #e8eaf6;
+        }
+        .modal-cancel-btn {
+            background: var(--light-gray);
+            border: none;
+            padding: 12px 30px;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            color: var(--text-dark);
+            margin-top: 10px;
+        }
+        .modal-cancel-btn:hover {
+            background: var(--medium-gray);
+        }
+        .modal-payment-options button .payment-icon .icon-fallback {
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+        .modal-payment-options button.airtel-option .payment-icon .icon-fallback {
+            color: #cc0000;
+        }
+        .modal-payment-options button.tnm-option .payment-icon .icon-fallback {
+            color: #004d99;
+        }
+        .modal-payment-options button.bank-option .payment-icon .icon-fallback {
+            color: #1a237e;
+        }
+
+        /* ===== WHATSAPP FLOATING ===== */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 100px;
+            right: 30px;
+            z-index: 999;
+            background: #25D366;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+            text-decoration: none;
+            transition: var(--transition);
+            animation: pulse 2s infinite;
+        }
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 30px rgba(37, 211, 102, 0.6);
+            color: white;
+        }
+        @keyframes pulse {
+            0% { box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4); }
+            50% { box-shadow: 0 4px 30px rgba(37, 211, 102, 0.7); }
+            100% { box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4); }
+        }
+
+        /* ===== REDIRECTING OVERLAY ===== */
+        .redirecting-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: 10000;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(10px);
+            animation: modalFadeIn 0.4s ease;
+        }
+        .redirecting-overlay.active {
+            display: flex;
+        }
+        .redirecting-content {
+            background: var(--white);
+            border-radius: 24px;
+            padding: 40px;
+            max-width: 450px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
+            animation: bounceIn 0.5s ease;
+        }
+        @keyframes bounceIn {
+            0% { transform: scale(0.8); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        .redirecting-content .spinner {
+            width: 60px;
+            height: 60px;
+            border: 4px solid var(--primary-light);
+            border-top: 4px solid var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+        .redirecting-content h3 {
+            color: var(--text-dark);
+            font-size: 1.3rem;
+            margin-bottom: 8px;
+        }
+        .redirecting-content p {
+            color: var(--text-light);
+            font-size: 0.95rem;
+        }
+        .redirecting-content .payment-method-display {
+            background: var(--primary-light);
+            padding: 16px;
+            border-radius: 12px;
+            margin: 16px 0;
+            border: 2px solid var(--primary);
+        }
+        .redirecting-content .payment-method-display strong {
+            color: var(--primary);
+            font-size: 1.2rem;
+        }
+        .redirecting-content .payment-method-display .ussd-code {
+            font-family: 'Courier New', monospace;
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--primary);
+            display: block;
+            margin-top: 6px;
+            padding: 8px;
+            background: var(--white);
+            border-radius: 8px;
+        }
+        .redirecting-content .btn-continue {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 14px 30px;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            margin-top: 10px;
+            width: 100%;
+        }
+        .redirecting-content .btn-continue:hover {
+            background: var(--primary-dark);
+            transform: scale(1.02);
+        }
+        .redirecting-content .btn-cancel-redirect {
+            background: transparent;
+            border: none;
+            color: var(--text-light);
+            padding: 10px 20px;
+            cursor: pointer;
+            margin-top: 8px;
+            font-size: 0.9rem;
+        }
+        .redirecting-content .btn-cancel-redirect:hover {
+            color: var(--text-dark);
+        }
+        .redirecting-content .instruction-text {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            background: var(--light-gray);
+            padding: 12px;
+            border-radius: 8px;
+            margin-top: 12px;
+            text-align: left;
+        }
+        .redirecting-content .instruction-text i {
+            color: var(--primary);
+            margin-right: 8px;
+        }
+
+        @media (max-width: 968px) {
+            .donate-wrapper {
+                grid-template-columns: 1fr;
+            }
+            .payment-methods-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        @media (max-width: 768px) {
+            .page-header h1 {
+                font-size: 2.2rem;
+            }
+            .amount-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .payment-methods-grid {
+                grid-template-columns: 1fr;
+            }
+            .redirecting-content .payment-method-display .ussd-code {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== NAVBAR ===== -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-flex">
+                <div class="logo">
+                    <img src="images/logo.png" alt="Charity-Fund Logo" onerror="this.src='https://img.icons8.com/fluency/48/africa.png'" />
+                    <span>Charity-Fund</span>
+                    <small>Malawi</small>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="projects.html">Projects</a></li>
+                    <li><a href="donate.html" class="active">Donate</a></li>
+                    <li><a href="testimonials.html">Testimonials</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="donate.html" class="btn-donate-nav"><i class="fas fa-heart"></i> Donate</a></li>
+                </ul>
+                <div class="hamburger" id="hamburger">
+                    <span></span><span></span><span></span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ===== PAGE HEADER ===== -->
+    <section class="page-header">
+        <div class="container">
+            <h1>💝 Make a Donation</h1>
+            <p>Your contribution changes lives across Malawi</p>
+        </div>
+    </section>
+
+    <!-- ===== DONATE SECTION ===== -->
+    <section class="donate-page">
+        <div class="container">
+            <div class="donate-wrapper">
+                <div class="donate-info">
+                    <span class="section-tag" style="color: #1a7a3a; background: rgba(26,122,58,0.1);">💝 Make a Difference</span>
+                    <h2>Your Donation <br/>Changes Everything</h2>
+                    <p>Every contribution, no matter how small, helps us reach more communities in need across Malawi.</p>
+                    <div class="impact-stats-donate">
+                        <div class="impact-item-donate">
+                            <img src="images/logo.png" alt="Education" onerror="this.src='https://img.icons8.com/fluency/48/school.png'" />
+                            <div>
+                                <h4>MWK 5,000</h4>
+                                <p>Provides a child with school supplies</p>
+                            </div>
+                        </div>
+                        <div class="impact-item-donate">
+                            <img src="images/logo.png" alt="Water" onerror="this.src='https://img.icons8.com/fluency/48/water.png'" />
+                            <div>
+                                <h4>MWK 10,000</h4>
+                                <p>Provides clean water for 1 family</p>
+                            </div>
+                        </div>
+                        <div class="impact-item-donate">
+                            <img src="images/logo.png" alt="Health" onerror="this.src='https://img.icons8.com/fluency/48/medical-doctor.png'" />
+                            <div>
+                                <h4>MWK 20,000</h4>
+                                <p>Medical checkup for 10 children</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="donate-box">
+                    <div class="donation-header">
+                        <h3><span class="green-heart">❤️</span> Make a Donation</h3>
+                        <p>Select an amount in Malawi Kwacha (MWK)</p>
+                    </div>
+
+                    <div class="amount-grid">
+                        <button class="amount-btn" data-amount="1000">MWK 1,000</button>
+                        <button class="amount-btn active" data-amount="2500">MWK 2,500</button>
+                        <button class="amount-btn" data-amount="5000">MWK 5,000</button>
+                        <button class="amount-btn" data-amount="10000">MWK 10,000</button>
+                        <button class="amount-btn" data-amount="25000">MWK 25,000</button>
+                        <button class="amount-btn" data-amount="50000">MWK 50,000</button>
+                    </div>
+
+                    <div class="custom-donate">
+                        <input type="number" id="customAmount" placeholder="Or enter custom amount (MWK)" min="100" />
+                        <select id="donationFrequency">
+                            <option value="one-time">One-time</option>
+                            <option value="monthly">Monthly</option>
+                            <option value="yearly">Yearly</option>
+                        </select>
+                    </div>
+
+                    <div class="donation-total">
+                        <span>Total Donation:</span>
+                        <strong id="totalDisplay">MWK 2,500</strong>
+                    </div>
+
+                    <button id="donateNowBtn" class="btn-primary btn-full">
+                        💳 Donate Now
+                    </button>
+
+                    <div id="donateMessage" class="donate-message">
+                        <p>✅ Thank you! Your donation of <span id="donationDisplay">MWK 2,500</span> is making a real difference in Malawi.</p>
+                        <small>💚 100% of your donation goes to our programs</small>
+                    </div>
+
+                    <div class="donation-goal">
+                        <div class="goal-label">
+                            <span>Monthly Goal</span>
+                            <span>MWK 2,500,000 / MWK 3,000,000</span>
+                        </div>
+                        <div class="goal-progress">
+                            <div class="goal-fill" style="width: 83%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== PAYMENT METHODS WITH USSD CODES ===== -->
+            <div class="payment-methods-section">
+                <div class="section-header">
+                    <span class="section-tag">📱 Payment Methods</span>
+                    <h2>Donate via Mobile Money</h2>
+                    <p>Dial the USSD code to complete your donation</p>
+                </div>
+
+                <div class="payment-methods-grid">
+                    <!-- AIRTEL Money - *211# -->
+                    <div class="payment-method-card airtel">
+                        <div class="method-logo">
+                            <img src="images/airtel-logo.png" alt="AIRTEL Money" onerror="this.src='https://img.icons8.com/color/96/airtel.png'" />
+                        </div>
+                        <h3>AIRTEL Money</h3>
+                        <div class="method-ussd">*211#</div>
+                        <p>Dial the USSD code to send your donation</p>
+                        <button class="call-btn" onclick="dialUSSD('*211#')">
+                            <i class="fas fa-phone"></i> Dial *211#
+                        </button>
+                        <span class="badge"><i class="fas fa-check-circle"></i> Available 24/7</span>
+                    </div>
+
+                    <!-- TNM Mpamba - *444# -->
+                    <div class="payment-method-card tnm">
+                        <div class="method-logo">
+                            <img src="images/tnm-logo.png" alt="TNM Mpamba" onerror="this.src='https://img.icons8.com/color/96/tnm.png'" />
+                        </div>
+                        <h3>TNM Mpamba</h3>
+                        <div class="method-ussd">*444#</div>
+                        <p>Dial the USSD code to send your donation</p>
+                        <button class="call-btn" onclick="dialUSSD('*444#')">
+                            <i class="fas fa-phone"></i> Dial *444#
+                        </button>
+                        <span class="badge"><i class="fas fa-check-circle"></i> Available 24/7</span>
+                    </div>
+
+                    <!-- FIRST CAPITAL BANK - *1111# -->
+                    <div class="payment-method-card bank">
+                        <div class="method-logo">
+                            <img src="images/first-capital-bank-logo.png" alt="FIRST CAPITAL BANK" onerror="this.src='https://img.icons8.com/color/96/bank.png'" />
+                        </div>
+                        <h3>FIRST CAPITAL BANK</h3>
+                        <div class="method-ussd">*1111#</div>
+                        <div class="bank-details">
+                            <strong>Account Name:</strong> IMANI LIWEWE MAIDA<br />
+                            <strong>Account Number:</strong> 0029503035324<br />
+                            <strong>Bank:</strong> FIRST CAPITAL BANK
+                            <button class="copy-btn" onclick="copyBankDetails()">Copy Bank Details</button>
+                        </div>
+                        <button class="call-btn" onclick="dialUSSD('*1111#')">
+                            <i class="fas fa-phone"></i> Dial *1111#
+                        </button>
+                        <span class="badge"><i class="fas fa-check-circle"></i> Direct Bank Transfer</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Support Section -->
+            <div style="text-align: center; background: var(--primary-light); padding: 24px; border-radius: var(--radius); margin-top: 40px;">
+                <p style="color: var(--text-dark); font-size: 1.1rem;">
+                    <i class="fas fa-shield-alt" style="color: var(--primary); margin-right: 10px;"></i>
+                    All donations are secure and 100% transparent. You'll receive a confirmation message.
+                </p>
+                <p style="margin-top: 12px; color: var(--text-light);">
+                    <i class="fas fa-headset" style="color: var(--primary);"></i> 
+                    Need help? Contact our CEO <strong>IMANI LIWEWE MAIDA</strong> directly:
+                </p>
+                <a href="https://wa.me/265997008860?text=Hello%20Charity-Fund%20Malawi%2C%20I%20need%20assistance%20with%20my%20donation." 
+                   target="_blank" style="display: inline-block; background: #25D366; color: white; padding: 10px 24px; border-radius: 50px; text-decoration: none; font-weight: 600; margin-top: 10px;">
+                    <i class="fab fa-whatsapp"></i> Chat on WhatsApp
+                </a>
+                <a href="tel:+265997008860" style="display: inline-block; background: var(--primary); color: white; padding: 10px 24px; border-radius: 50px; text-decoration: none; font-weight: 600; margin-top: 10px; margin-left: 10px;">
+                    <i class="fas fa-phone"></i> Call Now
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== PAYMENT MODAL ===== -->
+    <div class="payment-modal" id="paymentModal">
+        <div class="payment-modal-content">
+            <div class="modal-header">
+                <h2>💳 Choose Payment Method</h2>
+                <p>Select how you'd like to complete your donation</p>
+            </div>
+            
+            <div class="donation-amount-display">
+                <span>You're about to donate</span><br />
+                <strong id="modalDonationAmount">MWK 2,500</strong>
+            </div>
+
+            <div class="modal-payment-options">
+                <!-- AIRTEL Money - *211# -->
+                <button class="airtel-option" onclick="selectPayment('airtel')">
+                    <span class="payment-icon">
+                        <img src="images/airtel-logo.png" alt="AIRTEL" onerror="this.innerHTML='<span class=\'icon-fallback\'>A</span>'" />
+                    </span>
+                    <span class="payment-detail">
+                        AIRTEL Money
+                        <small>Dial <span class="payment-ussd">*211#</span> to donate</small>
+                    </span>
+                    <i class="fas fa-phone" style="color: #cc0000;"></i>
+                </button>
+
+                <!-- TNM Mpamba - *444# -->
+                <button class="tnm-option" onclick="selectPayment('tnm')">
+                    <span class="payment-icon">
+                        <img src="images/tnm-logo.png" alt="TNM" onerror="this.innerHTML='<span class=\'icon-fallback\'>T</span>'" />
+                    </span>
+                    <span class="payment-detail">
+                        TNM Mpamba
+                        <small>Dial <span class="payment-ussd">*444#</span> to donate</small>
+                    </span>
+                    <i class="fas fa-phone" style="color: #004d99;"></i>
+                </button>
+
+                <!-- FIRST CAPITAL BANK - *1111# -->
+                <button class="bank-option" onclick="selectPayment('bank')">
+                    <span class="payment-icon">
+                        <img src="images/first-capital-bank-logo.png" alt="Bank" onerror="this.innerHTML='<span class=\'icon-fallback\'>B</span>'" />
+                    </span>
+                    <span class="payment-detail">
+                        FIRST CAPITAL BANK
+                        <small>Dial <span class="payment-ussd">*1111#</span> to donate</small>
+                    </span>
+                    <i class="fas fa-chevron-right" style="color: #1a237e;"></i>
+                </button>
+            </div>
+
+            <!-- WhatsApp Help -->
+            <div style="margin: 16px 0; padding: 12px; background: #e8f5e9; border-radius: 12px;">
+                <p style="font-size: 0.9rem; color: var(--text-dark);">
+                    <i class="fab fa-whatsapp" style="color: #25D366; font-size: 1.2rem; margin-right: 8px;"></i>
+                    Need help? Chat with us on 
+                    <a href="https://wa.me/265997008860?text=Hello%20Charity-Fund%20Malawi%2C%20I%20need%20assistance%20with%20my%20donation." 
+                       target="_blank" style="color: #25D366; font-weight: 600; text-decoration: none;">
+                        WhatsApp
+                    </a>
+                </p>
+            </div>
+
+            <button class="modal-cancel-btn" onclick="closeModal()">
+                <i class="fas fa-times"></i> Cancel Donation
+            </button>
+        </div>
+    </div>
+
+    <!-- ===== REDIRECTING OVERLAY ===== -->
+    <div class="redirecting-overlay" id="redirectingOverlay">
+        <div class="redirecting-content">
+            <div class="spinner"></div>
+            <h3>📱 Dialing USSD Code</h3>
+            <p>Your phone will open the USSD dialer</p>
+            
+            <div class="payment-method-display">
+                <strong id="redirectMethodName">AIRTEL Money</strong>
+                <span class="ussd-code" id="redirectUssdCode">*211#</span>
+            </div>
+
+            <div class="instruction-text">
+                <i class="fas fa-info-circle"></i>
+                <span id="redirectInstructions">Dial *211# to send your donation via AIRTEL Money</span>
+            </div>
+
+            <p style="font-size: 0.85rem; color: var(--text-light); margin-top: 10px;">
+                <i class="fas fa-shield-alt" style="color: var(--primary);"></i> 
+                Your donation will be processed securely
+            </p>
+
+            <button class="btn-continue" id="redirectContinueBtn">
+                <i class="fas fa-phone"></i> Open Dialer
+            </button>
+            <br />
+            <button class="btn-cancel-redirect" onclick="cancelRedirect()">
+                <i class="fas fa-times"></i> Cancel
+            </button>
+        </div>
+    </div>
+
+    <!-- ===== CTA SECTION ===== -->
+    <section class="cta-section">
+        <div class="cta-overlay"></div>
+        <div class="container">
+            <div class="cta-content">
+                <h2>Every Donation Counts</h2>
+                <p>Your contribution helps us reach more communities in need across Malawi.</p>
+                <div class="cta-buttons">
+                    <a href="donate.html" class="btn-primary btn-large"><i class="fas fa-heart"></i> Donate Now</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <img src="images/logo.png" alt="Charity-Fund" onerror="this.src='https://img.icons8.com/fluency/48/africa.png'" />
+                    <h3>Charity-Fund Malawi</h3>
+                    <p>Making hope possible through community action and global support across Malawi and Africa.</p>
+                    <div class="footer-social">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="projects.html">Projects</a></li>
+                        <li><a href="donate.html">Donate</a></li>
+                        <li><a href="testimonials.html">Testimonials</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Volunteer</a></li>
+                    </ul>
+                </div>
+                <div class="footer-newsletter">
+                    <h4>Newsletter</h4>
+                    <p>Subscribe for updates from Malawi</p>
+                    <form>
+                        <input type="email" placeholder="Your email" />
+                        <button type="submit"><i class="fas fa-arrow-right"></i></button>
+                    </form>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2026 Charity-Fund Malawi. All rights reserved.</p>
+                <p class="footer-tagline">Built with <i class="fas fa-heart" style="color: #1a7a3a;"></i> for a better world</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/265997008860" class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <button id="themeToggle" class="theme-toggle">
+        <i class="fas fa-moon"></i>
+    </button>
+
+    <script>
+    // ===== USSD DIAL FUNCTION =====
+    function dialUSSD(code) {
+        // Open phone dialer with USSD code
+        window.location.href = 'tel:' + encodeURIComponent(code);
+    }
+
+    // ===== COPY BANK DETAILS =====
+    function copyBankDetails() {
+        const details = 'FIRST CAPITAL BANK\nAccount Name: IMANI LIWEWE MAIDA\nAccount Number: 0029503035324';
+        navigator.clipboard.writeText(details).then(() => {
+            const btn = event.target;
+            btn.textContent = 'Copied!';
+            btn.classList.add('copied');
+            setTimeout(() => {
+                btn.textContent = 'Copy Bank Details';
+                btn.classList.remove('copied');
+            }, 2000);
+        }).catch(() => {
+            const input = document.createElement('input');
+            input.value = details;
+            document.body.appendChild(input);
+            input.select();
+            document.execCommand('copy');
+            document.body.removeChild(input);
+            alert('Bank details copied!');
+        });
+    }
+
+    // ===== MODAL FUNCTIONS =====
+    let currentDonationAmount = 2500;
+    let redirectTimer = null;
+
+    function openModal(amount) {
+        currentDonationAmount = amount;
+        const modal = document.getElementById('paymentModal');
+        const display = document.getElementById('modalDonationAmount');
+        display.textContent = 'MWK ' + Number(amount).toLocaleString();
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+        const modal = document.getElementById('paymentModal');
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+
+    // ===== SELECT PAYMENT =====
+    function selectPayment(method) {
+        const methods = {
+            airtel: {
+                name: 'AIRTEL Money',
+                ussd: '*211#',
+                instructions: 'Dial *211# to send your donation via AIRTEL Money. Follow the prompts to complete the transaction.',
+                color: '#cc0000'
+            },
+            tnm: {
+                name: 'TNM Mpamba',
+                ussd: '*444#',
+                instructions: 'Dial *444# to send your donation via TNM Mpamba. Follow the prompts to complete the transaction.',
+                color: '#004d99'
+            },
+            bank: {
+                name: 'FIRST CAPITAL BANK',
+                ussd: '*1111#',
+                instructions: 'Dial *1111# for FIRST CAPITAL BANK services. Use Account: 0029503035324, Name: IMANI LIWEWE MAIDA',
+                color: '#1a237e'
+            }
+        };
+
+        const selected = methods[method];
+        closeModal();
+
+        // Show redirecting overlay with USSD code
+        const overlay = document.getElementById('redirectingOverlay');
+        document.getElementById('redirectMethodName').textContent = selected.name;
+        document.getElementById('redirectUssdCode').textContent = selected.ussd;
+        document.getElementById('redirectInstructions').textContent = selected.instructions;
+        
+        // Set color for USSD code
+        document.getElementById('redirectUssdCode').style.color = selected.color;
+        
+        overlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+
+        // Continue button - dial USSD
+        document.getElementById('redirectContinueBtn').onclick = function() {
+            dialUSSD(selected.ussd);
+            completeDonation(selected.name);
+            overlay.classList.remove('active');
+            document.body.style.overflow = '';
+        };
+
+        // Auto redirect after 3 seconds
+        redirectTimer = setTimeout(() => {
+            dialUSSD(selected.ussd);
+            completeDonation(selected.name);
+            overlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }, 3000);
+    }
+
+    function cancelRedirect() {
+        clearTimeout(redirectTimer);
+        document.getElementById('redirectingOverlay').classList.remove('active');
+        document.body.style.overflow = '';
+        openModal(currentDonationAmount);
+    }
+
+    // ===== COMPLETE DONATION =====
+    function completeDonation(methodName) {
+        const amount = currentDonationAmount;
+        const donateMessage = document.getElementById('donateMessage');
+        const donationDisplay = document.getElementById('donationDisplay');
+        
+        donationDisplay.textContent = 'MWK ' + Number(amount).toLocaleString();
+        
+        const messageP = donateMessage.querySelector('p');
+        messageP.innerHTML = `
+            ✅ Thank you! Your donation of <strong>MWK ${Number(amount).toLocaleString()}</strong> is making a real difference in Malawi.<br />
+            <span style="font-size: 0.9rem; display: block; margin-top: 8px;">
+                <i class="fas fa-check-circle" style="color: #1a7a3a;"></i> 
+                Payment via <strong>${methodName}</strong> initiated.
+            </span>
+            <span style="font-size: 0.85rem; display: block; margin-top: 4px; color: var(--text-light);">
+                Please follow the USSD prompts to complete the transaction.
+            </span>
+            <br />
+            <a href="https://wa.me/265997008860?text=Hello%20Charity-Fund%20Malawi%2C%20I%20just%20made%20a%20donation%20of%20MWK%20${Number(amount).toLocaleString()}%20via%20${methodName}%20and%20need%20assistance." 
+               target="_blank" style="background: #25D366; color: white; padding: 8px 20px; border-radius: 50px; text-decoration: none; display: inline-block; margin-top: 8px;">
+                <i class="fab fa-whatsapp"></i> Need Help? Chat with CEO
+            </a>
+        `;
+        
+        donateMessage.classList.add('show');
+
+        // Update goal progress
+        const goalFill = document.querySelector('.goal-fill');
+        if (goalFill) {
+            const currentWidth = parseFloat(goalFill.style.width);
+            const newWidth = Math.min(currentWidth + 2, 100);
+            goalFill.style.width = newWidth + '%';
+            
+            const currentAmount = 2500000 + (newWidth - 83) * 83333;
+            const goalLabel = document.querySelector('.goal-label span:last-child');
+            if (goalLabel) {
+                const formatMWK = (num) => 'MWK ' + Number(Math.round(num)).toLocaleString();
+                goalLabel.textContent = formatMWK(currentAmount) + ' / ' + formatMWK(3000000);
+            }
+        }
+
+        setTimeout(() => {
+            donateMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }, 300);
+
+        setTimeout(() => {
+            donateMessage.classList.remove('show');
+        }, 15000);
+    }
+
+    // Close modal on outside click
     document.getElementById('paymentModal').addEventListener('click', function(e) {
         if (e.target === this) {
             closeModal();
