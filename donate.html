@@ -6,42 +6,38 @@
     <title>Charity-Fund Malawi · Donate</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <link rel="stylesheet" href="style.css" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@700;800;900&display=swap" rel="stylesheet" />
     <style>
-        /* ===== GREEN HANDSHAKE EMOJI ===== */
-        .green-handshake {
-            color: #1a7a3a !important;
+        /* ===== GREEN HANDSHAKE - Removed emoji, using icon instead ===== */
+        .donation-header h3 {
             font-size: 1.8rem;
-            display: inline-block;
+            color: var(--text-dark);
+            margin-bottom: 4px;
+            font-family: 'Playfair Display', serif;
+        }
+        .donation-header h3 i {
+            color: var(--primary);
             margin-right: 8px;
-            vertical-align: middle;
         }
-        .donation-header h3 .green-handshake {
-            color: #1a7a3a !important;
-        }
-        .btn-primary .green-handshake {
+        .btn-primary i {
             color: #ffffff !important;
         }
-        .donate-message .green-handshake {
-            color: #1a7a3a !important;
+        .section-tag i {
+            color: var(--primary);
         }
-        .payment-card .green-handshake {
-            color: #1a7a3a !important;
+        .page-header h1 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 800;
         }
-        .section-tag .green-handshake {
-            color: #1a7a3a !important;
+        .page-header h1 i {
+            color: #ffffff;
         }
-        .modal-header .green-handshake {
-            color: #1a7a3a !important;
+        .donate-info h2 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
         }
-        .page-header .green-handshake {
-            color: #ffffff !important;
-        }
-        .whatsapp-float .green-handshake {
-            color: #ffffff !important;
-        }
-        .footer-tagline .green-handshake {
-            color: #1a7a3a !important;
+        .donate-message i {
+            color: var(--primary);
         }
 
         .page-header {
@@ -113,11 +109,6 @@
             padding: 40px;
             border-radius: var(--radius);
             box-shadow: var(--shadow);
-        }
-        .donation-header h3 {
-            font-size: 1.8rem;
-            color: var(--text-dark);
-            margin-bottom: 4px;
         }
         .donation-header p {
             color: var(--text-light);
@@ -270,6 +261,7 @@
             font-size: 1.3rem;
             color: var(--text-dark);
             margin-bottom: 4px;
+            font-family: 'Inter', sans-serif;
         }
         .payment-method-card .method-ussd {
             font-family: 'Courier New', monospace;
@@ -445,6 +437,7 @@
             font-size: 2rem;
             color: var(--text-dark);
             margin-bottom: 8px;
+            font-family: 'Playfair Display', serif;
         }
         .payment-modal-content .modal-header p {
             color: var(--text-light);
@@ -619,6 +612,7 @@
             color: var(--text-dark);
             font-size: 1.3rem;
             margin-bottom: 8px;
+            font-family: 'Playfair Display', serif;
         }
         .redirecting-content p {
             color: var(--text-light);
@@ -759,7 +753,7 @@
             height: 50px;
             border-radius: 50%;
             border: none;
-            background: var(--primary);
+            background: var(--primary-gradient);
             color: white;
             font-size: 1.3rem;
             cursor: pointer;
@@ -844,7 +838,7 @@
     <!-- ===== PAGE HEADER ===== -->
     <section class="page-header">
         <div class="container">
-            <h1>🤝 Make a Donation</h1>
+            <h1>Make a Donation</h1>
             <p>Your contribution changes lives across Malawi</p>
         </div>
     </section>
@@ -854,7 +848,7 @@
         <div class="container">
             <div class="donate-wrapper">
                 <div class="donate-info">
-                    <span class="section-tag" style="color: #1a7a3a; background: rgba(26,122,58,0.1);">🤝 Make a Difference</span>
+                    <span class="section-tag" style="color: #1a7a3a; background: rgba(26,122,58,0.1);"><i class="fas fa-handshake"></i> Make a Difference</span>
                     <h2>Your Donation <br/>Changes Everything</h2>
                     <p>Every contribution, no matter how small, helps us reach more communities in need across Malawi.</p>
                     <div class="impact-stats-donate">
@@ -884,7 +878,7 @@
 
                 <div class="donate-box">
                     <div class="donation-header">
-                        <h3><span class="green-handshake">🤝</span> Make a Donation</h3>
+                        <h3><i class="fas fa-handshake"></i> Make a Donation</h3>
                         <p>Select an amount in Malawi Kwacha (MWK)</p>
                     </div>
 
@@ -912,12 +906,12 @@
                     </div>
 
                     <button id="donateNowBtn" class="btn-primary btn-full">
-                        🤝 Donate Now
+                        <i class="fas fa-handshake"></i> Donate Now
                     </button>
 
                     <div id="donateMessage" class="donate-message">
-                        <p>✅ Thank you! Your donation of <span id="donationDisplay">MWK 2,500</span> is making a real difference in Malawi.</p>
-                        <small>💚 100% of your donation goes to our programs</small>
+                        <p><i class="fas fa-check-circle"></i> Thank you! Your donation of <span id="donationDisplay">MWK 2,500</span> is making a real difference in Malawi.</p>
+                        <small><i class="fas fa-heart"></i> 100% of your donation goes to our programs</small>
                     </div>
 
                     <div class="donation-goal">
@@ -935,7 +929,7 @@
             <!-- ===== PAYMENT METHODS ===== -->
             <div class="payment-methods-section">
                 <div class="section-header">
-                    <span class="section-tag">📱 Payment Methods</span>
+                    <span class="section-tag"><i class="fas fa-phone"></i> Payment Methods</span>
                     <h2>Donate via Mobile Money</h2>
                     <p>Tap the USSD code to dial directly on your phone</p>
                 </div>
@@ -948,7 +942,7 @@
                         </div>
                         <h3>AIRTEL Money</h3>
                         <div class="method-ussd" onclick="dialUSSD('*211#')">*211#</div>
-                        <p>Tap the code to dial on your phone</p>
+                        <p>Dial the USSD code to send your donation</p>
                         <button class="call-btn" onclick="dialUSSD('*211#')">
                             <i class="fas fa-phone"></i> Dial *211#
                         </button>
@@ -962,7 +956,7 @@
                         </div>
                         <h3>TNM Mpamba</h3>
                         <div class="method-ussd" onclick="dialUSSD('*444#')">*444#</div>
-                        <p>Tap the code to dial on your phone</p>
+                        <p>Dial the USSD code to send your donation</p>
                         <button class="call-btn" onclick="dialUSSD('*444#')">
                             <i class="fas fa-phone"></i> Dial *444#
                         </button>
@@ -1015,7 +1009,7 @@
     <div class="payment-modal" id="paymentModal">
         <div class="payment-modal-content">
             <div class="modal-header">
-                <h2>🤝 Choose Payment Method</h2>
+                <h2>Choose Payment Method</h2>
                 <p>Select how you'd like to complete your donation</p>
             </div>
             
@@ -1081,13 +1075,13 @@
     <div class="redirecting-overlay" id="redirectingOverlay">
         <div class="redirecting-content">
             <div class="spinner"></div>
-            <h3>📱 Dialing USSD Code</h3>
+            <h3>Dialing USSD Code</h3>
             <p>Your phone will open the dialer</p>
             
             <div class="payment-method-display">
                 <strong id="redirectMethodName">AIRTEL Money</strong>
                 <span class="ussd-code" id="redirectUssdCode">*211#</span>
-                <button class="copy-ussd-btn-large" onclick="copyUssdCode()">📋 Copy Code</button>
+                <button class="copy-ussd-btn-large" onclick="copyUssdCode()"><i class="fas fa-copy"></i> Copy Code</button>
             </div>
 
             <div class="instruction-text">
@@ -1207,10 +1201,10 @@
         var ussdCode = document.getElementById('redirectUssdCode').textContent;
         navigator.clipboard.writeText(ussdCode).then(function() {
             var btn = document.querySelector('.copy-ussd-btn-large');
-            btn.textContent = '✅ Copied!';
+            btn.innerHTML = '<i class="fas fa-check"></i> Copied!';
             btn.classList.add('copied');
             setTimeout(function() {
-                btn.textContent = '📋 Copy Code';
+                btn.innerHTML = '<i class="fas fa-copy"></i> Copy Code';
                 btn.classList.remove('copied');
             }, 2000);
         }).catch(function() {
@@ -1303,7 +1297,7 @@
 
         var copyBtn = document.querySelector('.copy-ussd-btn-large');
         if (copyBtn) {
-            copyBtn.textContent = '📋 Copy Code';
+            copyBtn.innerHTML = '<i class="fas fa-copy"></i> Copy Code';
             copyBtn.classList.remove('copied');
         }
 
@@ -1334,7 +1328,7 @@
         
         var messageP = donateMessage.querySelector('p');
         messageP.innerHTML = `
-            ✅ Thank you! Your donation of <strong>MWK ${Number(amount).toLocaleString()}</strong> is making a real difference in Malawi.<br />
+            <i class="fas fa-check-circle"></i> Thank you! Your donation of <strong>MWK ${Number(amount).toLocaleString()}</strong> is making a real difference in Malawi.<br />
             <span style="font-size: 0.9rem; display: block; margin-top: 8px;">
                 <i class="fas fa-check-circle" style="color: #1a7a3a;"></i> 
                 Payment via <strong>${methodName}</strong> initiated successfully!
